@@ -39,14 +39,15 @@
 .clock-card {
     padding: 2rem;
     text-align: center;
-    min-width: 300px;
+    width: 100%;
+    max-width: 600px;
 }
 
 /* 搜索卡片 */
 .search-card {
     padding: 1.5rem;
     width: 100%;
-    max-width: 600px;
+    max-width: 800px;
     position: relative;
 }
 
@@ -229,7 +230,7 @@
     
     .clock-card {
         padding: 1.5rem;
-        min-width: 250px;
+        max-width: 100%;
     }
     
     .search-card {
