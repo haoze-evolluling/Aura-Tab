@@ -47,6 +47,13 @@
         0 0 10px rgba(255, 255, 255, 0.2);
 }
 
+/* 时钟组件样式 */
+.clock-section {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
 /* 搜索组件样式 */
 .search-section {
     width: 100%;
