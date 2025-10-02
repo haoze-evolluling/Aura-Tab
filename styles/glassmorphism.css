@@ -70,6 +70,16 @@
     color: #333333;
 }
 
+/* 搜索引擎模态框特殊样式 */
+#searchEngineModal .modal-card {
+    max-width: 600px;
+}
+
+#searchEngineModal .search-engine-name,
+#searchEngineModal .search-engine-desc {
+    color: #333333 !important;
+}
+
 /* 模态框内部元素样式调整 */
 .modal-card h3 {
     color: #333333;

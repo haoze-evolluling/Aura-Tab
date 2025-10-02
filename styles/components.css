@@ -304,3 +304,103 @@
     background: rgba(255, 0, 0, 0.3);
     color: #ff5252;
 }
+
+/* 搜索引擎选择模态框样式 */
+.search-engine-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+    width: 100%;
+}
+
+.search-engine-item {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid var(--glass-border);
+    border-radius: 12px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    text-decoration: none;
+    color: inherit;
+}
+
+.search-engine-item:hover {
+    background: rgba(255, 255, 255, 0.1);
+    border-color: rgba(255, 255, 255, 0.3);
+    transform: translateY(-2px);
+}
+
+.search-engine-icon {
+    width: 32px;
+    height: 32px;
+    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    flex-shrink: 0;
+}
+
+.search-engine-info {
+    flex: 1;
+}
+
+.search-engine-name {
+    font-size: 1rem;
+    font-weight: 500;
+    color: var(--text-primary);
+    margin-bottom: 0.25rem;
+}
+
+.search-engine-desc {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    opacity: 0.8;
+}
+
+/* 搜索引擎特定颜色 */
+.search-engine-item[data-engine="google"] .search-engine-icon {
+    background: linear-gradient(45deg, #4285f4, #34a853);
+    color: white;
+}
+
+.search-engine-item[data-engine="baidu"] .search-engine-icon {
+    background: linear-gradient(45deg, #2932e1, #1e88e5);
+    color: white;
+}
+
+.search-engine-item[data-engine="bing"] .search-engine-icon {
+    background: linear-gradient(45deg, #00bcf2, #0078d4);
+    color: white;
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+    .search-engine-grid {
+        grid-template-columns: 1fr;
+        gap: 0.75rem;
+    }
+    
+    .search-engine-item {
+        padding: 0.875rem;
+    }
+    
+    .search-engine-icon {
+        width: 28px;
+        height: 28px;
+        font-size: 1.1rem;
+    }
+    
+    .search-engine-name {
+        font-size: 0.95rem;
+    }
+    
+    .search-engine-desc {
+        font-size: 0.8rem;
+    }
+}
