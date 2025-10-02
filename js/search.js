@@ -31,28 +31,6 @@ class Search {
         // 右键事件 - 显示搜索引擎选择
         this.searchInput.addEventListener('contextmenu', (e) => this.handleContextMenu(e));
 
-        // 长按事件 - 移动端支持
-        let touchTimer = null;
-        this.searchInput.addEventListener('touchstart', (e) => {
-            touchTimer = setTimeout(() => {
-                this.showSearchEngineModal();
-            }, 800); // 800ms长按
-        });
-
-        this.searchInput.addEventListener('touchend', () => {
-            if (touchTimer) {
-                clearTimeout(touchTimer);
-                touchTimer = null;
-            }
-        });
-
-        this.searchInput.addEventListener('touchmove', () => {
-            if (touchTimer) {
-                clearTimeout(touchTimer);
-                touchTimer = null;
-            }
-        });
-
         // 点击外部隐藏建议
         document.addEventListener('click', (e) => {
             if (!e.target.closest('.search-container')) {
@@ -304,18 +282,18 @@ class Search {
     setupSearchEngines() {
         this.searchEngines = [
             {
-                id: 'baidu',
-                name: '百度',
-                url: 'https://www.baidu.com/s?wd={query}',
-                icon: '百',
-                description: '全球最大的中文搜索引擎'
-            },
-            {
                 id: 'bing',
                 name: '必应',
                 url: 'https://www.bing.com/search?q={query}',
                 icon: 'B',
                 description: '微软搜索引擎'
+            },
+            {
+                id: 'baidu',
+                name: '百度',
+                url: 'https://www.baidu.com/s?wd={query}',
+                icon: '百',
+                description: '全球最大的中文搜索引擎'
             },
             {
                 id: 'google',
@@ -327,7 +305,7 @@ class Search {
         ];
 
         // 从本地存储获取默认搜索引擎
-        this.defaultEngine = Utils.storage.get('defaultSearchEngine', 'baidu');
+        this.defaultEngine = Utils.storage.get('defaultSearchEngine', 'bing');
     }
 
     getSearchEngines() {
