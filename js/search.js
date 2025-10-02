@@ -325,11 +325,23 @@ class Search {
         
         if (!modal || !grid) return;
 
+        const modalCard = modal.querySelector('.modal-card');
+
         // 生成搜索引擎选项
         this.renderSearchEngines(grid);
         
-        // 显示模态框
+        // 移除可能存在的关闭类
+        modal.classList.remove('closing');
+        
+        // 添加动画类以启用will-change
+        if (modalCard) modalCard.classList.add('animating');
+        
         modal.classList.add('active');
+        
+        // 动画完成后清理动画类
+        setTimeout(() => {
+            if (modalCard) modalCard.classList.remove('animating');
+        }, 350);
     }
 
     // 渲染搜索引擎选项
@@ -377,8 +389,20 @@ class Search {
     // 隐藏搜索引擎模态框
     hideSearchEngineModal() {
         const modal = document.getElementById('searchEngineModal');
-        if (modal) {
-            modal.classList.remove('active');
+        if (modal && modal.classList.contains('active')) {
+            const modalCard = modal.querySelector('.modal-card');
+            
+            // 添加动画类以启用will-change
+            if (modalCard) modalCard.classList.add('animating');
+            
+            // 添加关闭动画类
+            modal.classList.add('closing');
+            
+            // 等待动画完成后移除active类和清理动画类
+            setTimeout(() => {
+                modal.classList.remove('active', 'closing');
+                if (modalCard) modalCard.classList.remove('animating');
+            }, 250); // 与CSS动画时间一致
         }
     }
 

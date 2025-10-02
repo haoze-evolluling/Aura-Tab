@@ -94,35 +94,41 @@
     z-index: 1001;
     background: #ffffff !important;
     color: #333333;
-    transform: scale(0.7);
+    transform: scale(0.8) translateY(30px);
     opacity: 0;
-    transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+    transition: none;
+    will-change: transform, opacity;
 }
 
-/* 模态框内容动画 */
-.modal-overlay.active .modal-card {
-    transform: scale(1);
-    opacity: 1;
-}
-
+/* 模态框打开动画 */
 @keyframes modalSlideIn {
-    from {
-        transform: scale(0.7) translateY(50px);
+    0% {
+        transform: scale(0.8) translateY(30px) translateZ(0);
         opacity: 0;
     }
-    to {
-        transform: scale(1) translateY(0);
+    60% {
+        transform: scale(1.02) translateY(-5px) translateZ(0);
+        opacity: 0.9;
+    }
+    100% {
+        transform: scale(1) translateY(0) translateZ(0);
         opacity: 1;
     }
 }
 
 .modal-overlay.active .modal-card {
-    animation: modalSlideIn 0.4s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+    animation: modalSlideIn 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+}
+
+/* 动画完成后清理will-change属性以优化性能 */
+.modal-card:not(.animating) {
+    will-change: auto;
 }
 
 /* 搜索引擎模态框特殊样式 */
 #searchEngineModal .modal-card {
     max-width: 600px;
+    will-change: transform, opacity;
 }
 
 #searchEngineModal .search-engine-name,
@@ -381,70 +387,71 @@
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(0, 0, 0, 0.3);
-    backdrop-filter: blur(8px);
-    -webkit-backdrop-filter: blur(8px);
+    background: rgba(0, 0, 0, 0);
+    backdrop-filter: blur(0px);
+    -webkit-backdrop-filter: blur(0px);
     display: flex;
     align-items: center;
     justify-content: center;
     z-index: 1000;
     opacity: 0;
     visibility: hidden;
-    transition: all 0.3s ease;
+    transition: none;
+    will-change: opacity, backdrop-filter;
 }
 
-.modal-overlay.active {
-    opacity: 1;
-    visibility: visible;
-}
-
-/* 模态框淡入动画 */
-@keyframes modalFadeIn {
-    from {
+/* 模态框背景淡入动画 */
+@keyframes modalBackdropFadeIn {
+    0% {
         opacity: 0;
+        background: rgba(0, 0, 0, 0);
         backdrop-filter: blur(0px);
         -webkit-backdrop-filter: blur(0px);
     }
-    to {
+    100% {
         opacity: 1;
+        background: rgba(0, 0, 0, 0.4);
         backdrop-filter: blur(8px);
         -webkit-backdrop-filter: blur(8px);
     }
 }
 
 .modal-overlay.active {
-    animation: modalFadeIn 0.3s ease forwards;
+    visibility: visible;
+    animation: modalBackdropFadeIn 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
 }
 
 /* 模态框关闭动画 */
 .modal-overlay.closing {
-    animation: modalFadeOut 0.3s ease forwards;
+    animation: modalBackdropFadeOut 0.25s cubic-bezier(0.55, 0.055, 0.675, 0.19) forwards;
 }
 
 .modal-overlay.closing .modal-card {
-    animation: modalSlideOut 0.3s ease forwards;
+    animation: modalSlideOut 0.25s cubic-bezier(0.55, 0.055, 0.675, 0.19) forwards;
 }
 
-@keyframes modalFadeOut {
-    from {
+@keyframes modalBackdropFadeOut {
+    0% {
         opacity: 1;
+        background: rgba(0, 0, 0, 0.4);
         backdrop-filter: blur(8px);
         -webkit-backdrop-filter: blur(8px);
     }
-    to {
+    100% {
         opacity: 0;
+        background: rgba(0, 0, 0, 0);
         backdrop-filter: blur(0px);
         -webkit-backdrop-filter: blur(0px);
     }
 }
 
 @keyframes modalSlideOut {
-    from {
-        transform: scale(1) translateY(0);
+    0% {
+        transform: scale(1) translateY(0) translateZ(0);
         opacity: 1;
     }
-    to {
-        transform: scale(0.7) translateY(50px);
+    100% {
+        transform: scale(0.85) translateY(20px) translateZ(0);
         opacity: 0;
     }
 }

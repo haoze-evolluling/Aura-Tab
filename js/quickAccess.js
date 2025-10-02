@@ -226,6 +226,14 @@ class QuickAccess {
 
     showAddModal() {
         if (this.modalOverlay) {
+            const modalCard = this.modalOverlay.querySelector('.modal-card');
+            
+            // 移除可能存在的关闭类
+            this.modalOverlay.classList.remove('closing');
+            
+            // 添加动画类以启用will-change
+            if (modalCard) modalCard.classList.add('animating');
+            
             this.modalOverlay.classList.add('active');
             
             // 清空表单
@@ -234,16 +242,33 @@ class QuickAccess {
             if (nameInput) nameInput.value = '';
             if (urlInput) urlInput.value = '';
             
-            // 聚焦到名称输入框
+            // 聚焦到名称输入框 - 等待动画开始后再聚焦
             setTimeout(() => {
                 if (nameInput) nameInput.focus();
-            }, 100);
+            }, 150);
+            
+            // 动画完成后清理动画类
+            setTimeout(() => {
+                if (modalCard) modalCard.classList.remove('animating');
+            }, 350);
         }
     }
 
     hideModal() {
-        if (this.modalOverlay) {
-            this.modalOverlay.classList.remove('active');
+        if (this.modalOverlay && this.modalOverlay.classList.contains('active')) {
+            const modalCard = this.modalOverlay.querySelector('.modal-card');
+            
+            // 添加动画类以启用will-change
+            if (modalCard) modalCard.classList.add('animating');
+            
+            // 添加关闭动画类
+            this.modalOverlay.classList.add('closing');
+            
+            // 等待动画完成后移除active类和清理动画类
+            setTimeout(() => {
+                this.modalOverlay.classList.remove('active', 'closing');
+                if (modalCard) modalCard.classList.remove('animating');
+            }, 250); // 与CSS动画时间一致
         }
     }
 
