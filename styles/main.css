@@ -24,7 +24,7 @@ body {
     font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
     overflow: hidden;
     height: 100vh;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    background: #ffaaaa;
     color: var(--text-primary);
 }
 
@@ -43,21 +43,9 @@ body {
     left: 0;
     width: 100%;
     height: 100%;
-    background: linear-gradient(135deg, 
-        #667eea 0%, 
-        #764ba2 25%, 
-        #f093fb 50%, 
-        #f5576c 75%, 
-        #4facfe 100%);
-    background-size: 400% 400%;
-    animation: gradientShift 15s ease infinite;
+    background: #ff6666;
 }
 
-@keyframes gradientShift {
-    0% { background-position: 0% 50%; }
-    50% { background-position: 100% 50%; }
-    100% { background-position: 0% 50%; }
-}
 
 .particles {
     position: absolute;
@@ -72,13 +60,8 @@ body {
     position: absolute;
     background: rgba(255, 255, 255, 0.1);
     border-radius: 50%;
-    animation: float 6s ease-in-out infinite;
 }
 
-@keyframes float {
-    0%, 100% { transform: translateY(0px) rotate(0deg); }
-    50% { transform: translateY(-20px) rotate(180deg); }
-}
 
 .main-container {
     display: flex;

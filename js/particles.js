@@ -12,7 +12,8 @@ class Particles {
         if (!this.container) return;
         
         this.createParticles();
-        this.animate();
+        // 移除动画调用以禁用动态效果
+        // this.animate();
         this.addEventListeners();
     }
 
@@ -40,7 +41,7 @@ class Particles {
         // 随机透明度
         const opacity = Math.random() * 0.3 + 0.1;
         
-        // 设置样式
+        // 设置样式 - 使用静态位置
         particle.style.cssText = `
             width: ${size}px;
             height: ${size}px;
@@ -48,6 +49,7 @@ class Particles {
             top: ${y}px;
             opacity: ${opacity};
             background: rgba(255, 255, 255, ${opacity});
+            transform: translate(0px, 0px);
         `;
 
         // 存储粒子数据

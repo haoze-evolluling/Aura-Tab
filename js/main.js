@@ -127,10 +127,10 @@ class AuraTab {
             this.components.clock.updateTime();
         }
         
-        // 恢复粒子动画
-        if (this.components.particles) {
-            this.components.particles.resume();
-        }
+        // 粒子动画已禁用，无需恢复
+        // if (this.components.particles) {
+        //     this.components.particles.resume();
+        // }
     }
 
     handleWindowBlur() {
@@ -140,15 +140,15 @@ class AuraTab {
 
     handleVisibilityChange() {
         if (document.hidden) {
-            // 页面隐藏时暂停动画
-            if (this.components.particles) {
-                this.components.particles.pause();
-            }
+            // 页面隐藏时暂停动画（粒子动画已禁用）
+            // if (this.components.particles) {
+            //     this.components.particles.pause();
+            // }
         } else {
-            // 页面显示时恢复动画
-            if (this.components.particles) {
-                this.components.particles.resume();
-            }
+            // 页面显示时恢复动画（粒子动画已禁用）
+            // if (this.components.particles) {
+            //     this.components.particles.resume();
+            // }
             
             // 更新时钟
             if (this.components.clock) {
