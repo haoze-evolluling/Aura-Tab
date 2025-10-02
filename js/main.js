@@ -337,6 +337,10 @@ class AuraTab {
             text-align: center;
             opacity: 0;
             transition: all 0.5s ease;
+            background: #ffffff !important;
+            color: #333333;
+            backdrop-filter: none;
+            -webkit-backdrop-filter: none;
         `;
 
         document.body.appendChild(welcome);
@@ -453,11 +457,11 @@ const appStyles = `
     .welcome-title {
         font-size: 1.5rem;
         font-weight: 600;
-        color: var(--text-primary);
+        color: #333333 !important;
     }
 
     .welcome-text {
-        color: var(--text-secondary);
+        color: #666666 !important;
         line-height: 1.5;
     }
 
@@ -470,10 +474,25 @@ const appStyles = `
 
     .tip {
         font-size: 0.9rem;
-        color: var(--text-muted);
+        color: #888888 !important;
         display: flex;
         align-items: center;
         gap: 0.5rem;
+    }
+
+    /* 欢迎弹窗特殊样式 */
+    .welcome-message {
+        background: #ffffff !important;
+        color: #333333 !important;
+        backdrop-filter: none !important;
+        -webkit-backdrop-filter: none !important;
+        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15), 0 0 0 1px rgba(0, 0, 0, 0.1) !important;
+    }
+
+    .welcome-message .btn {
+        color: #ffffff !important;
+        backdrop-filter: none !important;
+        -webkit-backdrop-filter: none !important;
     }
 
     kbd {
@@ -483,6 +502,13 @@ const appStyles = `
         padding: 0.2rem 0.4rem;
         font-size: 0.8rem;
         font-family: monospace;
+    }
+
+    /* 欢迎弹窗中的 kbd 样式 */
+    .welcome-message kbd {
+        background: #f0f0f0 !important;
+        border: 1px solid #cccccc !important;
+        color: #333333 !important;
     }
 
     .toast-icon {
