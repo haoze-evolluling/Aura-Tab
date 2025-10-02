@@ -106,7 +106,6 @@ class Clock {
             padding: 1.5rem;
             min-width: 300px;
             opacity: 0;
-            /* 移除过渡效果 */
         `;
 
         // 添加到页面

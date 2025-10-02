@@ -405,7 +405,6 @@ class QuickAccess {
             font-size: 0.9rem;
             opacity: 0;
             transform: translateX(100%);
-            /* 移除过渡效果 */
         `;
 
         if (type === 'error') {

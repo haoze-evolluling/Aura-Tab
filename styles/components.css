@@ -1,10 +1,5 @@
 /* 组件样式 */
 
-/* 时钟组件样式 */
-.clock-section {
-    /* 移除动画效果 */
-}
-
 .clock-display {
     display: flex;
     flex-direction: column;
@@ -96,7 +91,6 @@
 .suggestion-item {
     padding: 0.75rem 1rem;
     cursor: pointer;
-    /* 移除过渡效果 */
     border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
 
@@ -300,7 +294,6 @@
     align-items: center;
     justify-content: center;
     font-size: 0.8rem;
-    /* 移除过渡效果 */
 }
 
 .shortcut-btn:hover .delete-shortcut {

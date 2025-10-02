@@ -160,7 +160,6 @@ class AuraTab {
             align-items: center;
             gap: 0.75rem;
             opacity: 0;
-            /* 移除过渡效果 */
             background: ${isOnline ? 'rgba(107, 255, 107, 0.2)' : 'rgba(255, 107, 107, 0.2)'};
             border: 1px solid ${isOnline ? 'rgba(107, 255, 107, 0.3)' : 'rgba(255, 107, 107, 0.3)'};
         `;
@@ -266,7 +265,6 @@ class AuraTab {
             gap: 0.75rem;
             opacity: 0;
             transform: translateY(20px);
-            /* 移除过渡效果 */
             background: rgba(255, 107, 107, 0.2);
             border: 1px solid rgba(255, 107, 107, 0.3);
             max-width: 400px;
@@ -412,7 +410,6 @@ class AuraTab {
 // 应用样式
 const appStyles = `
     .app-initialized {
-        /* 移除初始化动画 */
     }
 
     .init-error {
