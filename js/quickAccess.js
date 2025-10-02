@@ -65,33 +65,23 @@ class QuickAccess {
             this.shortcuts = [
                 {
                     id: Utils.generateId(),
-                    name: 'Google',
-                    url: 'https://www.google.com'
+                    name: '百度',
+                    url: 'https://www.baidu.com'
                 },
                 {
                     id: Utils.generateId(),
-                    name: 'YouTube',
-                    url: 'https://www.youtube.com'
+                    name: 'B站',
+                    url: 'https://www.bilibili.com'
                 },
                 {
                     id: Utils.generateId(),
-                    name: 'GitHub',
-                    url: 'https://github.com'
+                    name: '网易云音乐',
+                    url: 'https://music.163.com'
                 },
                 {
                     id: Utils.generateId(),
-                    name: 'Stack Overflow',
-                    url: 'https://stackoverflow.com'
-                },
-                {
-                    id: Utils.generateId(),
-                    name: 'MDN',
-                    url: 'https://developer.mozilla.org'
-                },
-                {
-                    id: Utils.generateId(),
-                    name: 'Twitter',
-                    url: 'https://twitter.com'
+                    name: '知乎',
+                    url: 'https://www.zhihu.com'
                 }
             ];
             this.saveShortcuts();
