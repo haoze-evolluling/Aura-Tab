@@ -1,0 +1,258 @@
+/* 玻璃态质感样式 */
+.glass-card {
+    background: var(--glass-bg);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid var(--glass-border);
+    border-radius: var(--border-radius);
+    box-shadow: 
+        0 8px 32px rgba(0, 0, 0, 0.1),
+        inset 0 1px 0 var(--shadow-light);
+    transition: var(--transition);
+    position: relative;
+    overflow: hidden;
+}
+
+.glass-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, 
+        transparent 0%, 
+        var(--shadow-light) 50%, 
+        transparent 100%);
+}
+
+.glass-card:hover {
+    background: rgba(255, 255, 255, 0.15);
+    border-color: rgba(255, 255, 255, 0.3);
+    box-shadow: 
+        0 12px 40px rgba(0, 0, 0, 0.15),
+        inset 0 1px 0 var(--shadow-light);
+    transform: translateY(-2px);
+}
+
+/* 时钟卡片 */
+.clock-card {
+    padding: 2rem;
+    text-align: center;
+    min-width: 300px;
+}
+
+/* 搜索卡片 */
+.search-card {
+    padding: 1.5rem;
+    width: 100%;
+    max-width: 600px;
+    position: relative;
+}
+
+/* 快捷访问卡片 */
+.quick-access-card {
+    padding: 2rem;
+    width: 100%;
+    max-width: 800px;
+}
+
+/* 模态框卡片 */
+.modal-card {
+    padding: 2rem;
+    width: 90%;
+    max-width: 400px;
+    margin: auto;
+    position: relative;
+    z-index: 1001;
+}
+
+/* 按钮玻璃效果 */
+.btn {
+    background: var(--glass-bg);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid var(--glass-border);
+    border-radius: 12px;
+    padding: 0.75rem 1.5rem;
+    color: var(--text-primary);
+    font-family: inherit;
+    font-size: 0.9rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: var(--transition);
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+}
+
+.btn:hover {
+    background: rgba(255, 255, 255, 0.2);
+    border-color: rgba(255, 255, 255, 0.4);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+}
+
+.btn:active {
+    transform: translateY(0);
+}
+
+.btn-primary {
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    border-color: rgba(255, 255, 255, 0.3);
+}
+
+.btn-primary:hover {
+    background: linear-gradient(135deg, 
+        color-mix(in srgb, var(--primary-color) 90%, white),
+        color-mix(in srgb, var(--secondary-color) 90%, white));
+}
+
+.btn-secondary {
+    background: rgba(255, 255, 255, 0.1);
+}
+
+/* 输入框玻璃效果 */
+.glass-input {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid var(--glass-border);
+    border-radius: 12px;
+    padding: 0.75rem 1rem;
+    color: var(--text-primary);
+    font-family: inherit;
+    font-size: 1rem;
+    width: 100%;
+    transition: var(--transition);
+}
+
+.glass-input::placeholder {
+    color: var(--text-muted);
+}
+
+.glass-input:focus {
+    background: rgba(255, 255, 255, 0.15);
+    border-color: rgba(255, 255, 255, 0.4);
+    box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.1);
+}
+
+/* 快捷访问按钮玻璃效果 */
+.shortcut-btn {
+    background: var(--glass-bg);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    border: 1px solid var(--glass-border);
+    border-radius: 16px;
+    padding: 1.5rem;
+    color: var(--text-primary);
+    text-decoration: none;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.75rem;
+    transition: var(--transition);
+    position: relative;
+    overflow: hidden;
+    min-height: 120px;
+    justify-content: center;
+}
+
+.shortcut-btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, 
+        transparent 0%, 
+        rgba(255, 255, 255, 0.1) 50%, 
+        transparent 100%);
+    transition: left 0.6s ease;
+}
+
+.shortcut-btn:hover::before {
+    left: 100%;
+}
+
+.shortcut-btn:hover {
+    background: rgba(255, 255, 255, 0.15);
+    border-color: rgba(255, 255, 255, 0.3);
+    transform: translateY(-4px) scale(1.02);
+    box-shadow: 
+        0 12px 32px rgba(0, 0, 0, 0.15),
+        inset 0 1px 0 var(--shadow-light);
+}
+
+/* 模态框覆盖层 */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    opacity: 0;
+    visibility: hidden;
+    transition: var(--transition);
+}
+
+.modal-overlay.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+.modal-overlay.active .modal-card {
+    transform: translateY(0) scale(1);
+}
+
+.modal-overlay .modal-card {
+    transform: translateY(-20px) scale(0.95);
+    transition: var(--transition);
+}
+
+/* 响应式玻璃效果调整 */
+@media (max-width: 768px) {
+    .glass-card {
+        backdrop-filter: blur(15px);
+        -webkit-backdrop-filter: blur(15px);
+    }
+    
+    .clock-card {
+        padding: 1.5rem;
+        min-width: 250px;
+    }
+    
+    .search-card {
+        padding: 1rem;
+    }
+    
+    .quick-access-card {
+        padding: 1.5rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .glass-card {
+        border-radius: 12px;
+    }
+    
+    .btn {
+        padding: 0.6rem 1.2rem;
+        font-size: 0.85rem;
+    }
+    
+    .shortcut-btn {
+        padding: 1rem;
+        min-height: 100px;
+    }
+}
