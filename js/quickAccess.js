@@ -303,10 +303,6 @@ class QuickAccess {
         const menu = document.createElement('div');
         menu.className = 'context-menu glass-card';
         menu.innerHTML = `
-            <div class="context-menu-item" data-action="edit">
-                <span class="context-menu-icon">✏️</span>
-                <span>编辑</span>
-            </div>
             <div class="context-menu-item" data-action="delete">
                 <span class="context-menu-icon">🗑️</span>
                 <span>删除</span>
@@ -361,9 +357,6 @@ class QuickAccess {
         if (!shortcut) return;
 
         switch (action) {
-            case 'edit':
-                this.editShortcut(shortcutId);
-                break;
             case 'delete':
                 this.deleteShortcut(shortcutId);
                 break;
@@ -375,21 +368,6 @@ class QuickAccess {
         }
     }
 
-    editShortcut(id) {
-        const shortcut = this.shortcuts.find(s => s.id === id);
-        if (!shortcut) return;
-
-        // 填充表单
-        const nameInput = document.getElementById('shortcutName');
-        const urlInput = document.getElementById('shortcutUrl');
-        
-        if (nameInput) nameInput.value = shortcut.name;
-        if (urlInput) urlInput.value = shortcut.url;
-
-        // 修改表单提交处理
-        this.editingId = id;
-        this.showAddModal();
-    }
 
     showError(message) {
         this.showToast(message, 'error');

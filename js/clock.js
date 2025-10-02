@@ -138,46 +138,6 @@ class Clock {
         });
     }
 
-    // 获取问候语
-    getGreeting() {
-        const hour = new Date().getHours();
-        
-        if (hour >= 5 && hour < 12) {
-            return '早上好';
-        } else if (hour >= 12 && hour < 14) {
-            return '中午好';
-        } else if (hour >= 14 && hour < 18) {
-            return '下午好';
-        } else if (hour >= 18 && hour < 22) {
-            return '晚上好';
-        } else {
-            return '夜深了';
-        }
-    }
-
-    // 添加问候语显示
-    showGreeting() {
-        const greeting = this.getGreeting();
-        const greetingElement = document.createElement('div');
-        greetingElement.className = 'greeting-text';
-        greetingElement.textContent = greeting;
-        greetingElement.style.cssText = `
-            font-size: 1rem;
-            color: var(--text-secondary);
-            margin-top: 0.5rem;
-            opacity: 0;
-            transition: opacity 0.5s ease;
-        `;
-
-        if (this.dateElement && this.dateElement.parentNode) {
-            this.dateElement.parentNode.appendChild(greetingElement);
-            
-            // 显示动画
-            requestAnimationFrame(() => {
-                greetingElement.style.opacity = '1';
-            });
-        }
-    }
 
     // 销毁时钟
     destroy() {
@@ -225,9 +185,6 @@ const timeTooltipStyles = `
         font-family: 'Courier New', monospace;
     }
 
-    .greeting-text {
-        animation: fadeInUp 0.5s ease-out;
-    }
 `;
 
 // 添加样式到页面

@@ -33,12 +33,6 @@ class AuraTab {
     }
 
     async initializeComponents() {
-        // 初始化粒子系统
-        this.components.particles = new Particles();
-        
-        // 初始化性能监控
-        this.components.performanceMonitor = new PerformanceMonitor(this.components.particles);
-        
         // 初始化时钟组件
         this.components.clock = new Clock();
         
@@ -127,10 +121,6 @@ class AuraTab {
             this.components.clock.updateTime();
         }
         
-        // 粒子动画已禁用，无需恢复
-        // if (this.components.particles) {
-        //     this.components.particles.resume();
-        // }
     }
 
     handleWindowBlur() {
@@ -139,17 +129,7 @@ class AuraTab {
     }
 
     handleVisibilityChange() {
-        if (document.hidden) {
-            // 页面隐藏时暂停动画（粒子动画已禁用）
-            // if (this.components.particles) {
-            //     this.components.particles.pause();
-            // }
-        } else {
-            // 页面显示时恢复动画（粒子动画已禁用）
-            // if (this.components.particles) {
-            //     this.components.particles.resume();
-            // }
-            
+        if (!document.hidden) {
             // 更新时钟
             if (this.components.clock) {
                 this.components.clock.updateTime();

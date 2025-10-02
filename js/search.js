@@ -292,25 +292,6 @@ class Search {
         return this.searchEngines || [];
     }
 
-    // 添加搜索历史功能
-    saveSearchHistory(query) {
-        const history = Utils.storage.get('searchHistory', []);
-        
-        // 移除重复项
-        const filteredHistory = history.filter(item => item !== query);
-        
-        // 添加到开头
-        filteredHistory.unshift(query);
-        
-        // 限制历史记录数量
-        const limitedHistory = filteredHistory.slice(0, 10);
-        
-        Utils.storage.set('searchHistory', limitedHistory);
-    }
-
-    getSearchHistory() {
-        return Utils.storage.get('searchHistory', []);
-    }
 }
 
 // 添加搜索建议样式
