@@ -95,9 +95,6 @@
     box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
 }
 
-.btn:active {
-    /* 移除按下效果 */
-}
 
 .btn-primary {
     background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
@@ -174,10 +171,6 @@
     /* 移除光效动画 */
 }
 
-.shortcut-btn:hover::before {
-    /* 移除光效动画 */
-}
-
 .shortcut-btn:hover {
     background: rgba(255, 255, 255, 0.15);
     border-color: rgba(255, 255, 255, 0.3);
@@ -204,14 +197,6 @@
 
 .modal-overlay.active {
     display: flex;
-}
-
-.modal-overlay.active .modal-card {
-    /* 移除变化效果 */
-}
-
-.modal-overlay .modal-card {
-    /* 移除变化效果 */
 }
 
 /* 响应式玻璃效果调整 */
