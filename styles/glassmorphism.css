@@ -66,6 +66,67 @@
     margin: auto;
     position: relative;
     z-index: 1001;
+    background: #ffffff !important;
+    color: #333333;
+}
+
+/* 模态框内部元素样式调整 */
+.modal-card h3 {
+    color: #333333;
+    margin-bottom: 1.5rem;
+}
+
+.modal-card .form-group label {
+    color: #666666;
+}
+
+.modal-card .form-group input {
+    background: #f8f9fa;
+    border: 1px solid #dee2e6;
+    color: #333333;
+}
+
+.modal-card .form-group input::placeholder {
+    color: #6c757d;
+}
+
+.modal-card .form-group input:focus {
+    background: #ffffff;
+    border-color: #667eea;
+    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+}
+
+/* 模态框按钮样式调整 */
+.modal-card .btn {
+    color: #333333;
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+}
+
+.modal-card .btn-secondary {
+    background: #f8f9fa;
+    border: 1px solid #dee2e6;
+    color: #6c757d;
+}
+
+.modal-card .btn-secondary:hover {
+    background: #e9ecef;
+    border-color: #adb5bd;
+    color: #495057;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.modal-card .btn-primary {
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    border: 1px solid #667eea;
+    color: #ffffff;
+}
+
+.modal-card .btn-primary:hover {
+    background: linear-gradient(135deg, #5a6fd8, #6a4190);
+    border-color: #5a6fd8;
+    color: #ffffff;
+    box-shadow: 0 2px 8px rgba(102, 126, 234, 0.3);
 }
 
 /* 按钮玻璃效果 */

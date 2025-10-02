@@ -95,16 +95,6 @@ class Utils {
                 console.error('Error writing to localStorage:', error);
                 return false;
             }
-        },
-
-        remove(key) {
-            try {
-                localStorage.removeItem(key);
-                return true;
-            } catch (error) {
-                console.error('Error removing from localStorage:', error);
-                return false;
-            }
         }
     };
 

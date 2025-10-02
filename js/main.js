@@ -409,8 +409,6 @@ class AuraTab {
 
 // 应用样式
 const appStyles = `
-    .app-initialized {
-    }
 
     .init-error {
         font-family: 'Inter', sans-serif;
