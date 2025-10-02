@@ -45,10 +45,29 @@ class Utils {
 
     // 格式化URL
     static formatUrl(url) {
-        if (!url.startsWith('http://') && !url.startsWith('https://')) {
+        // 移除首尾空格
+        url = url.trim();
+        
+        // 如果URL为空，返回空字符串
+        if (!url) return '';
+        
+        // 如果已经包含协议，直接返回
+        if (url.startsWith('http://') || url.startsWith('https://')) {
+            return url;
+        }
+        
+        // 如果URL以www.开头，添加https://
+        if (url.startsWith('www.')) {
             return 'https://' + url;
         }
-        return url;
+        
+        // 如果URL包含.（可能是域名），添加https://
+        if (url.includes('.')) {
+            return 'https://' + url;
+        }
+        
+        // 其他情况也添加https://
+        return 'https://' + url;
     }
 
     // 生成随机ID
