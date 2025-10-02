@@ -7,10 +7,31 @@
     border-radius: var(--border-radius);
     box-shadow: 
         0 8px 32px rgba(0, 0, 0, 0.1),
+        0 0 20px rgba(255, 255, 255, 0.1),
         inset 0 1px 0 var(--shadow-light);
-    /* 移除过渡效果 */
     position: relative;
     overflow: hidden;
+    transition: all 0.3s ease;
+}
+
+/* 添加光晕边框效果 */
+.glass-card::after {
+    content: '';
+    position: absolute;
+    top: -2px;
+    left: -2px;
+    right: -2px;
+    bottom: -2px;
+    background: linear-gradient(45deg, 
+        rgba(255, 255, 255, 0.1) 0%,
+        rgba(120, 119, 198, 0.2) 25%,
+        rgba(255, 119, 198, 0.2) 50%,
+        rgba(120, 219, 255, 0.2) 75%,
+        rgba(255, 255, 255, 0.1) 100%);
+    border-radius: var(--border-radius);
+    z-index: -1;
+    opacity: 0;
+    transition: opacity 0.3s ease;
 }
 
 .glass-card::before {
@@ -31,8 +52,13 @@
     border-color: rgba(255, 255, 255, 0.3);
     box-shadow: 
         0 12px 40px rgba(0, 0, 0, 0.15),
+        0 0 30px rgba(255, 255, 255, 0.2),
         inset 0 1px 0 var(--shadow-light);
-    /* 移除悬停变化效果 */
+    transform: translateY(-2px);
+}
+
+.glass-card:hover::after {
+    opacity: 1;
 }
 
 /* 时钟卡片 */
@@ -163,7 +189,11 @@
 .btn:hover {
     background: rgba(255, 255, 255, 0.2);
     border-color: rgba(255, 255, 255, 0.4);
-    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+    box-shadow: 
+        0 4px 16px rgba(0, 0, 0, 0.1),
+        0 0 20px rgba(120, 119, 198, 0.2),
+        0 0 40px rgba(255, 119, 198, 0.1);
+    transform: translateY(-1px);
 }
 
 
@@ -176,6 +206,10 @@
     background: linear-gradient(135deg, 
         color-mix(in srgb, var(--primary-color) 90%, white),
         color-mix(in srgb, var(--secondary-color) 90%, white));
+    box-shadow: 
+        0 4px 16px rgba(0, 0, 0, 0.1),
+        0 0 25px rgba(102, 126, 234, 0.4),
+        0 0 50px rgba(118, 75, 162, 0.3);
 }
 
 .btn-secondary {
@@ -221,11 +255,29 @@
     flex-direction: column;
     align-items: center;
     gap: 0.75rem;
-    /* 移除过渡效果 */
+    transition: all 0.3s ease;
     position: relative;
     overflow: hidden;
     min-height: 120px;
     justify-content: center;
+}
+
+/* 添加快捷按钮的光晕边框 */
+.shortcut-btn::after {
+    content: '';
+    position: absolute;
+    top: -2px;
+    left: -2px;
+    right: -2px;
+    bottom: -2px;
+    background: linear-gradient(45deg, 
+        rgba(120, 119, 198, 0.4) 0%,
+        rgba(255, 119, 198, 0.4) 50%,
+        rgba(120, 219, 255, 0.4) 100%);
+    border-radius: 18px;
+    z-index: -1;
+    opacity: 0;
+    transition: opacity 0.3s ease;
 }
 
 .shortcut-btn::before {
@@ -247,7 +299,14 @@
     border-color: rgba(255, 255, 255, 0.3);
     box-shadow: 
         0 12px 32px rgba(0, 0, 0, 0.15),
+        0 0 25px rgba(120, 119, 198, 0.3),
+        0 0 50px rgba(255, 119, 198, 0.2),
         inset 0 1px 0 var(--shadow-light);
+    transform: translateY(-3px) scale(1.02);
+}
+
+.shortcut-btn:hover::after {
+    opacity: 1;
 }
 
 /* 模态框覆盖层 */

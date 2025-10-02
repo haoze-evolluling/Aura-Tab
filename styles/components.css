@@ -12,7 +12,29 @@
     font-weight: 300;
     letter-spacing: -0.02em;
     color: var(--text-primary);
-    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    text-shadow: 
+        0 2px 8px rgba(0, 0, 0, 0.1),
+        0 0 20px rgba(255, 255, 255, 0.3),
+        0 0 40px rgba(120, 119, 198, 0.2),
+        0 0 60px rgba(255, 119, 198, 0.1);
+    animation: textGlow 4s ease-in-out infinite alternate;
+}
+
+@keyframes textGlow {
+    0% {
+        text-shadow: 
+            0 2px 8px rgba(0, 0, 0, 0.1),
+            0 0 20px rgba(255, 255, 255, 0.3),
+            0 0 40px rgba(120, 119, 198, 0.2),
+            0 0 60px rgba(255, 119, 198, 0.1);
+    }
+    100% {
+        text-shadow: 
+            0 2px 8px rgba(0, 0, 0, 0.1),
+            0 0 30px rgba(255, 255, 255, 0.4),
+            0 0 50px rgba(120, 119, 198, 0.3),
+            0 0 80px rgba(255, 119, 198, 0.2);
+    }
 }
 
 .date {
@@ -20,6 +42,9 @@
     font-weight: 400;
     color: var(--text-secondary);
     opacity: 0.9;
+    text-shadow: 
+        0 1px 4px rgba(0, 0, 0, 0.1),
+        0 0 10px rgba(255, 255, 255, 0.2);
 }
 
 /* 搜索组件样式 */
@@ -44,7 +69,8 @@
     color: var(--text-primary);
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
-    /* 移除过渡效果 */
+    transition: all 0.3s ease;
+    position: relative;
 }
 
 .search-input::placeholder {
@@ -54,7 +80,35 @@
 .search-input:focus {
     background: rgba(255, 255, 255, 0.15);
     border-color: rgba(255, 255, 255, 0.4);
-    box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.1);
+    box-shadow: 
+        0 0 0 3px rgba(255, 255, 255, 0.1),
+        0 0 20px rgba(120, 119, 198, 0.3),
+        0 0 40px rgba(255, 119, 198, 0.2),
+        0 4px 20px rgba(0, 0, 0, 0.1);
+    transform: translateY(-1px);
+}
+
+/* 添加搜索容器的光晕效果 */
+.search-container::before {
+    content: '';
+    position: absolute;
+    top: -2px;
+    left: -2px;
+    right: -2px;
+    bottom: -2px;
+    background: linear-gradient(45deg, 
+        rgba(120, 119, 198, 0.3) 0%,
+        rgba(255, 119, 198, 0.3) 50%,
+        rgba(120, 219, 255, 0.3) 100%);
+    border-radius: 18px;
+    z-index: -1;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.search-input:focus + .search-container::before,
+.search-container:focus-within::before {
+    opacity: 1;
 }
 
 .search-icon {
@@ -82,6 +136,10 @@
     overflow-y: auto;
     z-index: 100;
     display: none;
+    box-shadow: 
+        0 8px 32px rgba(0, 0, 0, 0.1),
+        0 0 20px rgba(120, 119, 198, 0.1),
+        0 0 40px rgba(255, 119, 198, 0.05);
 }
 
 .search-suggestions.active {
@@ -100,6 +158,9 @@
 
 .suggestion-item:hover {
     background: rgba(255, 255, 255, 0.1);
+    box-shadow: 
+        0 0 10px rgba(120, 119, 198, 0.1),
+        0 0 20px rgba(255, 119, 198, 0.05);
 }
 
 /* 快捷访问组件样式 */
@@ -151,17 +212,23 @@
     font-family: inherit;
     font-size: 0.9rem;
     cursor: pointer;
-    /* 移除过渡效果 */
+    transition: all 0.3s ease;
     display: flex;
     align-items: center;
     justify-content: center;
     gap: 0.5rem;
+    position: relative;
 }
 
 .add-shortcut-btn:hover {
     background: rgba(255, 255, 255, 0.1);
     border-color: rgba(255, 255, 255, 0.3);
     color: var(--text-primary);
+    box-shadow: 
+        0 0 15px rgba(120, 119, 198, 0.2),
+        0 0 30px rgba(255, 119, 198, 0.1),
+        0 4px 15px rgba(0, 0, 0, 0.1);
+    transform: translateY(-1px);
 }
 
 /* 表单样式 */
