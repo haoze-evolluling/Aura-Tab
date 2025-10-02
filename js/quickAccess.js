@@ -167,22 +167,19 @@ class QuickAccess {
         }
     }
 
-    // 获取备用图标源列表
+    // 获取备用图标源列表 (精简版：Google → 腾讯 → 网站本身)
     getFaviconSources(url) {
         try {
             const urlObj = new URL(url);
             const domain = urlObj.hostname;
             
             return [
-                // 1. Google favicon服务 (最可靠)
+                // 1. Google favicon服务
                 `https://www.google.com/s2/favicons?domain=${domain}&sz=32`,
-                // 2. 高可用第三方服务
-                `https://icon.bqb.cool?url=${encodeURIComponent(url)}`,
+                // 2. favicon服务
+                `https://statics.dnspod.cn/proxy_favicon/_/favicon?domain=${domain}`,
                 // 3. 网站自身的favicon
-                `${urlObj.protocol}//${urlObj.hostname}/favicon.ico`,
-                // 4. 尝试常见的favicon路径
-                `${urlObj.protocol}//${urlObj.hostname}/favicon.png`,
-                `${urlObj.protocol}//${urlObj.hostname}/apple-touch-icon.png`
+                `${urlObj.protocol}//${urlObj.hostname}/favicon.ico`
             ];
         } catch (error) {
             return [this.getDefaultIcon()];
@@ -194,7 +191,7 @@ class QuickAccess {
         return 'data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>';
     }
 
-    // 处理图标加载失败的智能回退逻辑
+    // 处理图标加载失败的回退逻辑 (精简版：Google → 腾讯 → 网站本身)
     handleIconError(imgElement, url) {
         const currentSrc = imgElement.src;
         const sources = this.getFaviconSources(url);
@@ -212,7 +209,8 @@ class QuickAccess {
         
         if (nextIndex < sources.length) {
             // 还有其他源可以尝试
-            console.log(`图标加载失败，尝试备用源 ${nextIndex + 1}/${sources.length}: ${sources[nextIndex]}`);
+            const sourceNames = ['Google', '腾讯', '网站本身'];
+            console.log(`图标加载失败，尝试${sourceNames[nextIndex]}服务: ${sources[nextIndex]}`);
             imgElement.src = sources[nextIndex];
         } else {
             // 所有源都失败了，显示默认图标
@@ -225,50 +223,6 @@ class QuickAccess {
         }
     }
 
-    // 异步预加载和验证图标
-    async getBestFaviconUrl(url) {
-        const sources = this.getFaviconSources(url);
-        
-        for (let i = 0; i < sources.length; i++) {
-            const source = sources[i];
-            try {
-                const isValid = await this.validateImageUrl(source);
-                if (isValid) {
-                    console.log(`找到有效图标源: ${source}`);
-                    return source;
-                }
-            } catch (error) {
-                console.log(`图标源验证失败: ${source}`, error);
-                continue;
-            }
-        }
-        
-        // 如果所有源都失败，返回默认图标
-        console.log(`所有图标源验证失败，使用默认图标: ${url}`);
-        return this.getDefaultIcon();
-    }
-
-    // 验证图片URL是否有效
-    validateImageUrl(url) {
-        return new Promise((resolve) => {
-            const img = new Image();
-            const timeout = setTimeout(() => {
-                resolve(false);
-            }, 3000); // 3秒超时
-            
-            img.onload = () => {
-                clearTimeout(timeout);
-                resolve(true);
-            };
-            
-            img.onerror = () => {
-                clearTimeout(timeout);
-                resolve(false);
-            };
-            
-            img.src = url;
-        });
-    }
 
     showAddModal() {
         if (this.modalOverlay) {
@@ -326,8 +280,7 @@ class QuickAccess {
         const shortcut = {
             id: Utils.generateId(),
             name: shortcutData.name,
-            url: shortcutData.url,
-            createdAt: new Date().toISOString()
+            url: shortcutData.url
         };
 
         this.shortcuts.push(shortcut);
@@ -350,10 +303,6 @@ class QuickAccess {
         }
     }
 
-    getIconForUrl(url) {
-        // 不再使用特定图标映射，统一使用必应图标服务
-        return null;
-    }
 
     showContextMenu(e, shortcutId) {
         // 移除现有的上下文菜单
@@ -387,16 +336,14 @@ class QuickAccess {
             min-width: 120px;
             opacity: 0;
             transform: scale(0.95);
-            transition: all 0.2s ease;
+            /* 移除过渡效果 */
         `;
 
         document.body.appendChild(menu);
 
-        // 显示动画
-        requestAnimationFrame(() => {
-            menu.style.opacity = '1';
-            menu.style.transform = 'scale(1)';
-        });
+        // 直接显示
+        menu.style.opacity = '1';
+        menu.style.transform = 'scale(1)';
 
         // 添加事件监听器
         menu.addEventListener('click', (e) => {
@@ -458,7 +405,7 @@ class QuickAccess {
             font-size: 0.9rem;
             opacity: 0;
             transform: translateX(100%);
-            transition: all 0.3s ease;
+            /* 移除过渡效果 */
         `;
 
         if (type === 'error') {
@@ -471,11 +418,9 @@ class QuickAccess {
 
         document.body.appendChild(toast);
 
-        // 显示动画
-        requestAnimationFrame(() => {
-            toast.style.opacity = '1';
-            toast.style.transform = 'translateX(0)';
-        });
+        // 直接显示
+        toast.style.opacity = '1';
+        toast.style.transform = 'translateX(0)';
 
         // 自动隐藏
         setTimeout(() => {

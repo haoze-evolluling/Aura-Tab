@@ -8,7 +8,7 @@
     box-shadow: 
         0 8px 32px rgba(0, 0, 0, 0.1),
         inset 0 1px 0 var(--shadow-light);
-    transition: var(--transition);
+    /* 移除过渡效果 */
     position: relative;
     overflow: hidden;
 }
@@ -32,7 +32,7 @@
     box-shadow: 
         0 12px 40px rgba(0, 0, 0, 0.15),
         inset 0 1px 0 var(--shadow-light);
-    transform: translateY(-2px);
+    /* 移除悬停变化效果 */
 }
 
 /* 时钟卡片 */
@@ -81,7 +81,7 @@
     font-size: 0.9rem;
     font-weight: 500;
     cursor: pointer;
-    transition: var(--transition);
+    /* 移除过渡效果 */
     text-decoration: none;
     display: inline-flex;
     align-items: center;
@@ -92,12 +92,11 @@
 .btn:hover {
     background: rgba(255, 255, 255, 0.2);
     border-color: rgba(255, 255, 255, 0.4);
-    transform: translateY(-1px);
     box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
 }
 
 .btn:active {
-    transform: translateY(0);
+    /* 移除按下效果 */
 }
 
 .btn-primary {
@@ -127,7 +126,7 @@
     font-family: inherit;
     font-size: 1rem;
     width: 100%;
-    transition: var(--transition);
+    /* 移除过渡效果 */
 }
 
 .glass-input::placeholder {
@@ -154,7 +153,7 @@
     flex-direction: column;
     align-items: center;
     gap: 0.75rem;
-    transition: var(--transition);
+    /* 移除过渡效果 */
     position: relative;
     overflow: hidden;
     min-height: 120px;
@@ -172,17 +171,16 @@
         transparent 0%, 
         rgba(255, 255, 255, 0.1) 50%, 
         transparent 100%);
-    transition: left 0.6s ease;
+    /* 移除光效动画 */
 }
 
 .shortcut-btn:hover::before {
-    left: 100%;
+    /* 移除光效动画 */
 }
 
 .shortcut-btn:hover {
     background: rgba(255, 255, 255, 0.15);
     border-color: rgba(255, 255, 255, 0.3);
-    transform: translateY(-4px) scale(1.02);
     box-shadow: 
         0 12px 32px rgba(0, 0, 0, 0.15),
         inset 0 1px 0 var(--shadow-light);
@@ -198,27 +196,22 @@
     background: rgba(0, 0, 0, 0.3);
     backdrop-filter: blur(8px);
     -webkit-backdrop-filter: blur(8px);
-    display: flex;
+    display: none;
     align-items: center;
     justify-content: center;
     z-index: 1000;
-    opacity: 0;
-    visibility: hidden;
-    transition: var(--transition);
 }
 
 .modal-overlay.active {
-    opacity: 1;
-    visibility: visible;
+    display: flex;
 }
 
 .modal-overlay.active .modal-card {
-    transform: translateY(0) scale(1);
+    /* 移除变化效果 */
 }
 
 .modal-overlay .modal-card {
-    transform: translateY(-20px) scale(0.95);
-    transition: var(--transition);
+    /* 移除变化效果 */
 }
 
 /* 响应式玻璃效果调整 */

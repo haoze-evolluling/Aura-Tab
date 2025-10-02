@@ -2,7 +2,7 @@
 
 /* 时钟组件样式 */
 .clock-section {
-    animation: fadeInUp 0.8s ease-out;
+    /* 移除动画效果 */
 }
 
 .clock-display {
@@ -29,7 +29,6 @@
 
 /* 搜索组件样式 */
 .search-section {
-    animation: fadeInUp 0.8s ease-out 0.1s both;
     width: 100%;
     display: flex;
     justify-content: center;
@@ -50,7 +49,7 @@
     color: var(--text-primary);
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
-    transition: var(--transition);
+    /* 移除过渡效果 */
 }
 
 .search-input::placeholder {
@@ -87,22 +86,17 @@
     max-height: 300px;
     overflow-y: auto;
     z-index: 100;
-    opacity: 0;
-    visibility: hidden;
-    transform: translateY(-10px);
-    transition: var(--transition);
+    display: none;
 }
 
 .search-suggestions.active {
-    opacity: 1;
-    visibility: visible;
-    transform: translateY(0);
+    display: block;
 }
 
 .suggestion-item {
     padding: 0.75rem 1rem;
     cursor: pointer;
-    transition: var(--transition);
+    /* 移除过渡效果 */
     border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
 
@@ -116,7 +110,6 @@
 
 /* 快捷访问组件样式 */
 .quick-access-section {
-    animation: fadeInUp 0.8s ease-out 0.2s both;
     width: 100%;
     display: flex;
     justify-content: center;
@@ -164,7 +157,7 @@
     font-family: inherit;
     font-size: 0.9rem;
     cursor: pointer;
-    transition: var(--transition);
+    /* 移除过渡效果 */
     display: flex;
     align-items: center;
     justify-content: center;
@@ -203,7 +196,7 @@
     border-radius: 8px;
     color: var(--text-primary);
     font-family: inherit;
-    transition: var(--transition);
+    /* 移除过渡效果 */
 }
 
 .form-group input::placeholder {
@@ -222,17 +215,6 @@
     justify-content: flex-end;
 }
 
-/* 动画 */
-@keyframes fadeInUp {
-    from {
-        opacity: 0;
-        transform: translateY(30px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
 
 
 /* 响应式设计 */
@@ -318,7 +300,7 @@
     align-items: center;
     justify-content: center;
     font-size: 0.8rem;
-    transition: var(--transition);
+    /* 移除过渡效果 */
 }
 
 .shortcut-btn:hover .delete-shortcut {

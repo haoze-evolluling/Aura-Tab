@@ -31,29 +31,7 @@ class Utils {
         };
     }
 
-    // 节流函数
-    static throttle(func, limit) {
-        let inThrottle;
-        return function() {
-            const args = arguments;
-            const context = this;
-            if (!inThrottle) {
-                func.apply(context, args);
-                inThrottle = true;
-                setTimeout(() => inThrottle = false, limit);
-            }
-        };
-    }
 
-    // 获取网站图标
-    static getFavicon(url) {
-        try {
-            const domain = new URL(url).hostname;
-            return `https://www.google.com/s2/favicons?domain=${domain}&sz=32`;
-        } catch (error) {
-            return 'data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>';
-        }
-    }
 
     // 验证URL
     static isValidUrl(string) {
@@ -111,71 +89,6 @@ class Utils {
         }
     };
 
-    // 动画工具
-    static animate = {
-        fadeIn(element, duration = 300) {
-            element.style.opacity = '0';
-            element.style.display = 'block';
-            
-            let start = null;
-            function step(timestamp) {
-                if (!start) start = timestamp;
-                const progress = timestamp - start;
-                const opacity = Math.min(progress / duration, 1);
-                
-                element.style.opacity = opacity;
-                
-                if (progress < duration) {
-                    requestAnimationFrame(step);
-                }
-            }
-            requestAnimationFrame(step);
-        },
-
-        fadeOut(element, duration = 300) {
-            let start = null;
-            const initialOpacity = parseFloat(getComputedStyle(element).opacity);
-            
-            function step(timestamp) {
-                if (!start) start = timestamp;
-                const progress = timestamp - start;
-                const opacity = initialOpacity * (1 - Math.min(progress / duration, 1));
-                
-                element.style.opacity = opacity;
-                
-                if (progress < duration) {
-                    requestAnimationFrame(step);
-                } else {
-                    element.style.display = 'none';
-                }
-            }
-            requestAnimationFrame(step);
-        },
-
-        slideUp(element, duration = 300) {
-            const height = element.offsetHeight;
-            element.style.height = height + 'px';
-            element.style.overflow = 'hidden';
-            
-            let start = null;
-            function step(timestamp) {
-                if (!start) start = timestamp;
-                const progress = timestamp - start;
-                const currentHeight = height * (1 - Math.min(progress / duration, 1));
-                
-                element.style.height = currentHeight + 'px';
-                
-                if (progress < duration) {
-                    requestAnimationFrame(step);
-                } else {
-                    element.style.display = 'none';
-                    element.style.height = '';
-                    element.style.overflow = '';
-                }
-            }
-            requestAnimationFrame(step);
-        }
-    };
 
     // 搜索建议
     static searchSuggestions = [

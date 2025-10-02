@@ -106,16 +106,14 @@ class Clock {
             padding: 1.5rem;
             min-width: 300px;
             opacity: 0;
-            transition: opacity 0.3s ease;
+            /* 移除过渡效果 */
         `;
 
         // 添加到页面
         document.body.appendChild(tooltip);
 
-        // 显示动画
-        requestAnimationFrame(() => {
-            tooltip.style.opacity = '1';
-        });
+        // 直接显示
+        tooltip.style.opacity = '1';
 
         // 3秒后自动隐藏
         setTimeout(() => {

@@ -70,7 +70,6 @@ class AuraTab {
         
         // 窗口焦点事件
         window.addEventListener('focus', () => this.handleWindowFocus());
-        window.addEventListener('blur', () => this.handleWindowBlur());
         
         // 页面可见性变化
         document.addEventListener('visibilitychange', () => this.handleVisibilityChange());
@@ -123,10 +122,6 @@ class AuraTab {
         
     }
 
-    handleWindowBlur() {
-        // 窗口失去焦点时的处理
-        // 可以在这里暂停一些动画以节省性能
-    }
 
     handleVisibilityChange() {
         if (!document.hidden) {
@@ -165,17 +160,15 @@ class AuraTab {
             align-items: center;
             gap: 0.75rem;
             opacity: 0;
-            transition: all 0.3s ease;
+            /* 移除过渡效果 */
             background: ${isOnline ? 'rgba(107, 255, 107, 0.2)' : 'rgba(255, 107, 107, 0.2)'};
             border: 1px solid ${isOnline ? 'rgba(107, 255, 107, 0.3)' : 'rgba(255, 107, 107, 0.3)'};
         `;
 
         document.body.appendChild(toast);
 
-        // 显示动画
-        requestAnimationFrame(() => {
-            toast.style.opacity = '1';
-        });
+        // 直接显示
+        toast.style.opacity = '1';
 
         // 自动隐藏
         setTimeout(() => {
@@ -273,7 +266,7 @@ class AuraTab {
             gap: 0.75rem;
             opacity: 0;
             transform: translateY(20px);
-            transition: all 0.3s ease;
+            /* 移除过渡效果 */
             background: rgba(255, 107, 107, 0.2);
             border: 1px solid rgba(255, 107, 107, 0.3);
             max-width: 400px;
@@ -281,11 +274,9 @@ class AuraTab {
 
         document.body.appendChild(toast);
 
-        // 显示动画
-        requestAnimationFrame(() => {
-            toast.style.opacity = '1';
-            toast.style.transform = 'translateY(0)';
-        });
+        // 直接显示
+        toast.style.opacity = '1';
+        toast.style.transform = 'translateY(0)';
 
         // 自动隐藏
         setTimeout(() => {
@@ -352,10 +343,8 @@ class AuraTab {
 
         document.body.appendChild(welcome);
 
-        // 显示动画
-        requestAnimationFrame(() => {
-            welcome.style.opacity = '1';
-        });
+        // 直接显示
+        welcome.style.opacity = '1';
 
         // 关闭按钮事件
         welcome.querySelector('.welcome-close').addEventListener('click', () => {
@@ -409,7 +398,6 @@ class AuraTab {
         // 清理全局事件监听器
         document.removeEventListener('keydown', this.handleGlobalKeydown);
         window.removeEventListener('focus', this.handleWindowFocus);
-        window.removeEventListener('blur', this.handleWindowBlur);
         document.removeEventListener('visibilitychange', this.handleVisibilityChange);
         window.removeEventListener('online', this.handleNetworkChange);
         window.removeEventListener('offline', this.handleNetworkChange);
@@ -424,18 +412,7 @@ class AuraTab {
 // 应用样式
 const appStyles = `
     .app-initialized {
-        animation: appFadeIn 0.8s ease-out;
-    }
-
-    @keyframes appFadeIn {
-        from {
-            opacity: 0;
-            transform: scale(0.98);
-        }
-        to {
-            opacity: 1;
-            transform: scale(1);
-        }
+        /* 移除初始化动画 */
     }
 
     .init-error {
