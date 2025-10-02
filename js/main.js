@@ -546,3 +546,10 @@ if (document.readyState === 'loading') {
 // 导出到全局作用域（用于调试）
 window.AuraTab = AuraTab;
 window.auraTabApp = auraTabApp;
+
+// 导出快捷访问组件到全局作用域，用于图标错误处理
+Object.defineProperty(window, 'quickAccess', {
+    get() {
+        return auraTabApp?.components?.quickAccess;
+    }
+});

@@ -66,38 +66,32 @@ class QuickAccess {
                 {
                     id: Utils.generateId(),
                     name: 'Google',
-                    url: 'https://www.google.com',
-                    icon: '🔍'
+                    url: 'https://www.google.com'
                 },
                 {
                     id: Utils.generateId(),
                     name: 'YouTube',
-                    url: 'https://www.youtube.com',
-                    icon: '📺'
+                    url: 'https://www.youtube.com'
                 },
                 {
                     id: Utils.generateId(),
                     name: 'GitHub',
-                    url: 'https://github.com',
-                    icon: '💻'
+                    url: 'https://github.com'
                 },
                 {
                     id: Utils.generateId(),
                     name: 'Stack Overflow',
-                    url: 'https://stackoverflow.com',
-                    icon: '📚'
+                    url: 'https://stackoverflow.com'
                 },
                 {
                     id: Utils.generateId(),
                     name: 'MDN',
-                    url: 'https://developer.mozilla.org',
-                    icon: '📖'
+                    url: 'https://developer.mozilla.org'
                 },
                 {
                     id: Utils.generateId(),
                     name: 'Twitter',
-                    url: 'https://twitter.com',
-                    icon: '🐦'
+                    url: 'https://twitter.com'
                 }
             ];
             this.saveShortcuts();
@@ -121,7 +115,6 @@ class QuickAccess {
 
         const html = this.shortcuts.map(shortcut => {
             const favicon = this.getFaviconUrl(shortcut.url);
-            const displayIcon = shortcut.icon || '🌐';
             
             return `
                 <a href="${shortcut.url}" 
@@ -130,8 +123,11 @@ class QuickAccess {
                    rel="noopener noreferrer"
                    data-id="${shortcut.id}">
                     <div class="shortcut-icon">
-                        ${shortcut.icon ? displayIcon : `<img src="${favicon}" alt="${shortcut.name}" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">`}
-                        <div class="fallback-icon" style="display: none;">${displayIcon}</div>
+                        <img src="${favicon}" 
+                             alt="${shortcut.name}" 
+                             loading="lazy"
+                             onerror="window.quickAccess.handleIconError(this, '${shortcut.url}')">
+                        <div class="fallback-icon" style="display: none;">🌐</div>
                     </div>
                     <div class="shortcut-name">${shortcut.name}</div>
                     <button class="delete-shortcut" data-id="${shortcut.id}" title="删除">×</button>
@@ -164,10 +160,114 @@ class QuickAccess {
     getFaviconUrl(url) {
         try {
             const domain = new URL(url).hostname;
+            // 使用Google的favicon服务，这是最可靠的选择
             return `https://www.google.com/s2/favicons?domain=${domain}&sz=32`;
         } catch (error) {
-            return 'data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>';
+            return this.getDefaultIcon();
         }
+    }
+
+    // 获取备用图标源列表
+    getFaviconSources(url) {
+        try {
+            const urlObj = new URL(url);
+            const domain = urlObj.hostname;
+            
+            return [
+                // 1. Google favicon服务 (最可靠)
+                `https://www.google.com/s2/favicons?domain=${domain}&sz=32`,
+                // 2. 高可用第三方服务
+                `https://icon.bqb.cool?url=${encodeURIComponent(url)}`,
+                // 3. 网站自身的favicon
+                `${urlObj.protocol}//${urlObj.hostname}/favicon.ico`,
+                // 4. 尝试常见的favicon路径
+                `${urlObj.protocol}//${urlObj.hostname}/favicon.png`,
+                `${urlObj.protocol}//${urlObj.hostname}/apple-touch-icon.png`
+            ];
+        } catch (error) {
+            return [this.getDefaultIcon()];
+        }
+    }
+
+    // 获取默认SVG图标
+    getDefaultIcon() {
+        return 'data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>';
+    }
+
+    // 处理图标加载失败的智能回退逻辑
+    handleIconError(imgElement, url) {
+        const currentSrc = imgElement.src;
+        const sources = this.getFaviconSources(url);
+        
+        // 找到当前失败的源在列表中的位置
+        let currentIndex = sources.findIndex(src => src === currentSrc);
+        
+        // 如果找不到当前源，从第一个开始
+        if (currentIndex === -1) {
+            currentIndex = 0;
+        }
+        
+        // 尝试下一个源
+        const nextIndex = currentIndex + 1;
+        
+        if (nextIndex < sources.length) {
+            // 还有其他源可以尝试
+            console.log(`图标加载失败，尝试备用源 ${nextIndex + 1}/${sources.length}: ${sources[nextIndex]}`);
+            imgElement.src = sources[nextIndex];
+        } else {
+            // 所有源都失败了，显示默认图标
+            console.log(`所有图标源都失败，显示默认图标: ${url}`);
+            imgElement.style.display = 'none';
+            const fallbackIcon = imgElement.nextElementSibling;
+            if (fallbackIcon && fallbackIcon.classList.contains('fallback-icon')) {
+                fallbackIcon.style.display = 'flex';
+            }
+        }
+    }
+
+    // 异步预加载和验证图标
+    async getBestFaviconUrl(url) {
+        const sources = this.getFaviconSources(url);
+        
+        for (let i = 0; i < sources.length; i++) {
+            const source = sources[i];
+            try {
+                const isValid = await this.validateImageUrl(source);
+                if (isValid) {
+                    console.log(`找到有效图标源: ${source}`);
+                    return source;
+                }
+            } catch (error) {
+                console.log(`图标源验证失败: ${source}`, error);
+                continue;
+            }
+        }
+        
+        // 如果所有源都失败，返回默认图标
+        console.log(`所有图标源验证失败，使用默认图标: ${url}`);
+        return this.getDefaultIcon();
+    }
+
+    // 验证图片URL是否有效
+    validateImageUrl(url) {
+        return new Promise((resolve) => {
+            const img = new Image();
+            const timeout = setTimeout(() => {
+                resolve(false);
+            }, 3000); // 3秒超时
+            
+            img.onload = () => {
+                clearTimeout(timeout);
+                resolve(true);
+            };
+            
+            img.onerror = () => {
+                clearTimeout(timeout);
+                resolve(false);
+            };
+            
+            img.src = url;
+        });
     }
 
     showAddModal() {
@@ -216,8 +316,7 @@ class QuickAccess {
 
         this.addShortcut({
             name: name,
-            url: Utils.formatUrl(url),
-            icon: this.getIconForUrl(url)
+            url: Utils.formatUrl(url)
         });
 
         this.hideModal();
@@ -228,7 +327,6 @@ class QuickAccess {
             id: Utils.generateId(),
             name: shortcutData.name,
             url: shortcutData.url,
-            icon: shortcutData.icon || '🌐',
             createdAt: new Date().toISOString()
         };
 
@@ -253,41 +351,8 @@ class QuickAccess {
     }
 
     getIconForUrl(url) {
-        const iconMap = {
-            'google.com': '🔍',
-            'youtube.com': '📺',
-            'github.com': '💻',
-            'stackoverflow.com': '📚',
-            'developer.mozilla.org': '📖',
-            'twitter.com': '🐦',
-            'facebook.com': '📘',
-            'instagram.com': '📷',
-            'linkedin.com': '💼',
-            'reddit.com': '🔴',
-            'wikipedia.org': '📚',
-            'amazon.com': '📦',
-            'netflix.com': '🎬',
-            'spotify.com': '🎵',
-            'apple.com': '🍎',
-            'microsoft.com': '🪟',
-            'baidu.com': '🔍',
-            'bilibili.com': '📺',
-            'zhihu.com': '🤔',
-            'weibo.com': '📱'
-        };
-
-        try {
-            const domain = new URL(Utils.formatUrl(url)).hostname.toLowerCase();
-            for (const [key, icon] of Object.entries(iconMap)) {
-                if (domain.includes(key)) {
-                    return icon;
-                }
-            }
-        } catch (error) {
-            // 忽略URL解析错误
-        }
-
-        return '🌐';
+        // 不再使用特定图标映射，统一使用必应图标服务
+        return null;
     }
 
     showContextMenu(e, shortcutId) {
