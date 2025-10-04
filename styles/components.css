@@ -78,7 +78,7 @@
 
 .quick-access-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    grid-template-columns: repeat(4, 1fr);
     gap: 1rem;
     margin-bottom: 1.5rem;
     width: 100%;
@@ -244,29 +244,3 @@
 .search-engine-item[data-engine="google"] .search-engine-icon { background: linear-gradient(45deg, #4285f4, #34a853); color: white; }
 .search-engine-item[data-engine="baidu"] .search-engine-icon { background: linear-gradient(45deg, #2932e1, #1e88e5); color: white; }
 .search-engine-item[data-engine="bing"] .search-engine-icon { background: linear-gradient(45deg, #00bcf2, #0078d4); color: white; }
-
-/* 响应式设计 */
-@media (max-width: 768px) {
-    .time { font-size: 2.8rem; }
-    .date { font-size: 1rem; }
-    .search-input { font-size: 1rem; padding: 0.875rem 0.875rem 0.875rem 2.75rem; }
-    .search-icon { left: 0.875rem; }
-    .quick-access-grid { grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); gap: 0.75rem; }
-    .shortcut-icon { width: 28px; height: 28px; font-size: 1.1rem; }
-    .shortcut-name { font-size: 0.85rem; }
-    .search-engine-grid { grid-template-columns: 1fr; gap: 0.75rem; }
-    .search-engine-item { padding: 0.875rem; }
-    .search-engine-icon { width: 28px; height: 28px; font-size: 1.1rem; }
-    .search-engine-name { font-size: 0.95rem; }
-    .search-engine-desc { font-size: 0.8rem; }
-}
-
-@media (max-width: 480px) {
-    .time { font-size: 2.2rem; }
-    .date { font-size: 0.9rem; }
-    .search-input { font-size: 0.9rem; padding: 0.75rem 0.75rem 0.75rem 2.5rem; }
-    .search-icon { left: 0.75rem; }
-    .quick-access-grid { grid-template-columns: repeat(auto-fit, minmax(100px, 1fr)); gap: 0.5rem; }
-    .form-actions { flex-direction: column; }
-    .modal-card { padding: 1.5rem; }
-}

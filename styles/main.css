@@ -68,15 +68,6 @@ body {
     text-align: center;
 }
 
-/* 响应式设计 */
-@media (max-width: 768px) {
-    .main-container { padding: 1rem; gap: 1.5rem; }
-    .section-title { font-size: 1rem; }
-}
-
-@media (max-width: 480px) {
-    .main-container { padding: 0.5rem; gap: 1rem; }
-}
 
 /* 滚动条样式 */
 ::-webkit-scrollbar { width: 8px; }
