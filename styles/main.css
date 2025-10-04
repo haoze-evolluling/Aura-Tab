@@ -84,12 +84,7 @@ body {
         radial-gradient(circle at 20% 90%, rgba(255, 255, 255, 0.05) 0%, transparent 2%);
     pointer-events: none;
     z-index: -1;
-    animation: sparkle 8s ease-in-out infinite;
-}
-
-@keyframes sparkle {
-    0%, 100% { opacity: 0.3; transform: scale(1); }
-    50% { opacity: 0.6; transform: scale(1.1); }
+    opacity: 0.4;
 }
 
 .section-title {

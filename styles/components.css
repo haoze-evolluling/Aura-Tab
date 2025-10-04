@@ -13,15 +13,9 @@
     color: var(--text-primary);
     text-shadow: 
         0 2px 8px rgba(0, 0, 0, 0.1),
-        0 0 20px rgba(255, 255, 255, 0.3),
-        0 0 40px rgba(120, 119, 198, 0.2),
-        0 0 60px rgba(255, 119, 198, 0.1);
-    animation: textGlow 4s ease-in-out infinite alternate;
-}
-
-@keyframes textGlow {
-    0% { text-shadow: 0 2px 8px rgba(0, 0, 0, 0.1), 0 0 20px rgba(255, 255, 255, 0.3), 0 0 40px rgba(120, 119, 198, 0.2), 0 0 60px rgba(255, 119, 198, 0.1); }
-    100% { text-shadow: 0 2px 8px rgba(0, 0, 0, 0.1), 0 0 30px rgba(255, 255, 255, 0.4), 0 0 50px rgba(120, 119, 198, 0.3), 0 0 80px rgba(255, 119, 198, 0.2); }
+        0 0 25px rgba(255, 255, 255, 0.35),
+        0 0 45px rgba(120, 119, 198, 0.25),
+        0 0 70px rgba(255, 119, 198, 0.15);
 }
 
 .date {
