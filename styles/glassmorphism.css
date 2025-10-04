@@ -96,10 +96,6 @@
     will-change: transform, opacity;
 }
 
-#searchEngineModal .btn {
-    margin-top: 1rem;
-}
-
 #searchEngineModal .search-engine-name,
 #searchEngineModal .search-engine-desc {
     color: #333333 !important;
