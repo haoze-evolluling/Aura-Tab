@@ -38,8 +38,12 @@ class Search {
         const modal = document.getElementById('searchEngineModal');
         const grid = document.getElementById('searchEngineGrid');
         if (!modal || !grid) return;
+        const modalCard = modal.querySelector('.modal-card');
         this.renderSearchEngines(grid);
+        modal.classList.remove('closing');
+        modalCard?.classList.add('animating');
         modal.classList.add('active');
+        setTimeout(() => modalCard?.classList.remove('animating'), 350);
     }
 
     renderSearchEngines(container) {
@@ -70,7 +74,15 @@ class Search {
     }
 
     hideSearchEngineModal() {
-        document.getElementById('searchEngineModal')?.classList.remove('active');
+        const modal = document.getElementById('searchEngineModal');
+        if (!modal?.classList.contains('active')) return;
+        const modalCard = modal.querySelector('.modal-card');
+        modalCard?.classList.add('animating');
+        modal.classList.add('closing');
+        setTimeout(() => {
+            modal.classList.remove('active', 'closing');
+            modalCard?.classList.remove('animating');
+        }, 250);
     }
 
     setupSearchEngineModal() {
