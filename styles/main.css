@@ -57,6 +57,7 @@ body {
     gap: 2rem;
     position: relative;
     z-index: 3;
+    box-sizing: border-box;
 }
 
 
