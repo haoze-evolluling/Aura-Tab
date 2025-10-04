@@ -34,7 +34,7 @@
 
 /* 模态框卡片 */
 .modal-card {
-    padding: 2rem;
+    padding: 2.5rem;
     width: 90%;
     max-width: 550px;
     margin: auto;
@@ -46,6 +46,8 @@
     opacity: 0;
     will-change: transform, opacity;
     box-sizing: border-box;
+    border: 2px solid rgba(255, 255, 255, 0.8);
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
 }
 
 /* 模态框动画 */
