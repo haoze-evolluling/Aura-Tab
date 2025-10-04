@@ -20,7 +20,6 @@
 .clock-card, .quick-access-card {
     padding: 2rem;
     width: 100%;
-    max-width: 800px;
 }
 
 .clock-card { text-align: center; }
@@ -28,7 +27,6 @@
 .search-card {
     padding: 1.5rem;
     width: 100%;
-    max-width: 800px;
     position: relative;
 }
 
@@ -36,7 +34,6 @@
 .modal-card {
     padding: 2rem;
     width: 90%;
-    max-width: 400px;
     margin: auto;
     position: relative;
     z-index: 1001;
@@ -59,7 +56,6 @@
 }
 
 /* 搜索引擎模态框特殊样式 */
-#searchEngineModal .modal-card { max-width: 600px; }
 #searchEngineModal .search-engine-name,
 #searchEngineModal .search-engine-desc { color: #333333 !important; }
 
@@ -290,15 +286,3 @@
     animation: modalSlideOut 0.25s cubic-bezier(0.55, 0.055, 0.675, 0.19) forwards;
 }
 
-/* 响应式玻璃效果调整 */
-@media (max-width: 768px) {
-    .glass-card { backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px); }
-    .clock-card { padding: 1.5rem; max-width: 100%; }
-    .search-card { padding: 1rem; }
-    .quick-access-card { padding: 1.5rem; }
-}
-@media (max-width: 480px) {
-    .glass-card { border-radius: 12px; }
-    .btn { padding: 0.6rem 1.2rem; font-size: 0.85rem; }
-    .shortcut-btn { padding: 1rem; min-height: 100px; }
-}
