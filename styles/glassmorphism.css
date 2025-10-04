@@ -105,6 +105,13 @@
     border-color: #adb5bd;
     color: #495057;
 }
+.modal-card .btn-secondary:active {
+    background: #dee2e6;
+    border-color: #6c757d;
+    color: #343a40;
+    transform: translateY(1px) scale(0.98);
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1);
+}
 .modal-card .btn-primary {
     background: linear-gradient(135deg, #667eea, #764ba2);
     border: 1px solid #667eea;
@@ -114,6 +121,13 @@
     background: linear-gradient(135deg, #5a6fd8, #6a4190);
     border-color: #5a6fd8;
     color: #ffffff;
+}
+.modal-card .btn-primary:active {
+    background: linear-gradient(135deg, #4e5bc6, #5e3a7e);
+    border-color: #4e5bc6;
+    color: #ffffff;
+    transform: translateY(1px) scale(0.98);
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 
 /* 按钮玻璃效果 */
@@ -137,6 +151,33 @@
     gap: 0.5rem;
     position: relative;
     overflow: hidden;
+}
+
+/* 波纹效果 */
+.btn::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.3);
+    transform: translate(-50%, -50%);
+    transition: width 0.3s ease, height 0.3s ease;
+    pointer-events: none;
+    z-index: 0;
+}
+
+.btn:active::before {
+    width: 200px;
+    height: 200px;
+}
+
+/* 确保按钮文字在波纹效果之上 */
+.btn > * {
+    position: relative;
+    z-index: 1;
 }
 .btn:active { transform: translateY(1px) scale(0.98); }
 .btn:hover {
