@@ -40,14 +40,7 @@ class Search {
         if (!modal || !grid) return;
         
         this.renderSearchEngines(grid);
-        const modalCard = modal.querySelector('.modal-card');
-        modal.classList.remove('closing');
         modal.classList.add('active');
-        
-        // 强制重新触发动画
-        modalCard.style.animation = 'none';
-        modalCard.offsetHeight; // 触发重排
-        modalCard.style.animation = '';
         
         // 添加键盘事件监听
         document.addEventListener('keydown', this.handleKeyDown.bind(this));
@@ -84,10 +77,7 @@ class Search {
         const modal = document.getElementById('searchEngineModal');
         if (!modal?.classList.contains('active')) return;
         
-        modal.classList.add('closing');
-        setTimeout(() => {
-            modal.classList.remove('active', 'closing');
-        }, 250);
+        modal.classList.remove('active');
         
         // 移除键盘事件监听
         document.removeEventListener('keydown', this.handleKeyDown.bind(this));

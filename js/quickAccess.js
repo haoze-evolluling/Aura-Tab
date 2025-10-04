@@ -99,25 +99,15 @@ class QuickAccess {
 
     showAddModal() {
         if (!this.elements.modal) return;
-        const modalCard = this.elements.modal.querySelector('.modal-card');
-        this.elements.modal.classList.remove('closing');
-        modalCard?.classList.add('animating');
         this.elements.modal.classList.add('active');
         document.getElementById('shortcutName').value = '';
         document.getElementById('shortcutUrl').value = '';
         setTimeout(() => document.getElementById('shortcutName')?.focus(), 150);
-        setTimeout(() => modalCard?.classList.remove('animating'), 350);
     }
 
     hideModal() {
         if (!this.elements.modal?.classList.contains('active')) return;
-        const modalCard = this.elements.modal.querySelector('.modal-card');
-        modalCard?.classList.add('animating');
-        this.elements.modal.classList.add('closing');
-        setTimeout(() => {
-            this.elements.modal.classList.remove('active', 'closing');
-            modalCard?.classList.remove('animating');
-        }, 250);
+        this.elements.modal.classList.remove('active');
     }
 
     handleFormSubmit(e) {
