@@ -1,5 +1,4 @@
 /* 组件样式 */
-
 .clock-display {
     display: flex;
     flex-direction: column;
@@ -21,20 +20,8 @@
 }
 
 @keyframes textGlow {
-    0% {
-        text-shadow: 
-            0 2px 8px rgba(0, 0, 0, 0.1),
-            0 0 20px rgba(255, 255, 255, 0.3),
-            0 0 40px rgba(120, 119, 198, 0.2),
-            0 0 60px rgba(255, 119, 198, 0.1);
-    }
-    100% {
-        text-shadow: 
-            0 2px 8px rgba(0, 0, 0, 0.1),
-            0 0 30px rgba(255, 255, 255, 0.4),
-            0 0 50px rgba(120, 119, 198, 0.3),
-            0 0 80px rgba(255, 119, 198, 0.2);
-    }
+    0% { text-shadow: 0 2px 8px rgba(0, 0, 0, 0.1), 0 0 20px rgba(255, 255, 255, 0.3), 0 0 40px rgba(120, 119, 198, 0.2), 0 0 60px rgba(255, 119, 198, 0.1); }
+    100% { text-shadow: 0 2px 8px rgba(0, 0, 0, 0.1), 0 0 30px rgba(255, 255, 255, 0.4), 0 0 50px rgba(120, 119, 198, 0.3), 0 0 80px rgba(255, 119, 198, 0.2); }
 }
 
 .date {
@@ -42,20 +29,11 @@
     font-weight: 400;
     color: var(--text-secondary);
     opacity: 0.9;
-    text-shadow: 
-        0 1px 4px rgba(0, 0, 0, 0.1),
-        0 0 10px rgba(255, 255, 255, 0.2);
+    text-shadow: 0 1px 4px rgba(0, 0, 0, 0.1), 0 0 10px rgba(255, 255, 255, 0.2);
 }
 
-/* 时钟组件样式 */
-.clock-section {
-    width: 100%;
-    display: flex;
-    justify-content: center;
-}
-
-/* 搜索组件样式 */
-.search-section {
+/* 组件布局 */
+.clock-section, .search-section {
     width: 100%;
     display: flex;
     justify-content: center;
@@ -76,7 +54,7 @@
     color: var(--text-primary);
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
-    transition: all 0.3s ease;
+    transition: var(--transition);
     position: relative;
 }
 
@@ -245,7 +223,6 @@
     border-radius: 8px;
     color: var(--text-primary);
     font-family: inherit;
-    /* 移除过渡效果 */
 }
 
 .form-group input::placeholder {
@@ -261,9 +238,7 @@
 /* 表单输入框点击反馈 */
 .form-group input:active {
     transform: scale(0.998);
-    box-shadow: 
-        0 0 0 2px rgba(255, 255, 255, 0.2),
-        inset 0 2px 4px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.2), inset 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .form-actions {
@@ -276,78 +251,30 @@
 
 /* 响应式设计 */
 @media (max-width: 768px) {
-    .time {
-        font-size: 2.8rem;
-    }
-    
-    .date {
-        font-size: 1rem;
-    }
-    
-    .search-input {
-        font-size: 1rem;
-        padding: 0.875rem 0.875rem 0.875rem 2.75rem;
-    }
-    
-    .search-icon {
-        left: 0.875rem;
-    }
-    
-    .quick-access-grid {
-        grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
-        gap: 0.75rem;
-    }
-    
-    .shortcut-icon {
-        width: 28px;
-        height: 28px;
-        font-size: 1.1rem;
-    }
-    
-    .shortcut-name {
-        font-size: 0.85rem;
-    }
+    .time { font-size: 2.8rem; }
+    .date { font-size: 1rem; }
+    .search-input { font-size: 1rem; padding: 0.875rem 0.875rem 0.875rem 2.75rem; }
+    .search-icon { left: 0.875rem; }
+    .quick-access-grid { grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); gap: 0.75rem; }
+    .shortcut-icon { width: 28px; height: 28px; font-size: 1.1rem; }
+    .shortcut-name { font-size: 0.85rem; }
 }
 
 @media (max-width: 480px) {
-    .time {
-        font-size: 2.2rem;
-    }
-    
-    .date {
-        font-size: 0.9rem;
-    }
-    
-    .search-input {
-        font-size: 0.9rem;
-        padding: 0.75rem 0.75rem 0.75rem 2.5rem;
-    }
-    
-    .search-icon {
-        left: 0.75rem;
-    }
-    
-    .quick-access-grid {
-        grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
-        gap: 0.5rem;
-    }
-    
-    .form-actions {
-        flex-direction: column;
-    }
-    
-    .modal-card {
-        padding: 1.5rem;
-    }
+    .time { font-size: 2.2rem; }
+    .date { font-size: 0.9rem; }
+    .search-input { font-size: 0.9rem; padding: 0.75rem 0.75rem 0.75rem 2.5rem; }
+    .search-icon { left: 0.75rem; }
+    .quick-access-grid { grid-template-columns: repeat(auto-fit, minmax(100px, 1fr)); gap: 0.5rem; }
+    .form-actions { flex-direction: column; }
+    .modal-card { padding: 1.5rem; }
 }
 
 /* 删除按钮样式 */
 .delete-shortcut {
     position: absolute;
-    top: 0.5rem;
-    right: 0.5rem;
-    width: 24px;
-    height: 24px;
+    top: 0.5rem; right: 0.5rem;
+    width: 24px; height: 24px;
     background: rgba(255, 0, 0, 0.2);
     border: none;
     border-radius: 50%;
@@ -373,9 +300,7 @@
     transform: scale(0.9);
     background: rgba(255, 0, 0, 0.4);
     color: #ff1744;
-    box-shadow: 
-        0 0 8px rgba(255, 0, 0, 0.3),
-        inset 0 1px 2px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 0 8px rgba(255, 0, 0, 0.3), inset 0 1px 2px rgba(0, 0, 0, 0.2);
 }
 
 /* 搜索引擎选择模态框样式 */
@@ -412,9 +337,7 @@
     transform: translateY(0px) scale(0.98);
     background: rgba(255, 255, 255, 0.15);
     border-color: rgba(255, 255, 255, 0.4);
-    box-shadow: 
-        0 2px 8px rgba(0, 0, 0, 0.15),
-        inset 0 2px 4px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15), inset 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .search-engine-icon {
@@ -447,43 +370,15 @@
 }
 
 /* 搜索引擎特定颜色 */
-.search-engine-item[data-engine="google"] .search-engine-icon {
-    background: linear-gradient(45deg, #4285f4, #34a853);
-    color: white;
-}
+.search-engine-item[data-engine="google"] .search-engine-icon { background: linear-gradient(45deg, #4285f4, #34a853); color: white; }
+.search-engine-item[data-engine="baidu"] .search-engine-icon { background: linear-gradient(45deg, #2932e1, #1e88e5); color: white; }
+.search-engine-item[data-engine="bing"] .search-engine-icon { background: linear-gradient(45deg, #00bcf2, #0078d4); color: white; }
 
-.search-engine-item[data-engine="baidu"] .search-engine-icon {
-    background: linear-gradient(45deg, #2932e1, #1e88e5);
-    color: white;
-}
-
-.search-engine-item[data-engine="bing"] .search-engine-icon {
-    background: linear-gradient(45deg, #00bcf2, #0078d4);
-    color: white;
-}
-
-/* 响应式设计 */
+/* 搜索引擎响应式设计 */
 @media (max-width: 768px) {
-    .search-engine-grid {
-        grid-template-columns: 1fr;
-        gap: 0.75rem;
-    }
-    
-    .search-engine-item {
-        padding: 0.875rem;
-    }
-    
-    .search-engine-icon {
-        width: 28px;
-        height: 28px;
-        font-size: 1.1rem;
-    }
-    
-    .search-engine-name {
-        font-size: 0.95rem;
-    }
-    
-    .search-engine-desc {
-        font-size: 0.8rem;
-    }
+    .search-engine-grid { grid-template-columns: 1fr; gap: 0.75rem; }
+    .search-engine-item { padding: 0.875rem; }
+    .search-engine-icon { width: 28px; height: 28px; font-size: 1.1rem; }
+    .search-engine-name { font-size: 0.95rem; }
+    .search-engine-desc { font-size: 0.8rem; }
 }

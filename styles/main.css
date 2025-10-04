@@ -9,7 +9,7 @@
     --glass-border: rgba(255, 255, 255, 0.2);
     --shadow-light: rgba(255, 255, 255, 0.25);
     --border-radius: 16px;
-    /* --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); 移除过渡效果变量 */
+    --transition: all 0.3s ease;
 }
 
 * {
@@ -68,7 +68,7 @@ body {
     z-index: 2;
 }
 
-/* 添加环境光粒子效果 */
+/* 环境光粒子效果 */
 .main-container::before {
     content: '';
     position: fixed;
@@ -88,14 +88,8 @@ body {
 }
 
 @keyframes sparkle {
-    0%, 100% {
-        opacity: 0.3;
-        transform: scale(1);
-    }
-    50% {
-        opacity: 0.6;
-        transform: scale(1.1);
-    }
+    0%, 100% { opacity: 0.3; transform: scale(1); }
+    50% { opacity: 0.6; transform: scale(1.1); }
 }
 
 .section-title {
@@ -108,21 +102,12 @@ body {
 
 /* 响应式设计 */
 @media (max-width: 768px) {
-    .main-container {
-        padding: 1rem;
-        gap: 1.5rem;
-    }
-    
-    .section-title {
-        font-size: 1rem;
-    }
+    .main-container { padding: 1rem; gap: 1.5rem; }
+    .section-title { font-size: 1rem; }
 }
 
 @media (max-width: 480px) {
-    .main-container {
-        padding: 0.5rem;
-        gap: 1rem;
-    }
+    .main-container { padding: 0.5rem; gap: 1rem; }
 }
 
 /* 滚动条样式 */
