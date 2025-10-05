@@ -1,4 +1,193 @@
-// 快捷访问组件模块
+/**
+ * Aura Tab - UI组件模块
+ * 包含时钟、搜索、快捷访问等UI组件
+ */
+
+/**
+ * 时钟组件
+ * 负责显示当前时间和日期
+ */
+class Clock {
+    constructor() {
+        this.timeElement = document.getElementById('timeDisplay');
+        this.dateElement = document.getElementById('dateDisplay');
+        this.updateTime();
+        this.clockInterval = setInterval(() => this.updateTime(), 1000);
+    }
+
+    /**
+     * 更新时间显示
+     */
+    updateTime() {
+        const now = new Date();
+        if (this.timeElement) {
+            this.timeElement.textContent = Utils.formatTime(now);
+        }
+        if (this.dateElement) {
+            this.dateElement.textContent = Utils.formatDate(now);
+        }
+    }
+
+    /**
+     * 销毁时钟组件
+     */
+    destroy() { 
+        clearInterval(this.clockInterval); 
+    }
+}
+
+/**
+ * 搜索组件
+ * 负责搜索功能和搜索引擎管理
+ */
+class Search {
+    constructor() {
+        this.searchInput = document.getElementById('searchInput');
+        this.searchEngines = [
+            { id: 'bing', name: '必应', url: 'https://www.bing.com/search?q={query}', icon: 'B', description: '微软搜索引擎' },
+            { id: 'baidu', name: '百度', url: 'https://www.baidu.com/s?wd={query}', icon: '百', description: '全球最大的中文搜索引擎' },
+            { id: 'google', name: 'Google', url: 'https://www.google.com/search?q={query}', icon: 'G', description: '全球最受欢迎的搜索引擎' }
+        ];
+        this.defaultEngine = Utils.storage.get('defaultSearchEngine', 'bing');
+        this.init();
+    }
+
+    /**
+     * 初始化搜索组件
+     */
+    init() {
+        if (!this.searchInput) return;
+        this.searchInput.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter') {
+                e.preventDefault();
+                this.performSearch();
+            }
+        });
+        this.searchInput.addEventListener('contextmenu', (e) => {
+            e.preventDefault();
+            this.showSearchEngineModal();
+        });
+        this.setupSearchEngineModal();
+    }
+
+    /**
+     * 执行搜索
+     */
+    performSearch() {
+        const query = this.searchInput.value.trim();
+        if (!query) return;
+        this.performSearchWithEngine(query);
+        this.searchInput.value = '';
+    }
+
+    /**
+     * 使用指定搜索引擎执行搜索
+     * @param {string} query - 搜索查询
+     * @param {string} engineId - 搜索引擎ID
+     */
+    performSearchWithEngine(query, engineId = null) {
+        const engine = this.searchEngines.find(e => e.id === (engineId || this.defaultEngine));
+        if (engine) {
+            window.open(engine.url.replace('{query}', encodeURIComponent(query)), '_blank');
+        } else {
+            Utils.performSearch(query);
+        }
+    }
+
+    /**
+     * 显示搜索引擎选择模态框
+     */
+    showSearchEngineModal() {
+        const modal = document.getElementById('searchEngineModal');
+        const grid = document.getElementById('searchEngineGrid');
+        if (!modal || !grid) return;
+        
+        this.renderSearchEngines(grid);
+        modal.classList.add('active');
+        document.addEventListener('keydown', this.handleKeyDown.bind(this));
+    }
+
+    /**
+     * 渲染搜索引擎列表
+     * @param {HTMLElement} container - 容器元素
+     */
+    renderSearchEngines(container) {
+        container.innerHTML = this.searchEngines.map(engine => `
+            <div class="search-engine-item ${engine.id === this.defaultEngine ? 'selected' : ''}" data-engine="${engine.id}">
+                <div class="search-engine-icon">${engine.icon}</div>
+                <div class="search-engine-info">
+                    <div class="search-engine-name">${engine.name}</div>
+                    <div class="search-engine-desc">${engine.description}</div>
+                </div>
+            </div>
+        `).join('');
+        
+        container.querySelectorAll('.search-engine-item').forEach(item => {
+            item.addEventListener('click', () => {
+                this.setDefaultSearchEngine(item.dataset.engine);
+                this.hideSearchEngineModal();
+            });
+        });
+    }
+
+    /**
+     * 设置默认搜索引擎
+     * @param {string} engineId - 搜索引擎ID
+     */
+    setDefaultSearchEngine(engineId) {
+        this.defaultEngine = engineId;
+        Utils.storage.set('defaultSearchEngine', engineId);
+        const engine = this.searchEngines.find(e => e.id === engineId);
+        if (engine) {
+            Utils.showToast(`已设置 ${engine.name} 为默认搜索引擎`, 'success');
+        }
+    }
+
+    /**
+     * 隐藏搜索引擎选择模态框
+     */
+    hideSearchEngineModal() {
+        const modal = document.getElementById('searchEngineModal');
+        if (!modal?.classList.contains('active')) return;
+        
+        modal.classList.remove('active');
+        document.removeEventListener('keydown', this.handleKeyDown.bind(this));
+    }
+
+    /**
+     * 设置搜索引擎模态框事件
+     */
+    setupSearchEngineModal() {
+        const modal = document.getElementById('searchEngineModal');
+        const cancelBtn = document.getElementById('searchEngineCancelBtn');
+        
+        if (cancelBtn) {
+            cancelBtn.addEventListener('click', () => this.hideSearchEngineModal());
+        }
+        if (modal) {
+            modal.addEventListener('click', (e) => {
+                if (e.target === modal) {
+                    this.hideSearchEngineModal();
+                }
+            });
+        }
+    }
+
+    /**
+     * 处理键盘事件
+     * @param {KeyboardEvent} e - 键盘事件
+     */
+    handleKeyDown(e) {
+        if (e.key === 'Escape') {
+            this.hideSearchEngineModal();
+        }
+    }
+}
+
+/**
+ * 快捷访问组件
+ * 负责管理快捷方式书签
+ */
 class QuickAccess {
     constructor() {
         this.elements = {
@@ -12,12 +201,18 @@ class QuickAccess {
         this.init();
     }
 
+    /**
+     * 初始化快捷访问组件
+     */
     init() {
         this.renderShortcuts();
         this.addEventListeners();
         this.loadDefaultShortcuts();
     }
 
+    /**
+     * 添加事件监听器
+     */
     addEventListeners() {
         if (this.elements.addBtn) {
             this.elements.addBtn.addEventListener('click', () => this.showAddModal());
@@ -42,6 +237,9 @@ class QuickAccess {
         });
     }
 
+    /**
+     * 加载默认快捷方式
+     */
     loadDefaultShortcuts() {
         if (this.shortcuts.length === 0) {
             this.shortcuts = [
@@ -55,6 +253,9 @@ class QuickAccess {
         }
     }
 
+    /**
+     * 渲染快捷方式列表
+     */
     renderShortcuts() {
         if (!this.elements.grid) return;
         if (this.shortcuts.length === 0) {
@@ -94,6 +295,11 @@ class QuickAccess {
         });
     }
 
+    /**
+     * 获取网站图标URL
+     * @param {string} url - 网站URL
+     * @returns {string} 图标URL
+     */
     getFaviconUrl(url) {
         try { 
             return `https://www.google.com/s2/favicons?domain=${new URL(url).hostname}&sz=32`; 
@@ -102,6 +308,11 @@ class QuickAccess {
         }
     }
 
+    /**
+     * 获取多个图标源
+     * @param {string} url - 网站URL
+     * @returns {Array} 图标URL数组
+     */
     getFaviconSources(url) {
         try {
             const urlObj = new URL(url);
@@ -116,10 +327,19 @@ class QuickAccess {
         }
     }
 
+    /**
+     * 获取默认图标
+     * @returns {string} 默认图标SVG
+     */
     getDefaultIcon() {
         return 'data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>';
     }
 
+    /**
+     * 处理图标加载错误
+     * @param {HTMLImageElement} imgElement - 图片元素
+     * @param {string} url - 网站URL
+     */
     handleIconError(imgElement, url) {
         const sources = this.getFaviconSources(url);
         const currentIndex = sources.findIndex(src => src === imgElement.src);
@@ -135,6 +355,9 @@ class QuickAccess {
         }
     }
 
+    /**
+     * 显示添加快捷方式模态框
+     */
     showAddModal() {
         if (!this.elements.modal) return;
         this.elements.modal.classList.add('active');
@@ -148,11 +371,18 @@ class QuickAccess {
         }, 150);
     }
 
+    /**
+     * 隐藏模态框
+     */
     hideModal() {
         if (!this.elements.modal?.classList.contains('active')) return;
         this.elements.modal.classList.remove('active');
     }
 
+    /**
+     * 处理表单提交
+     * @param {Event} e - 提交事件
+     */
     handleFormSubmit(e) {
         e.preventDefault();
         const nameInput = document.getElementById('shortcutName');
@@ -176,6 +406,10 @@ class QuickAccess {
         this.hideModal();
     }
 
+    /**
+     * 添加快捷方式
+     * @param {Object} shortcutData - 快捷方式数据
+     */
     addShortcut(shortcutData) {
         const shortcut = { id: Utils.generateId(), ...shortcutData };
         this.shortcuts.push(shortcut);
@@ -184,6 +418,10 @@ class QuickAccess {
         Utils.showToast(`已添加 ${shortcut.name}`, 'success');
     }
 
+    /**
+     * 删除快捷方式
+     * @param {string} id - 快捷方式ID
+     */
     deleteShortcut(id) {
         const shortcut = this.shortcuts.find(s => s.id === id);
         if (!shortcut) return;
@@ -196,6 +434,11 @@ class QuickAccess {
         }
     }
 
+    /**
+     * 显示上下文菜单
+     * @param {MouseEvent} e - 鼠标事件
+     * @param {string} shortcutId - 快捷方式ID
+     */
     showContextMenu(e, shortcutId) {
         document.querySelector('.context-menu')?.remove();
         const shortcut = this.shortcuts.find(s => s.id === shortcutId);
@@ -247,6 +490,11 @@ class QuickAccess {
         setTimeout(() => document.addEventListener('click', closeMenu), 0);
     }
 
+    /**
+     * 处理上下文菜单操作
+     * @param {string} action - 操作类型
+     * @param {string} shortcutId - 快捷方式ID
+     */
     handleContextMenuAction(action, shortcutId) {
         const shortcut = this.shortcuts.find(s => s.id === shortcutId);
         if (!shortcut) return;
@@ -260,6 +508,9 @@ class QuickAccess {
         }
     }
 
+    /**
+     * 保存快捷方式到本地存储
+     */
     saveShortcuts() { 
         Utils.storage.set('quickAccessShortcuts', this.shortcuts); 
     }
@@ -356,4 +607,11 @@ if (!document.getElementById('quick-access-styles')) {
     styleSheet.id = 'quick-access-styles';
     styleSheet.textContent = quickAccessStyles;
     document.head.appendChild(styleSheet);
+}
+
+// 导出到全局作用域
+if (typeof window !== 'undefined') {
+    window.Clock = Clock;
+    window.Search = Search;
+    window.QuickAccess = QuickAccess;
 }
