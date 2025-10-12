@@ -279,8 +279,12 @@ class QuickAccess {
                     <div class="fallback-icon" style="display: none;">🌐</div>
                 </div>`;
             
+            // DeepSeek Chat 在当前标签页打开，其他网站在新标签页打开
+            const isDeepSeekChat = s.name === 'DeepSeek Chat';
+            const targetAttr = isDeepSeekChat ? '' : 'target="_blank" rel="noopener noreferrer"';
+            
             return `
-                <a href="${s.url}" class="shortcut-btn" target="_blank" rel="noopener noreferrer" data-id="${s.id}">
+                <a href="${s.url}" class="shortcut-btn" ${targetAttr} data-id="${s.id}">
                     ${iconHtml}
                     <div class="shortcut-name">${s.name}</div>
                     <button class="delete-shortcut" data-id="${s.id}" title="删除">×</button>
