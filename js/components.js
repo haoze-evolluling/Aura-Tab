@@ -243,6 +243,7 @@ class QuickAccess {
     loadDefaultShortcuts() {
         if (this.shortcuts.length === 0) {
             this.shortcuts = [
+                { id: Utils.generateId(), name: 'DeepSeek Chat', url: './chatdeepseek/index.html', icon: '🤖' },
                 { id: Utils.generateId(), name: '百度', url: 'https://www.baidu.com' },
                 { id: Utils.generateId(), name: 'B站', url: 'https://www.bilibili.com' },
                 { id: Utils.generateId(), name: '网易云音乐', url: 'https://music.163.com' },
@@ -268,16 +269,24 @@ class QuickAccess {
             `;
             return;
         }
-        this.elements.grid.innerHTML = this.shortcuts.map(s => `
-            <a href="${s.url}" class="shortcut-btn" target="_blank" rel="noopener noreferrer" data-id="${s.id}">
-                <div class="shortcut-icon">
+        this.elements.grid.innerHTML = this.shortcuts.map(s => {
+            const iconHtml = s.icon ? 
+                `<div class="shortcut-icon">
+                    <div class="custom-icon">${s.icon}</div>
+                </div>` :
+                `<div class="shortcut-icon">
                     <img src="${this.getFaviconUrl(s.url)}" alt="${s.name}" loading="lazy" onerror="window.quickAccess.handleIconError(this, '${s.url}')">
                     <div class="fallback-icon" style="display: none;">🌐</div>
-                </div>
-                <div class="shortcut-name">${s.name}</div>
-                <button class="delete-shortcut" data-id="${s.id}" title="删除">×</button>
-            </a>
-        `).join('');
+                </div>`;
+            
+            return `
+                <a href="${s.url}" class="shortcut-btn" target="_blank" rel="noopener noreferrer" data-id="${s.id}">
+                    ${iconHtml}
+                    <div class="shortcut-name">${s.name}</div>
+                    <button class="delete-shortcut" data-id="${s.id}" title="删除">×</button>
+                </a>
+            `;
+        }).join('');
         
         this.elements.grid.querySelectorAll('.delete-shortcut').forEach(btn => {
             btn.addEventListener('click', (e) => {
@@ -598,6 +607,18 @@ const quickAccessStyles = `
         align-items: center;
         justify-content: center;
         font-size: 1.2rem;
+    }
+
+    .custom-icon {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.5rem;
+        background: rgba(255, 255, 255, 0.1);
+        border-radius: 8px;
+        border: 1px solid rgba(255, 255, 255, 0.2);
     }
 `;
 
