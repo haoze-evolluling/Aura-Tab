@@ -37,7 +37,7 @@
     padding: 1rem 1rem 1rem 3rem;
     font-size: 1.1rem;
     background: rgba(255, 255, 255, 0.1);
-    border: 1px solid var(--glass-border);
+    border: 2px solid var(--glass-border);
     border-radius: 16px;
     color: var(--text-primary);
     backdrop-filter: blur(10px);
@@ -52,7 +52,8 @@
 
 .search-input:focus {
     background: rgba(255, 255, 255, 0.15);
-    border-color: rgba(255, 255, 255, 0.4);
+    border-color: rgba(255, 255, 255, 0.7);
+    border-width: 2px;
 }
 
 .search-icon {
@@ -136,7 +137,8 @@
 
 .add-shortcut-btn:hover {
     background: rgba(255, 255, 255, 0.1);
-    border-color: rgba(255, 255, 255, 0.3);
+    border-color: rgba(255, 255, 255, 0.6);
+    border-width: 2px;
     color: var(--text-primary);
 }
 
@@ -277,7 +279,6 @@
 .search-engine-item:hover {
     background: #ffffff;
     border-color: #667eea;
-    box-shadow: 0 4px 12px rgba(102, 126, 234, 0.15);
 }
 
 .search-engine-item:active {
@@ -298,12 +299,10 @@
     margin-bottom: 1rem;
     position: relative;
     z-index: 2;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
     transition: none;
 }
 
 .search-engine-item:hover .search-engine-icon {
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
 }
 
 /* 搜索引擎信息 */
@@ -336,28 +335,22 @@
 .search-engine-item[data-engine="google"] .search-engine-icon { 
     background: linear-gradient(135deg, #4285f4 0%, #34a853 50%, #fbbc05 100%); 
     color: white; 
-    box-shadow: 0 4px 12px rgba(66, 133, 244, 0.3);
 }
 
 .search-engine-item[data-engine="baidu"] .search-engine-icon { 
     background: linear-gradient(135deg, #2932e1 0%, #1e88e5 100%); 
     color: white; 
-    box-shadow: 0 4px 12px rgba(41, 50, 225, 0.3);
 }
 
 .search-engine-item[data-engine="bing"] .search-engine-icon { 
     background: linear-gradient(135deg, #00bcf2 0%, #0078d4 100%); 
     color: white; 
-    box-shadow: 0 4px 12px rgba(0, 188, 242, 0.3);
 }
 
 /* 选中状态 */
 .search-engine-item.selected {
     background: rgba(76, 175, 80, 0.1);
     border-color: rgba(76, 175, 80, 0.4);
-    box-shadow: 
-        0 4px 12px rgba(76, 175, 80, 0.2),
-        0 0 0 1px rgba(76, 175, 80, 0.3);
 }
 
 .search-engine-item.selected::after {
@@ -376,7 +369,6 @@
     font-size: 0.8rem;
     font-weight: bold;
     z-index: 3;
-    box-shadow: 0 2px 8px rgba(76, 175, 80, 0.4);
 }
 
 .search-engine-item.selected .search-engine-name::after {
