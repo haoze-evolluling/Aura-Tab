@@ -198,6 +198,8 @@ class QuickAccess {
             cancelBtn: document.getElementById('cancelBtn')
         };
         this.shortcuts = Utils.storage.get('quickAccessShortcuts', []);
+        // 初始化图标缓存
+        this.iconCache = Utils.storage.get('iconCache', {});
         this.init();
     }
 
@@ -205,6 +207,8 @@ class QuickAccess {
      * 初始化快捷访问组件
      */
     init() {
+        // 初始化时清理缓存，避免localStorage过大
+        this.cleanIconCache();
         this.renderShortcuts();
         this.addEventListeners();
         this.loadDefaultShortcuts();
@@ -275,7 +279,7 @@ class QuickAccess {
                     <div class="custom-icon">${s.icon}</div>
                 </div>` :
                 `<div class="shortcut-icon">
-                    <img src="${this.getFaviconUrl(s.url)}" alt="${s.name}" loading="lazy" onerror="window.quickAccess.handleIconError(this, '${s.url}')">
+                    <img src="${this.getFaviconUrl(s.url)}" alt="${s.name}" loading="lazy" onerror="window.quickAccess.handleIconError(this, '${s.url}')" onload="window.quickAccess.handleIconLoad(this, '${s.url}')">
                     <div class="fallback-icon" style="display: none;">🌐</div>
                 </div>`;
             
@@ -311,13 +315,121 @@ class QuickAccess {
     /**
      * 获取网站图标URL
      * @param {string} url - 网站URL
-     * @returns {string} 图标URL
+     * @returns {string} 图标URL或data URI
      */
     getFaviconUrl(url) {
         try { 
-            return `https://www.google.com/s2/favicons?domain=${new URL(url).hostname}&sz=32`; 
+            const domain = new URL(url).hostname;
+            // 检查缓存中是否已有该域名的图标
+            if (this.iconCache[domain]) {
+                return this.iconCache[domain];
+            }
+            // 使用国内访问速度最快的图标服务作为默认源
+            return `https://api.iowen.cn/favicon/${domain}.png`; 
         } catch { 
             return this.getDefaultIcon(); 
+        }
+    }
+
+    /**
+     * 缓存图标URL或data URI
+     * @param {string} domain - 域名
+     * @param {string} iconUrl - 图标URL或data URI
+     */
+    cacheIcon(domain, iconUrl) {
+        this.iconCache[domain] = iconUrl;
+        Utils.storage.set('iconCache', this.iconCache);
+        
+        // 如果是data URI，检查缓存大小
+        if (iconUrl.startsWith('data:')) {
+            // 延迟清理，避免频繁操作
+            clearTimeout(this.cacheCleanupTimeout);
+            this.cacheCleanupTimeout = setTimeout(() => {
+                this.cleanIconCache();
+            }, 1000);
+        }
+    }
+
+    /**
+     * 将图标转换为data URI并缓存
+     * @param {string} url - 图标URL
+     * @param {string} domain - 域名
+     * @returns {Promise<string>} data URI
+     */
+    async fetchAndCacheIcon(url, domain) {
+        try {
+            // 检查是否已经缓存为data URI
+            if (this.iconCache[domain] && this.iconCache[domain].startsWith('data:')) {
+                return this.iconCache[domain];
+            }
+            
+            // 获取图标并转换为data URI
+            const response = await fetch(url);
+            if (!response.ok) {
+                throw new Error(`Failed to fetch icon: ${response.status}`);
+            }
+            
+            const blob = await response.blob();
+            const reader = new FileReader();
+            
+            return new Promise((resolve, reject) => {
+                reader.onload = () => {
+                    const dataUri = reader.result;
+                    // 缓存data URI
+                    this.cacheIcon(domain, dataUri);
+                    resolve(dataUri);
+                };
+                reader.onerror = reject;
+                reader.readAsDataURL(blob);
+            });
+        } catch (error) {
+            console.error('Error fetching and caching icon:', error);
+            // 如果获取失败，缓存原始URL以便下次尝试
+            this.cacheIcon(domain, url);
+            return url;
+        }
+    }
+
+    /**
+     * 清理缓存，避免localStorage过大
+     * @param {number} maxCacheSize - 最大缓存大小（字节）
+     */
+    cleanIconCache(maxCacheSize = 2 * 1024 * 1024) { // 默认2MB
+        try {
+            // 计算当前缓存大小
+            let currentSize = 0;
+            const dataUriEntries = [];
+            
+            for (const [domain, iconUrl] of Object.entries(this.iconCache)) {
+                if (iconUrl.startsWith('data:')) {
+                    // 估算data URI大小（base64编码大约比原始数据大33%）
+                    const estimatedSize = Math.floor(iconUrl.length * 0.75);
+                    currentSize += estimatedSize;
+                    dataUriEntries.push({ domain, size: estimatedSize });
+                }
+            }
+            
+            // 如果缓存大小超过限制，删除最旧的条目
+            if (currentSize > maxCacheSize && dataUriEntries.length > 0) {
+                // 按大小排序，优先删除大的图标
+                dataUriEntries.sort((a, b) => b.size - a.size);
+                
+                // 删除条目直到缓存大小在限制内
+                for (const entry of dataUriEntries) {
+                    delete this.iconCache[entry.domain];
+                    currentSize -= entry.size;
+                    
+                    if (currentSize <= maxCacheSize * 0.8) { // 留出20%的空间
+                        break;
+                    }
+                }
+                
+                // 保存更新后的缓存
+                Utils.storage.set('iconCache', this.iconCache);
+                console.log(`Icon cache cleaned, reduced size to ~${Math.round(currentSize / 1024)}KB`);
+            }
+        } catch (error) {
+            console.error('Error cleaning icon cache:', error);
         }
     }
 
@@ -331,8 +443,9 @@ class QuickAccess {
             const urlObj = new URL(url);
             const domain = urlObj.hostname;
             return [
-                `https://www.google.com/s2/favicons?domain=${domain}&sz=32`,
+                // 优先使用国内访问速度快的图标服务
                 `https://statics.dnspod.cn/proxy_favicon/_/favicon?domain=${domain}`,
+                `https://www.google.com/s2/favicons?domain=${domain}&sz=32`,
                 `${urlObj.protocol}//${urlObj.hostname}/favicon.ico`
             ];
         } catch { 
@@ -353,18 +466,76 @@ class QuickAccess {
      * @param {HTMLImageElement} imgElement - 图片元素
      * @param {string} url - 网站URL
      */
-    handleIconError(imgElement, url) {
-        const sources = this.getFaviconSources(url);
-        const currentIndex = sources.findIndex(src => src === imgElement.src);
-        const nextIndex = currentIndex === -1 ? 0 : currentIndex + 1;
-        if (nextIndex < sources.length) {
-            imgElement.src = sources[nextIndex];
-        } else {
+    async handleIconError(imgElement, url) {
+        try {
+            const sources = this.getFaviconSources(url);
+            const currentIndex = sources.findIndex(src => src === imgElement.src);
+            const nextIndex = currentIndex === -1 ? 0 : currentIndex + 1;
+            
+            if (nextIndex < sources.length) {
+                // 尝试加载下一个图标源
+                const nextSource = sources[nextIndex];
+                
+                // 检查缓存中是否有该域名的data URI
+                const domain = new URL(url).hostname;
+                if (this.iconCache[domain] && this.iconCache[domain].startsWith('data:')) {
+                    imgElement.src = this.iconCache[domain];
+                    return;
+                }
+                
+                // 尝试获取并缓存图标
+                this.fetchAndCacheIcon(nextSource, domain).then(dataUri => {
+                    imgElement.src = dataUri;
+                }).catch(() => {
+                    // 如果获取失败，直接使用URL
+                    imgElement.src = nextSource;
+                });
+            } else {
+                // 所有图标源都失败，显示默认图标
+                imgElement.style.display = 'none';
+                const fallbackIcon = imgElement.nextElementSibling;
+                if (fallbackIcon?.classList.contains('fallback-icon')) {
+                    fallbackIcon.style.display = 'flex';
+                }
+            }
+        } catch (e) {
+            console.error('Error in handleIconError:', e);
+            // 发生错误时显示默认图标
             imgElement.style.display = 'none';
             const fallbackIcon = imgElement.nextElementSibling;
             if (fallbackIcon?.classList.contains('fallback-icon')) {
                 fallbackIcon.style.display = 'flex';
             }
+        }
+    }
+
+    /**
+     * 处理图标加载成功
+     * @param {HTMLImageElement} imgElement - 图片元素
+     * @param {string} url - 网站URL
+     */
+    handleIconLoad(imgElement, url) {
+        try {
+            const domain = new URL(url).hostname;
+            
+            // 如果已经是data URI，直接缓存
+            if (imgElement.src.startsWith('data:')) {
+                this.cacheIcon(domain, imgElement.src);
+                return;
+            }
+            
+            // 将图标转换为data URI并缓存
+            this.fetchAndCacheIcon(imgElement.src, domain).then(dataUri => {
+                // 更新图片src为data URI
+                imgElement.src = dataUri;
+            }).catch(error => {
+                console.error('Error caching icon:', error);
+                // 即使缓存失败，也缓存原始URL
+                this.cacheIcon(domain, imgElement.src);
+            });
+        } catch (e) {
+            // 忽略错误，不影响用户体验
+            console.error('Error in handleIconLoad:', e);
         }
     }
 
@@ -444,6 +615,16 @@ class QuickAccess {
             this.saveShortcuts();
             this.renderShortcuts();
             Utils.showToast(`已删除 ${shortcut.name}`, 'success');
+        }
+    }
+
+    /**
+     * 销毁快捷访问组件
+     */
+    destroy() {
+        // 清理缓存清理定时器
+        if (this.cacheCleanupTimeout) {
+            clearTimeout(this.cacheCleanupTimeout);
         }
     }
 
