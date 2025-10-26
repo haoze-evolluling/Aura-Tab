@@ -14,382 +14,195 @@ class CityDataManager {
     }
 
     /**
-     * 初始化城市数据 - 按国家-省份-城市层级组织
+     * 初始化城市数据 - 压缩格式，减少冗余
      */
     initializeCityData() {
         return {
-            '中国': {
-                name: '中国',
-                region: '亚洲',
-                provinces: {
-                    '直辖市': {
-                        name: '直辖市',
-                        cities: [
-                            { name: '北京', lat: 39.9042, lon: 116.4074, isPopular: true },
-                            { name: '上海', lat: 31.2304, lon: 121.4737, isPopular: true },
-                            { name: '天津', lat: 39.0842, lon: 117.2008, isPopular: true },
-                            { name: '重庆', lat: 29.5630, lon: 106.5516, isPopular: true }
-                        ]
-                    },
-                    '河北省': {
-                        name: '河北省',
-                        cities: [
-                            { name: '石家庄', lat: 38.0428, lon: 114.5149, isPopular: true },
-                            { name: '唐山', lat: 39.6339, lon: 118.1822 },
-                            { name: '沧州', lat: 38.3045, lon: 116.8384 }
-                        ]
-                    },
-                    '山西省': {
-                        name: '山西省',
-                        cities: [
-                            { name: '太原', lat: 37.8733, lon: 112.5623, isPopular: true },
-                            { name: '长治', lat: 36.1825, lon: 113.1114 },
-                            { name: '临汾', lat: 36.0883, lon: 111.5183 }
-                        ]
-                    },
-                    '辽宁省': {
-                        name: '辽宁省',
-                        cities: [
-                            { name: '沈阳', lat: 41.8057, lon: 123.4315, isPopular: true },
-                            { name: '大连', lat: 38.9140, lon: 121.6147, isPopular: true },
-                            { name: '鞍山', lat: 41.1200, lon: 122.9922 }
-                        ]
-                    },
-                    '吉林省': {
-                        name: '吉林省',
-                        cities: [
-                            { name: '长春', lat: 43.8170, lon: 125.3235, isPopular: true },
-                            { name: '吉林', lat: 43.8580, lon: 126.5499 },
-                            { name: '延吉', lat: 42.9056, lon: 129.5083 }
-                        ]
-                    },
-                    '黑龙江省': {
-                        name: '黑龙江省',
-                        cities: [
-                            { name: '哈尔滨', lat: 45.8038, lon: 126.5350, isPopular: true },
-                            { name: '大庆', lat: 46.5919, lon: 125.1036 },
-                            { name: '齐齐哈尔', lat: 47.3421, lon: 123.9550 }
-                        ]
-                    },
-                    '江苏省': {
-                        name: '江苏省',
-                        cities: [
-                            { name: '南京', lat: 32.0603, lon: 118.7969, isPopular: true },
-                            { name: '苏州', lat: 31.2990, lon: 120.5853, isPopular: true },
-                            { name: '无锡', lat: 31.5689, lon: 120.2987 }
-                        ]
-                    },
-                    '浙江省': {
-                        name: '浙江省',
-                        cities: [
-                            { name: '杭州', lat: 30.2741, lon: 120.1551, isPopular: true },
-                            { name: '宁波', lat: 29.8683, lon: 121.5440 },
-                            { name: '温州', lat: 27.9943, lon: 120.6994 }
-                        ]
-                    },
-                    '安徽省': {
-                        name: '安徽省',
-                        cities: [
-                            { name: '合肥', lat: 31.8206, lon: 117.2272, isPopular: true },
-                            { name: '芜湖', lat: 31.3582, lon: 118.3845 },
-                            { name: '滁州', lat: 32.3083, lon: 118.3117 }
-                        ]
-                    },
-                    '福建省': {
-                        name: '福建省',
-                        cities: [
-                            { name: '福州', lat: 26.0745, lon: 119.2965, isPopular: true },
-                            { name: '厦门', lat: 24.4798, lon: 118.0894, isPopular: true },
-                            { name: '泉州', lat: 24.9139, lon: 118.5858 }
-                        ]
-                    },
-                    '江西省': {
-                        name: '江西省',
-                        cities: [
-                            { name: '南昌', lat: 28.6832, lon: 115.8921, isPopular: true },
-                            { name: '赣州', lat: 25.8502, lon: 114.9344 },
-                            { name: '九江', lat: 29.7138, lon: 115.9926 }
-                        ]
-                    },
-                    '山东省': {
-                        name: '山东省',
-                        cities: [
-                            { name: '济南', lat: 36.6683, lon: 116.9975, isPopular: true },
-                            { name: '青岛', lat: 36.0671, lon: 120.3826, isPopular: true },
-                            { name: '烟台', lat: 37.4633, lon: 121.4479 }
-                        ]
-                    },
-                    '河南省': {
-                        name: '河南省',
-                        cities: [
-                            { name: '郑州', lat: 34.7466, lon: 113.6254, isPopular: true },
-                            { name: '洛阳', lat: 34.6697, lon: 112.4540 },
-                            { name: '南阳', lat: 32.9901, lon: 112.5283 }
-                        ]
-                    },
-                    '湖北省': {
-                        name: '湖北省',
-                        cities: [
-                            { name: '武汉', lat: 30.5928, lon: 114.3055, isPopular: true },
-                            { name: '襄阳', lat: 32.0432, lon: 112.1436 },
-                            { name: '宜昌', lat: 30.7140, lon: 111.2847 }
-                        ]
-                    },
-                    '湖南省': {
-                        name: '湖南省',
-                        cities: [
-                            { name: '长沙', lat: 28.2282, lon: 112.9389, isPopular: true },
-                            { name: '岳阳', lat: 29.3721, lon: 113.1326 },
-                            { name: '常德', lat: 29.0401, lon: 111.6913 }
-                        ]
-                    },
-                    '广东省': {
-                        name: '广东省',
-                        cities: [
-                            { name: '广州', lat: 23.1291, lon: 113.2644, isPopular: true },
-                            { name: '深圳', lat: 22.5431, lon: 114.0579, isPopular: true },
-                            { name: '佛山', lat: 23.0215, lon: 113.1214 }
-                        ]
-                    },
-                    '海南省': {
-                        name: '海南省',
-                        cities: [
-                            { name: '海口', lat: 20.0458, lon: 110.3410, isPopular: true },
-                            { name: '三亚', lat: 18.2523, lon: 109.5118, isPopular: true },
-                            { name: '儋州', lat: 19.5160, lon: 109.5768 }
-                        ]
-                    },
-                    '四川省': {
-                        name: '四川省',
-                        cities: [
-                            { name: '成都', lat: 30.5728, lon: 104.0668, isPopular: true },
-                            { name: '绵阳', lat: 31.4679, lon: 104.7411 },
-                            { name: '宜宾', lat: 28.7512, lon: 104.6436 }
-                        ]
-                    },
-                    '贵州省': {
-                        name: '贵州省',
-                        cities: [
-                            { name: '贵阳', lat: 26.6477, lon: 106.6302, isPopular: true },
-                            { name: '遵义', lat: 27.7225, lon: 106.9322 },
-                            { name: '毕节', lat: 27.3023, lon: 105.2863 }
-                        ]
-                    },
-                    '云南省': {
-                        name: '云南省',
-                        cities: [
-                            { name: '昆明', lat: 25.0422, lon: 102.7122, isPopular: true },
-                            { name: '曲靖', lat: 25.4925, lon: 103.7919 },
-                            { name: '蒙自', lat: 23.3768, lon: 103.3934 }
-                        ]
-                    },
-                    '陕西省': {
-                        name: '陕西省',
-                        cities: [
-                            { name: '西安', lat: 34.3416, lon: 108.9402, isPopular: true },
-                            { name: '榆林', lat: 38.2900, lon: 109.7423 },
-                            { name: '宝鸡', lat: 34.3650, lon: 107.1444 }
-                        ]
-                    },
-                    '甘肃省': {
-                        name: '甘肃省',
-                        cities: [
-                            { name: '兰州', lat: 36.0611, lon: 103.8343, isPopular: true },
-                            { name: '庆阳', lat: 35.7380, lon: 107.6353 },
-                            { name: '天水', lat: 34.5806, lon: 105.7249 }
-                        ]
-                    },
-                    '青海省': {
-                        name: '青海省',
-                        cities: [
-                            { name: '西宁', lat: 36.6171, lon: 101.7782, isPopular: true },
-                            { name: '德令哈', lat: 37.3697, lon: 97.3680 },
-                            { name: '海东', lat: 36.5050, lon: 102.1068 }
-                        ]
-                    },
-                    '内蒙古自治区': {
-                        name: '内蒙古自治区',
-                        cities: [
-                            { name: '呼和浩特', lat: 40.8183, lon: 111.6708, isPopular: true },
-                            { name: '包头', lat: 40.6522, lon: 109.8222 },
-                            { name: '鄂尔多斯', lat: 39.6083, lon: 109.7816 }
-                        ]
-                    },
-                    '广西壮族自治区': {
-                        name: '广西壮族自治区',
-                        cities: [
-                            { name: '南宁', lat: 22.8172, lon: 108.3666, isPopular: true },
-                            { name: '桂林', lat: 25.2800, lon: 110.2865, isPopular: true },
-                            { name: '柳州', lat: 24.3255, lon: 109.4344 }
-                        ]
-                    },
-                    '西藏自治区': {
-                        name: '西藏自治区',
-                        cities: [
-                            { name: '拉萨', lat: 29.6456, lon: 91.1172, isPopular: true },
-                            { name: '日喀则', lat: 29.2718, lon: 88.8805 },
-                            { name: '昌都', lat: 31.1444, lon: 97.1725 }
-                        ]
-                    },
-                    '宁夏回族自治区': {
-                        name: '宁夏回族自治区',
-                        cities: [
-                            { name: '银川', lat: 38.4681, lon: 106.2731, isPopular: true },
-                            { name: '石嘴山', lat: 39.0142, lon: 106.3813 },
-                            { name: '吴忠', lat: 37.9944, lon: 106.1969 }
-                        ]
-                    },
-                    '新疆维吾尔自治区': {
-                        name: '新疆维吾尔自治区',
-                        cities: [
-                            { name: '乌鲁木齐', lat: 43.8256, lon: 87.6168, isPopular: true },
-                            { name: '昌吉', lat: 44.0150, lon: 87.3130 },
-                            { name: '伊宁', lat: 43.9161, lon: 81.3248 }
-                        ]
-                    },
-                    '香港特别行政区': {
-                        name: '香港特别行政区',
-                        cities: [
-                            { name: '香港', lat: 22.3193, lon: 114.1694, isPopular: true }
-                        ]
-                    },
-                    '澳门特别行政区': {
-                        name: '澳门特别行政区',
-                        cities: [
-                            { name: '澳门', lat: 22.1987, lon: 113.5439, isPopular: true }
-                        ]
-                    },
-                    '台湾省': {
-                        name: '台湾省',
-                        cities: [
-                            { name: '台北', lat: 25.0330, lon: 121.5654, isPopular: true },
-                            { name: '新北', lat: 25.0169, lon: 121.4627 },
-                            { name: '桃园', lat: 24.9936, lon: 121.2954 }
-                        ]
-                    }
-                }
-            },
-            '日本': {
-                name: '日本',
-                region: '亚洲',
-                provinces: {
-                    '东京都': {
-                        name: '东京都',
-                        cities: [
-                            { name: '东京', lat: 35.6762, lon: 139.6503, isPopular: true }
-                        ]
-                    },
-                    '大阪府': {
-                        name: '大阪府',
-                        cities: [
-                            { name: '大阪', lat: 34.6937, lon: 135.5023, isPopular: true }
-                        ]
-                    }
-                }
-            },
-            '韩国': {
-                name: '韩国',
-                region: '亚洲',
-                provinces: {
-                    '首尔特别市': {
-                        name: '首尔特别市',
-                        cities: [
-                            { name: '首尔', lat: 37.5665, lon: 126.9780, isPopular: true }
-                        ]
-                    }
-                }
-            },
-            '新加坡': {
-                name: '新加坡',
-                region: '亚洲',
-                provinces: {
-                    '新加坡': {
-                        name: '新加坡',
-                        cities: [
-                            { name: '新加坡', lat: 1.3521, lon: 103.8198, isPopular: true }
-                        ]
-                    }
-                }
-            },
-            '美国': {
-                name: '美国',
-                region: '北美洲',
-                provinces: {
-                    '加利福尼亚州': {
-                        name: '加利福尼亚州',
-                        cities: [
-                            { name: '洛杉矶', lat: 34.0522, lon: -118.2437, isPopular: true },
-                            { name: '旧金山', lat: 37.7749, lon: -122.4194, isPopular: true }
-                        ]
-                    },
-                    '纽约州': {
-                        name: '纽约州',
-                        cities: [
-                            { name: '纽约', lat: 40.7128, lon: -74.0060, isPopular: true }
-                        ]
-                    },
-                    '伊利诺伊州': {
-                        name: '伊利诺伊州',
-                        cities: [
-                            { name: '芝加哥', lat: 41.8781, lon: -87.6298, isPopular: true }
-                        ]
-                    }
-                }
-            },
-            '英国': {
-                name: '英国',
-                region: '欧洲',
-                provinces: {
-                    '英格兰': {
-                        name: '英格兰',
-                        cities: [
-                            { name: '伦敦', lat: 51.5074, lon: -0.1278, isPopular: true }
-                        ]
-                    }
-                }
-            },
-            '法国': {
-                name: '法国',
-                region: '欧洲',
-                provinces: {
-                    '法兰西岛': {
-                        name: '法兰西岛',
-                        cities: [
-                            { name: '巴黎', lat: 48.8566, lon: 2.3522, isPopular: true }
-                        ]
-                    }
-                }
-            },
-            '德国': {
-                name: '德国',
-                region: '欧洲',
-                provinces: {
-                    '柏林州': {
-                        name: '柏林州',
-                        cities: [
-                            { name: '柏林', lat: 52.5200, lon: 13.4050, isPopular: true }
-                        ]
-                    }
-                }
-            },
-            '澳大利亚': {
-                name: '澳大利亚',
-                region: '大洋洲',
-                provinces: {
-                    '新南威尔士州': {
-                        name: '新南威尔士州',
-                        cities: [
-                            { name: '悉尼', lat: -33.8688, lon: 151.2093, isPopular: true }
-                        ]
-                    },
-                    '维多利亚州': {
-                        name: '维多利亚州',
-                        cities: [
-                            { name: '墨尔本', lat: -37.8136, lon: 144.9631, isPopular: true }
-                        ]
-                    }
-                }
-            }
+            '中国': { region: '亚洲', provinces: {
+                '直辖市': { cities: [
+                    { name: '北京', lat: 39.9042, lon: 116.4074, p: 1 },
+                    { name: '上海', lat: 31.2304, lon: 121.4737, p: 1 },
+                    { name: '天津', lat: 39.0842, lon: 117.2008, p: 1 },
+                    { name: '重庆', lat: 29.5630, lon: 106.5516, p: 1 }
+                ]},
+                '河北省': { cities: [
+                    { name: '石家庄', lat: 38.0428, lon: 114.5149, p: 1 },
+                    { name: '唐山', lat: 39.6339, lon: 118.1822 },
+                    { name: '沧州', lat: 38.3045, lon: 116.8384 }
+                ]},
+                '山西省': { cities: [
+                    { name: '太原', lat: 37.8733, lon: 112.5623, p: 1 },
+                    { name: '长治', lat: 36.1825, lon: 113.1114 },
+                    { name: '临汾', lat: 36.0883, lon: 111.5183 }
+                ]},
+                '辽宁省': { cities: [
+                    { name: '沈阳', lat: 41.8057, lon: 123.4315, p: 1 },
+                    { name: '大连', lat: 38.9140, lon: 121.6147, p: 1 },
+                    { name: '鞍山', lat: 41.1200, lon: 122.9922 }
+                ]},
+                '吉林省': { cities: [
+                    { name: '长春', lat: 43.8170, lon: 125.3235, p: 1 },
+                    { name: '吉林', lat: 43.8580, lon: 126.5499 },
+                    { name: '延吉', lat: 42.9056, lon: 129.5083 }
+                ]},
+                '黑龙江省': { cities: [
+                    { name: '哈尔滨', lat: 45.8038, lon: 126.5350, p: 1 },
+                    { name: '大庆', lat: 46.5919, lon: 125.1036 },
+                    { name: '齐齐哈尔', lat: 47.3421, lon: 123.9550 }
+                ]},
+                '江苏省': { cities: [
+                    { name: '南京', lat: 32.0603, lon: 118.7969, p: 1 },
+                    { name: '苏州', lat: 31.2990, lon: 120.5853, p: 1 },
+                    { name: '无锡', lat: 31.5689, lon: 120.2987 }
+                ]},
+                '浙江省': { cities: [
+                    { name: '杭州', lat: 30.2741, lon: 120.1551, p: 1 },
+                    { name: '宁波', lat: 29.8683, lon: 121.5440 },
+                    { name: '温州', lat: 27.9943, lon: 120.6994 }
+                ]},
+                '安徽省': { cities: [
+                    { name: '合肥', lat: 31.8206, lon: 117.2272, p: 1 },
+                    { name: '芜湖', lat: 31.3582, lon: 118.3845 },
+                    { name: '滁州', lat: 32.3083, lon: 118.3117 }
+                ]},
+                '福建省': { cities: [
+                    { name: '福州', lat: 26.0745, lon: 119.2965, p: 1 },
+                    { name: '厦门', lat: 24.4798, lon: 118.0894, p: 1 },
+                    { name: '泉州', lat: 24.9139, lon: 118.5858 }
+                ]},
+                '江西省': { cities: [
+                    { name: '南昌', lat: 28.6832, lon: 115.8921, p: 1 },
+                    { name: '赣州', lat: 25.8502, lon: 114.9344 },
+                    { name: '九江', lat: 29.7138, lon: 115.9926 }
+                ]},
+                '山东省': { cities: [
+                    { name: '济南', lat: 36.6683, lon: 116.9975, p: 1 },
+                    { name: '青岛', lat: 36.0671, lon: 120.3826, p: 1 },
+                    { name: '烟台', lat: 37.4633, lon: 121.4479 }
+                ]},
+                '河南省': { cities: [
+                    { name: '郑州', lat: 34.7466, lon: 113.6254, p: 1 },
+                    { name: '洛阳', lat: 34.6697, lon: 112.4540 },
+                    { name: '南阳', lat: 32.9901, lon: 112.5283 }
+                ]},
+                '湖北省': { cities: [
+                    { name: '武汉', lat: 30.5928, lon: 114.3055, p: 1 },
+                    { name: '襄阳', lat: 32.0432, lon: 112.1436 },
+                    { name: '宜昌', lat: 30.7140, lon: 111.2847 }
+                ]},
+                '湖南省': { cities: [
+                    { name: '长沙', lat: 28.2282, lon: 112.9389, p: 1 },
+                    { name: '岳阳', lat: 29.3721, lon: 113.1326 },
+                    { name: '常德', lat: 29.0401, lon: 111.6913 }
+                ]},
+                '广东省': { cities: [
+                    { name: '广州', lat: 23.1291, lon: 113.2644, p: 1 },
+                    { name: '深圳', lat: 22.5431, lon: 114.0579, p: 1 },
+                    { name: '佛山', lat: 23.0215, lon: 113.1214 }
+                ]},
+                '海南省': { cities: [
+                    { name: '海口', lat: 20.0458, lon: 110.3410, p: 1 },
+                    { name: '三亚', lat: 18.2523, lon: 109.5118, p: 1 },
+                    { name: '儋州', lat: 19.5160, lon: 109.5768 }
+                ]},
+                '四川省': { cities: [
+                    { name: '成都', lat: 30.5728, lon: 104.0668, p: 1 },
+                    { name: '绵阳', lat: 31.4679, lon: 104.7411 },
+                    { name: '宜宾', lat: 28.7512, lon: 104.6436 }
+                ]},
+                '贵州省': { cities: [
+                    { name: '贵阳', lat: 26.6477, lon: 106.6302, p: 1 },
+                    { name: '遵义', lat: 27.7225, lon: 106.9322 },
+                    { name: '毕节', lat: 27.3023, lon: 105.2863 }
+                ]},
+                '云南省': { cities: [
+                    { name: '昆明', lat: 25.0422, lon: 102.7122, p: 1 },
+                    { name: '曲靖', lat: 25.4925, lon: 103.7919 },
+                    { name: '蒙自', lat: 23.3768, lon: 103.3934 }
+                ]},
+                '陕西省': { cities: [
+                    { name: '西安', lat: 34.3416, lon: 108.9402, p: 1 },
+                    { name: '榆林', lat: 38.2900, lon: 109.7423 },
+                    { name: '宝鸡', lat: 34.3650, lon: 107.1444 }
+                ]},
+                '甘肃省': { cities: [
+                    { name: '兰州', lat: 36.0611, lon: 103.8343, p: 1 },
+                    { name: '庆阳', lat: 35.7380, lon: 107.6353 },
+                    { name: '天水', lat: 34.5806, lon: 105.7249 }
+                ]},
+                '青海省': { cities: [
+                    { name: '西宁', lat: 36.6171, lon: 101.7782, p: 1 },
+                    { name: '德令哈', lat: 37.3697, lon: 97.3680 },
+                    { name: '海东', lat: 36.5050, lon: 102.1068 }
+                ]},
+                '内蒙古自治区': { cities: [
+                    { name: '呼和浩特', lat: 40.8183, lon: 111.6708, p: 1 },
+                    { name: '包头', lat: 40.6522, lon: 109.8222 },
+                    { name: '鄂尔多斯', lat: 39.6083, lon: 109.7816 }
+                ]},
+                '广西壮族自治区': { cities: [
+                    { name: '南宁', lat: 22.8172, lon: 108.3666, p: 1 },
+                    { name: '桂林', lat: 25.2800, lon: 110.2865, p: 1 },
+                    { name: '柳州', lat: 24.3255, lon: 109.4344 }
+                ]},
+                '西藏自治区': { cities: [
+                    { name: '拉萨', lat: 29.6456, lon: 91.1172, p: 1 },
+                    { name: '日喀则', lat: 29.2718, lon: 88.8805 },
+                    { name: '昌都', lat: 31.1444, lon: 97.1725 }
+                ]},
+                '宁夏回族自治区': { cities: [
+                    { name: '银川', lat: 38.4681, lon: 106.2731, p: 1 },
+                    { name: '石嘴山', lat: 39.0142, lon: 106.3813 },
+                    { name: '吴忠', lat: 37.9944, lon: 106.1969 }
+                ]},
+                '新疆维吾尔自治区': { cities: [
+                    { name: '乌鲁木齐', lat: 43.8256, lon: 87.6168, p: 1 },
+                    { name: '昌吉', lat: 44.0150, lon: 87.3130 },
+                    { name: '伊宁', lat: 43.9161, lon: 81.3248 }
+                ]},
+                '香港特别行政区': { cities: [
+                    { name: '香港', lat: 22.3193, lon: 114.1694, p: 1 }
+                ]},
+                '澳门特别行政区': { cities: [
+                    { name: '澳门', lat: 22.1987, lon: 113.5439, p: 1 }
+                ]},
+                '台湾省': { cities: [
+                    { name: '台北', lat: 25.0330, lon: 121.5654, p: 1 },
+                    { name: '新北', lat: 25.0169, lon: 121.4627 },
+                    { name: '桃园', lat: 24.9936, lon: 121.2954 }
+                ]}
+            }},
+            '日本': { region: '亚洲', provinces: {
+                '东京都': { cities: [{ name: '东京', lat: 35.6762, lon: 139.6503, p: 1 }]},
+                '大阪府': { cities: [{ name: '大阪', lat: 34.6937, lon: 135.5023, p: 1 }]}
+            }},
+            '韩国': { region: '亚洲', provinces: {
+                '首尔特别市': { cities: [{ name: '首尔', lat: 37.5665, lon: 126.9780, p: 1 }]}
+            }},
+            '新加坡': { region: '亚洲', provinces: {
+                '新加坡': { cities: [{ name: '新加坡', lat: 1.3521, lon: 103.8198, p: 1 }]}
+            }},
+            '美国': { region: '北美洲', provinces: {
+                '加利福尼亚州': { cities: [
+                    { name: '洛杉矶', lat: 34.0522, lon: -118.2437, p: 1 },
+                    { name: '旧金山', lat: 37.7749, lon: -122.4194, p: 1 }
+                ]},
+                '纽约州': { cities: [{ name: '纽约', lat: 40.7128, lon: -74.0060, p: 1 }]},
+                '伊利诺伊州': { cities: [{ name: '芝加哥', lat: 41.8781, lon: -87.6298, p: 1 }]}
+            }},
+            '英国': { region: '欧洲', provinces: {
+                '英格兰': { cities: [{ name: '伦敦', lat: 51.5074, lon: -0.1278, p: 1 }]}
+            }},
+            '法国': { region: '欧洲', provinces: {
+                '法兰西岛': { cities: [{ name: '巴黎', lat: 48.8566, lon: 2.3522, p: 1 }]}
+            }},
+            '德国': { region: '欧洲', provinces: {
+                '柏林州': { cities: [{ name: '柏林', lat: 52.5200, lon: 13.4050, p: 1 }]}
+            }},
+            '澳大利亚': { region: '大洋洲', provinces: {
+                '新南威尔士州': { cities: [{ name: '悉尼', lat: -33.8688, lon: 151.2093, p: 1 }]},
+                '维多利亚州': { cities: [{ name: '墨尔本', lat: -37.8136, lon: 144.9631, p: 1 }]}
+            }}
         };
     }
 
@@ -405,11 +218,11 @@ class CityDataManager {
 
         Object.entries(this.cityData).forEach(([countryKey, country]) => {
             // 索引国家
-            index.countries.set(country.name.toLowerCase(), country);
+            index.countries.set(countryKey.toLowerCase(), country);
             
             Object.entries(country.provinces).forEach(([provinceKey, province]) => {
                 // 索引省份
-                index.provinces.set(province.name.toLowerCase(), province);
+                index.provinces.set(provinceKey.toLowerCase(), province);
                 
                 province.cities.forEach(city => {
                     // 索引城市
@@ -419,8 +232,8 @@ class CityDataManager {
                     }
                     index.cities.get(cityKey).push({
                         ...city,
-                        country: country.name,
-                        province: province.name,
+                        country: countryKey,
+                        province: provinceKey,
                         region: country.region
                     });
                 });
@@ -446,8 +259,8 @@ class CityDataManager {
                     if (specifiedPopularCities.includes(city.name)) {
                         popularCities.push({
                             ...city,
-                            country: country.name,
-                            province: province.name,
+                            country: countryKey,
+                            province: provinceKey,
                             region: country.region
                         });
                     }
@@ -483,7 +296,7 @@ class CityDataManager {
                     results.add(JSON.stringify({
                         ...city,
                         country: this.getCountryByProvince(provinceKey),
-                        province: province.name,
+                        province: provinceKey,
                         region: this.getRegionByProvince(provinceKey)
                     }));
                 });
@@ -493,12 +306,12 @@ class CityDataManager {
         // 按国家名称搜索
         this.searchIndex.countries.forEach((country, countryKey) => {
             if (countryKey.includes(lowerQuery)) {
-                Object.values(country.provinces).forEach(province => {
+                Object.entries(country.provinces).forEach(([provinceKey, province]) => {
                     province.cities.forEach(city => {
                         results.add(JSON.stringify({
                             ...city,
-                            country: country.name,
-                            province: province.name,
+                            country: countryKey,
+                            province: provinceKey,
                             region: country.region
                         }));
                     });
@@ -517,10 +330,8 @@ class CityDataManager {
      */
     getCountryByProvince(provinceKey) {
         for (const [countryKey, country] of Object.entries(this.cityData)) {
-            if (Object.keys(country.provinces).some(key => 
-                country.provinces[key].name.toLowerCase() === provinceKey
-            )) {
-                return country.name;
+            if (Object.keys(country.provinces).some(key => key.toLowerCase() === provinceKey)) {
+                return countryKey;
             }
         }
         return '';
@@ -531,9 +342,7 @@ class CityDataManager {
      */
     getRegionByProvince(provinceKey) {
         for (const [countryKey, country] of Object.entries(this.cityData)) {
-            if (Object.keys(country.provinces).some(key => 
-                country.provinces[key].name.toLowerCase() === provinceKey
-            )) {
+            if (Object.keys(country.provinces).some(key => key.toLowerCase() === provinceKey)) {
                 return country.region;
             }
         }
@@ -550,15 +359,15 @@ class CityDataManager {
         Object.entries(this.cityData).forEach(([countryKey, country]) => {
             Object.entries(country.provinces).forEach(([provinceKey, province]) => {
                 province.cities.forEach(city => {
-            const distance = Math.sqrt(
-                Math.pow(city.lat - lat, 2) + Math.pow(city.lon - lon, 2)
-            );
-            if (distance < minDistance) {
-                minDistance = distance;
+                    const distance = Math.sqrt(
+                        Math.pow(city.lat - lat, 2) + Math.pow(city.lon - lon, 2)
+                    );
+                    if (distance < minDistance) {
+                        minDistance = distance;
                         nearestCity = {
                             ...city,
-                            country: country.name,
-                            province: province.name,
+                            country: countryKey,
+                            province: provinceKey,
                             region: country.region
                         };
                     }
@@ -573,8 +382,8 @@ class CityDataManager {
      * 获取所有国家列表
      */
     getAllCountries() {
-        return Object.values(this.cityData).map(country => ({
-            name: country.name,
+        return Object.entries(this.cityData).map(([countryKey, country]) => ({
+            name: countryKey,
             region: country.region
         }));
     }
@@ -586,8 +395,8 @@ class CityDataManager {
         const country = this.cityData[countryName];
         if (!country) return [];
         
-        return Object.values(country.provinces).map(province => ({
-            name: province.name,
+        return Object.entries(country.provinces).map(([provinceKey, province]) => ({
+            name: provinceKey,
             cityCount: province.cities.length
         }));
     }
@@ -604,8 +413,8 @@ class CityDataManager {
         
         return province.cities.map(city => ({
             ...city,
-            country: country.name,
-            province: province.name,
+            country: countryName,
+            province: provinceName,
             region: country.region
         }));
     }
