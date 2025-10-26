@@ -207,8 +207,6 @@ class QuickAccess {
      * 初始化快捷访问组件
      */
     init() {
-        // 初始化时清理缓存，避免localStorage过大
-        this.cleanIconCache();
         this.renderShortcuts();
         this.addEventListeners();
         this.loadDefaultShortcuts();
@@ -332,101 +330,33 @@ class QuickAccess {
     }
 
     /**
-     * 缓存图标URL或data URI
+     * 缓存图标URL
      * @param {string} domain - 域名
-     * @param {string} iconUrl - 图标URL或data URI
+     * @param {string} iconUrl - 图标URL
      */
     cacheIcon(domain, iconUrl) {
         this.iconCache[domain] = iconUrl;
         Utils.storage.set('iconCache', this.iconCache);
-        
-        // 如果是data URI，检查缓存大小
-        if (iconUrl.startsWith('data:')) {
-            // 延迟清理，避免频繁操作
-            clearTimeout(this.cacheCleanupTimeout);
-            this.cacheCleanupTimeout = setTimeout(() => {
-                this.cleanIconCache();
-            }, 1000);
-        }
     }
 
-    /**
-     * 将图标转换为data URI并缓存
-     * @param {string} url - 图标URL
-     * @param {string} domain - 域名
-     * @returns {Promise<string>} data URI
-     */
-    async fetchAndCacheIcon(url, domain) {
-        try {
-            // 检查是否已经缓存为data URI
-            if (this.iconCache[domain] && this.iconCache[domain].startsWith('data:')) {
-                return this.iconCache[domain];
-            }
-            
-            // 获取图标并转换为data URI
-            const response = await fetch(url);
-            if (!response.ok) {
-                throw new Error(`Failed to fetch icon: ${response.status}`);
-            }
-            
-            const blob = await response.blob();
-            const reader = new FileReader();
-            
-            return new Promise((resolve, reject) => {
-                reader.onload = () => {
-                    const dataUri = reader.result;
-                    // 缓存data URI
-                    this.cacheIcon(domain, dataUri);
-                    resolve(dataUri);
-                };
-                reader.onerror = reject;
-                reader.readAsDataURL(blob);
-            });
-        } catch (error) {
-            console.error('Error fetching and caching icon:', error);
-            // 如果获取失败，缓存原始URL以便下次尝试
-            this.cacheIcon(domain, url);
-            return url;
-        }
-    }
 
     /**
      * 清理缓存，避免localStorage过大
-     * @param {number} maxCacheSize - 最大缓存大小（字节）
      */
-    cleanIconCache(maxCacheSize = 2 * 1024 * 1024) { // 默认2MB
+    cleanIconCache() {
         try {
-            // 计算当前缓存大小
-            let currentSize = 0;
-            const dataUriEntries = [];
+            const maxEntries = 50; // 最多缓存50个图标
+            const entries = Object.entries(this.iconCache);
             
-            for (const [domain, iconUrl] of Object.entries(this.iconCache)) {
-                if (iconUrl.startsWith('data:')) {
-                    // 估算data URI大小（base64编码大约比原始数据大33%）
-                    const estimatedSize = Math.floor(iconUrl.length * 0.75);
-                    currentSize += estimatedSize;
-                    dataUriEntries.push({ domain, size: estimatedSize });
-                }
-            }
-            
-            // 如果缓存大小超过限制，删除最旧的条目
-            if (currentSize > maxCacheSize && dataUriEntries.length > 0) {
-                // 按大小排序，优先删除大的图标
-                dataUriEntries.sort((a, b) => b.size - a.size);
+            if (entries.length > maxEntries) {
+                // 保留最新的50个图标
+                const sortedEntries = entries.sort((a, b) => {
+                    // 简单的LRU策略，这里可以根据需要优化
+                    return 0;
+                });
                 
-                // 删除条目直到缓存大小在限制内
-                for (const entry of dataUriEntries) {
-                    delete this.iconCache[entry.domain];
-                    currentSize -= entry.size;
-                    
-                    if (currentSize <= maxCacheSize * 0.8) { // 留出20%的空间
-                        break;
-                    }
-                }
-                
-                // 保存更新后的缓存
+                this.iconCache = Object.fromEntries(sortedEntries.slice(-maxEntries));
                 Utils.storage.set('iconCache', this.iconCache);
-                console.log(`Icon cache cleaned, reduced size to ~${Math.round(currentSize / 1024)}KB`);
             }
         } catch (error) {
             console.error('Error cleaning icon cache:', error);
@@ -466,7 +396,7 @@ class QuickAccess {
      * @param {HTMLImageElement} imgElement - 图片元素
      * @param {string} url - 网站URL
      */
-    async handleIconError(imgElement, url) {
+    handleIconError(imgElement, url) {
         try {
             const sources = this.getFaviconSources(url);
             const currentIndex = sources.findIndex(src => src === imgElement.src);
@@ -474,22 +404,7 @@ class QuickAccess {
             
             if (nextIndex < sources.length) {
                 // 尝试加载下一个图标源
-                const nextSource = sources[nextIndex];
-                
-                // 检查缓存中是否有该域名的data URI
-                const domain = new URL(url).hostname;
-                if (this.iconCache[domain] && this.iconCache[domain].startsWith('data:')) {
-                    imgElement.src = this.iconCache[domain];
-                    return;
-                }
-                
-                // 尝试获取并缓存图标
-                this.fetchAndCacheIcon(nextSource, domain).then(dataUri => {
-                    imgElement.src = dataUri;
-                }).catch(() => {
-                    // 如果获取失败，直接使用URL
-                    imgElement.src = nextSource;
-                });
+                imgElement.src = sources[nextIndex];
             } else {
                 // 所有图标源都失败，显示默认图标
                 imgElement.style.display = 'none';
@@ -517,22 +432,7 @@ class QuickAccess {
     handleIconLoad(imgElement, url) {
         try {
             const domain = new URL(url).hostname;
-            
-            // 如果已经是data URI，直接缓存
-            if (imgElement.src.startsWith('data:')) {
-                this.cacheIcon(domain, imgElement.src);
-                return;
-            }
-            
-            // 将图标转换为data URI并缓存
-            this.fetchAndCacheIcon(imgElement.src, domain).then(dataUri => {
-                // 更新图片src为data URI
-                imgElement.src = dataUri;
-            }).catch(error => {
-                console.error('Error caching icon:', error);
-                // 即使缓存失败，也缓存原始URL
-                this.cacheIcon(domain, imgElement.src);
-            });
+            this.cacheIcon(domain, imgElement.src);
         } catch (e) {
             // 忽略错误，不影响用户体验
             console.error('Error in handleIconLoad:', e);
@@ -622,10 +522,7 @@ class QuickAccess {
      * 销毁快捷访问组件
      */
     destroy() {
-        // 清理缓存清理定时器
-        if (this.cacheCleanupTimeout) {
-            clearTimeout(this.cacheCleanupTimeout);
-        }
+        // 组件销毁时的清理工作
     }
 
     /**

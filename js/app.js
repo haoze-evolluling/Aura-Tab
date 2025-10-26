@@ -30,24 +30,26 @@ class AuraTab {
      * 设置全局事件监听器
      */
     setupGlobalEventListeners() {
-        document.addEventListener('keydown', (e) => this.handleGlobalKeydown(e));
+        this.handleGlobalKeydown = this.handleGlobalKeydown.bind(this);
+        document.addEventListener('keydown', this.handleGlobalKeydown);
     }
 
     /**
      * 设置时钟更新机制
      */
     setupClockUpdates() {
-        const updateClock = () => this.components.clock?.updateTime();
+        this.updateClock = () => this.components.clock?.updateTime();
+        this.handleVisibilityChange = () => {
+            if (!document.hidden) {
+                this.updateClock();
+            }
+        };
         
         // 窗口获得焦点时更新时间
-        window.addEventListener('focus', updateClock);
+        window.addEventListener('focus', this.updateClock);
         
         // 页面可见性变化时更新时间
-        document.addEventListener('visibilitychange', () => {
-            if (!document.hidden) {
-                updateClock();
-            }
-        });
+        document.addEventListener('visibilitychange', this.handleVisibilityChange);
     }
 
     /**

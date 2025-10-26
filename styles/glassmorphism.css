@@ -1,19 +1,21 @@
-/* 玻璃态质感样式 */
+/* 白色亚克力质感样式 */
 .glass-card {
-    background: var(--glass-bg);
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
-    border: 2px solid var(--glass-border);
+    background: var(--acrylic-bg);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid var(--acrylic-border);
     border-radius: var(--border-radius);
     position: relative;
     overflow: hidden;
     transition: none;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
 }
 
 .glass-card:hover {
-    background: rgba(255, 255, 255, 0.15);
-    border-color: rgba(255, 255, 255, 0.6);
-    border-width: 2px;
+    background: rgba(255, 255, 255, 0.9);
+    border-color: rgba(102, 126, 234, 0.3);
+    border-width: 1px;
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
 }
 
 /* 卡片样式 */
@@ -41,9 +43,9 @@
     left: 0; 
     width: 100%; 
     height: 100%;
-    background: rgba(0, 0, 0, 0.4);
-    backdrop-filter: blur(8px);
-    -webkit-backdrop-filter: blur(8px);
+    background: rgba(0, 0, 0, 0.2);
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -68,10 +70,11 @@
     margin: auto;
     position: relative;
     z-index: 1001;
-    background: #ffffff !important;
+    background: rgba(255, 255, 255, 0.95) !important;
     color: #333333;
     box-sizing: border-box;
-    border: 3px solid rgba(255, 255, 255, 0.9);
+    border: 1px solid rgba(255, 255, 255, 0.8);
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
     transform: scale(0.8) translateY(20px);
     opacity: 0;
     transition: transform 0.3s ease-out, opacity 0.3s ease-out;
@@ -150,12 +153,12 @@
     color: #ffffff;
 }
 
-/* 按钮玻璃效果 */
+/* 按钮亚克力效果 */
 .btn {
-    background: var(--glass-bg);
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-    border: 2px solid var(--glass-border);
+    background: var(--acrylic-bg);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border: 1px solid var(--acrylic-border);
     border-radius: 12px;
     padding: 0.75rem 1.5rem;
     color: var(--text-primary);
@@ -171,6 +174,7 @@
     gap: 0.5rem;
     position: relative;
     overflow: hidden;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
 }
 
 /* 按钮点击缩放效果 */
@@ -179,9 +183,10 @@
 }
 
 .btn:hover {
-    background: rgba(255, 255, 255, 0.2);
-    border-color: rgba(255, 255, 255, 0.7);
-    border-width: 2px;
+    background: rgba(255, 255, 255, 0.9);
+    border-color: rgba(102, 126, 234, 0.3);
+    border-width: 1px;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
 }
 .btn-primary {
     background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
@@ -196,12 +201,12 @@
     background: rgba(255, 255, 255, 0.1); 
 }
 
-/* 快捷访问按钮玻璃效果 */
+/* 快捷访问按钮亚克力效果 */
 .shortcut-btn {
-    background: var(--glass-bg);
-    backdrop-filter: blur(15px);
-    -webkit-backdrop-filter: blur(15px);
-    border: 2px solid var(--glass-border);
+    background: var(--acrylic-bg);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border: 1px solid var(--acrylic-border);
     border-radius: 16px;
     padding: 1.5rem;
     color: var(--text-primary);
@@ -215,6 +220,7 @@
     overflow: hidden;
     min-height: 120px;
     justify-content: center;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
 }
 
 /* 快捷访问按钮点击缩放效果 */
@@ -232,8 +238,9 @@
         transparent 0%, rgba(255, 255, 255, 0.1) 50%, transparent 100%);
 }
 .shortcut-btn:hover {
-    background: rgba(255, 255, 255, 0.15);
-    border-color: rgba(255, 255, 255, 0.6);
-    border-width: 2px;
+    background: rgba(255, 255, 255, 0.9);
+    border-color: rgba(102, 126, 234, 0.3);
+    border-width: 1px;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
 }
 

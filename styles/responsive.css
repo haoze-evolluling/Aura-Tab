@@ -796,47 +796,11 @@ body {
     }
 }
 
-/* 打印样式 */
-@media print {
-    body::before,
-    body::after,
-    .main-container::before,
-    .main-container::after {
-        display: none;
-    }
-    
-    .background-container {
-        display: none;
-    }
-    
-    .modal-overlay {
-        display: none !important;
-    }
-    
-    .delete-shortcut {
-        display: none !important;
-    }
-    
-    .add-shortcut-btn {
-        display: none !important;
-    }
-    
-    .glass-card {
-        box-shadow: none;
-        border: 1px solid #ccc;
-    }
-}
 
-/* 深色模式支持（系统偏好） */
-@media (prefers-color-scheme: dark) {
-    /* 深色模式已经是默认主题，这里可以进行微调 */
-    :root {
-        --glass-bg: rgba(255, 255, 255, 0.12);
-        --glass-border: rgba(255, 255, 255, 0.22);
-    }
-}
-
-/* 浅色模式支持（如需要） */
+/* 浅色模式优化（系统偏好） */
 @media (prefers-color-scheme: light) {
-    /* 保持深色主题设计 */
+    :root {
+        --acrylic-bg: rgba(255, 255, 255, 0.9);
+        --acrylic-border: rgba(255, 255, 255, 0.95);
+    }
 }
