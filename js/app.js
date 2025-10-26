@@ -12,7 +12,8 @@ class AuraTab {
         this.components = {
             clock: new Clock(),
             search: new Search(),
-            quickAccess: new QuickAccess()
+            quickAccess: new QuickAccess(),
+            weather: new Weather()
         };
         this.init();
     }
@@ -108,6 +109,7 @@ class AuraTab {
         console.log('  - Ctrl/Cmd + K: 聚焦搜索框');
         console.log('  - Ctrl/Cmd + Shift + A: 添加快捷方式');
         console.log('  - Escape: 关闭模态框');
+        console.log('🌤️ 天气组件已加载');
     }
 
     /**
@@ -165,6 +167,11 @@ if (typeof window !== 'undefined') {
     
     Object.defineProperty(window, 'clock', {
         get: () => window.auraTabApp?.components?.clock,
+        configurable: true
+    });
+    
+    Object.defineProperty(window, 'weather', {
+        get: () => window.auraTabApp?.components?.weather,
         configurable: true
     });
 }
