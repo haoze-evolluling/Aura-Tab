@@ -247,55 +247,66 @@ class Weather {
         this.isLoading = true;
 
         try {
-            // 使用免费的wttr.in API获取天气数据
-            const response = await fetch(
-                `https://wttr.in/${this.currentCity.lat},${this.currentCity.lon}?format=j1&lang=zh`
-            );
-
-            if (!response.ok) {
-                throw new Error('天气数据获取失败');
-            }
-
-            const data = await response.json();
-            this.weatherData = data;
+            // 同时向两个API发送请求，优先展示先获取到的结果
+            const weatherData = await this.fetchWeatherDataParallel();
+            this.weatherData = weatherData;
             this.updateWeatherDisplay();
         } catch (error) {
-            console.warn('天气数据获取失败:', error);
-            // 如果wttr.in失败，尝试使用备用API
-            await this.loadWeatherDataFallback();
+            console.warn('所有天气API都获取失败:', error);
+            this.showErrorState();
         } finally {
             this.isLoading = false;
         }
     }
 
     /**
-     * 备用天气数据获取方法
+     * 并行获取天气数据
+     * 同时向wttr.in和Open-Meteo API发送请求，优先展示先返回的结果
      */
-    async loadWeatherDataFallback() {
-        try {
-            // 使用免费的Open-Meteo API作为备用
-            const response = await fetch(
-                `https://api.open-meteo.com/v1/forecast?latitude=${this.currentCity.lat}&longitude=${this.currentCity.lon}&current_weather=true&timezone=auto`
-            );
+    async fetchWeatherDataParallel() {
+        const wttrPromise = this.fetchFromWttr();
+        const openMeteoPromise = this.fetchFromOpenMeteo();
 
-            if (!response.ok) {
-                throw new Error('备用API也失败');
-            }
+        // 使用Promise.race获取最先返回的结果
+        return await Promise.race([wttrPromise, openMeteoPromise]);
+    }
 
-            const data = await response.json();
-            // 转换数据格式以匹配我们的显示方法
-            this.weatherData = {
-                main: { temp: data.current_weather.temperature },
-                weather: [{ 
-                    description: this.getWeatherDescription(data.current_weather.weathercode),
-                    icon: this.getWeatherIconCode(data.current_weather.weathercode)
-                }]
-            };
-            this.updateWeatherDisplay();
-        } catch (error) {
-            console.warn('备用天气API也失败:', error);
-            this.showErrorState();
+    /**
+     * 从wttr.in API获取天气数据
+     */
+    async fetchFromWttr() {
+        const response = await fetch(
+            `https://wttr.in/${this.currentCity.lat},${this.currentCity.lon}?format=j1&lang=zh`
+        );
+
+        if (!response.ok) {
+            throw new Error('wttr.in API请求失败');
         }
+
+        const data = await response.json();
+        return {
+            source: 'wttr',
+            data: data
+        };
+    }
+
+    /**
+     * 从Open-Meteo API获取天气数据
+     */
+    async fetchFromOpenMeteo() {
+        const response = await fetch(
+            `https://api.open-meteo.com/v1/forecast?latitude=${this.currentCity.lat}&longitude=${this.currentCity.lon}&current_weather=true&timezone=auto`
+        );
+
+        if (!response.ok) {
+            throw new Error('Open-Meteo API请求失败');
+        }
+
+        const data = await response.json();
+        return {
+            source: 'openmeteo',
+            data: data
+        };
     }
 
     /**
@@ -306,17 +317,23 @@ class Weather {
 
         let temp, description, iconCode;
 
-        // 处理wttr.in API数据格式
-        if (this.weatherData.current_condition) {
-            temp = Math.round(this.weatherData.current_condition.temp_C);
-            description = this.weatherData.current_condition.lang_zh[0].value;
-            iconCode = this.weatherData.current_condition.weatherCode;
-        }
-        // 处理Open-Meteo API数据格式
-        else if (this.weatherData.main) {
-            temp = Math.round(this.weatherData.main.temp);
-            description = this.weatherData.weather[0].description;
-            iconCode = this.weatherData.weather[0].icon;
+        // 根据数据源处理不同的数据格式
+        if (this.weatherData.source === 'wttr') {
+            // 处理wttr.in API数据格式
+            const wttrData = this.weatherData.data;
+            if (wttrData.current_condition) {
+                temp = Math.round(wttrData.current_condition.temp_C);
+                description = wttrData.current_condition.lang_zh[0].value;
+                iconCode = wttrData.current_condition.weatherCode;
+            }
+        } else if (this.weatherData.source === 'openmeteo') {
+            // 处理Open-Meteo API数据格式
+            const openMeteoData = this.weatherData.data;
+            if (openMeteoData.current_weather) {
+                temp = Math.round(openMeteoData.current_weather.temperature);
+                description = this.getWeatherDescription(openMeteoData.current_weather.weathercode);
+                iconCode = this.getWeatherIconCode(openMeteoData.current_weather.weathercode);
+            }
         }
 
         this.elements.temp.textContent = `${temp}°C`;
