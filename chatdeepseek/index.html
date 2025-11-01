@@ -1,8 +1,8 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="zh-CN" class="notranslate" translate="no">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, user-scalable=no">
     <title>DeepSeek Chat - Aura Tab</title>
     <link rel="icon" type="image/png" href="../icon.png">
     <link rel="stylesheet" href="../styles/main.css">
@@ -14,62 +14,111 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
 </head>
-<body>
-    <div class="background-container">
-        <div class="gradient-bg"></div>
-    </div>
-    
-    <main class="chat-container">
-        <!-- 聊天头部 -->
-        <div class="glass-card chat-header">
-            <div class="header-content">
-                <div class="header-left">
-                    <h1 class="chat-title">🤖 DeepSeek Chat</h1>
-                    <div class="status-indicator" id="statusIndicator">
-                        <span class="status-dot"></span>
-                        <span class="status-text">就绪</span>
+<body class="zh_CN light">
+    <div id="root">
+        <div class="ds-theme">
+            <div class="chat-layout">
+                <!-- 侧边栏 -->
+                <aside class="sidebar">
+                    <div class="sidebar-header">
+                        <div class="logo-container">
+                            <span class="logo-text">DeepSeek</span>
+                        </div>
+                        <button class="icon-button sidebar-toggle" id="sidebarToggle" aria-label="切换侧边栏">
+                            <span class="icon">☰</span>
+                        </button>
                     </div>
-                </div>
-                <div class="header-right">
-                    <button class="btn btn-secondary" id="clearChatBtn">🗑️ 清空对话</button>
-                    <button class="btn btn-secondary" id="backToHomeBtn">🏠 返回首页</button>
-                </div>
-            </div>
-        </div>
-
-        <!-- 聊天消息区域 -->
-        <div class="glass-card chat-messages-container">
-            <div class="chat-messages" id="chatMessages">
-                <div class="welcome-message">
-                    <div class="welcome-icon">🤖</div>
-                    <h3>欢迎使用 DeepSeek Chat</h3>
-                    <p>我是您的AI助手，可以回答各种问题，帮助您解决问题。请在下方的输入框中输入您的问题。</p>
-                </div>
-            </div>
-        </div>
-
-        <!-- 输入区域 -->
-        <div class="glass-card chat-input-container">
-            <div class="input-wrapper">
-                <div class="input-container">
-                    <textarea 
-                        class="chat-input" 
-                        id="chatInput" 
-                        placeholder="输入您的问题..." 
-                        rows="1"
-                        maxlength="2000"
-                    ></textarea>
-                    <button class="send-btn" id="sendBtn" disabled>
-                        <span class="send-icon">📤</span>
+                    <button class="new-chat-button" id="newChatBtn">
+                        <span class="icon">⊕</span>
+                        <span>开启新对话</span>
                     </button>
-                </div>
-                <div class="input-footer">
-                    <span class="char-count" id="charCount">0/2000</span>
-                    <span class="input-tip">按 Enter 发送，Shift+Enter 换行</span>
-                </div>
+                    <div class="sidebar-content">
+                        <div class="chat-history" id="chatHistory">
+                            <!-- 历史对话列表将在这里动态生成 -->
+                        </div>
+                    </div>
+                    <div class="sidebar-footer">
+                        <div class="user-profile" tabindex="0">
+                            <div class="user-avatar">
+                                <span>👤</span>
+                            </div>
+                            <div class="user-name">用户</div>
+                            <button class="icon-button menu-button" aria-label="菜单">
+                                <span class="icon">⋯</span>
+                            </button>
+                        </div>
+                    </div>
+                </aside>
+
+                <!-- 主内容区域 -->
+                <main class="main-content">
+                    <!-- 顶部标题栏 -->
+                    <div class="chat-titlebar">
+                        <div class="titlebar-content">
+                            <div class="chat-title-text" id="chatTitle">新对话</div>
+                        </div>
+                        <div class="titlebar-actions">
+                            <button class="icon-button" id="menuBtn" aria-label="菜单">
+                                <span class="icon">☰</span>
+                            </button>
+                            <button class="icon-button" id="newChatBtn2" aria-label="新对话">
+                                <span class="icon">⊕</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- 消息区域 -->
+                    <div class="messages-container">
+                        <div class="messages-scroll-area" id="messagesScrollArea">
+                            <div class="messages-list" id="chatMessages">
+                                <div class="welcome-message">
+                                    <div class="welcome-content">
+                                        <h2>欢迎使用 DeepSeek Chat</h2>
+                                        <p>我是您的AI助手，可以回答各种问题，帮助您解决问题。</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 输入区域 -->
+                    <div class="input-area">
+                        <div class="input-toolbar">
+                            <button class="toggle-button" id="deepThinkingBtn" data-active="false">
+                                <span class="icon">🧠</span>
+                                <span>深度思考</span>
+                            </button>
+                            <button class="toggle-button" id="webSearchBtn" data-active="false">
+                                <span class="icon">🔍</span>
+                                <span>联网搜索</span>
+                            </button>
+                            <div class="input-actions">
+                                <button class="icon-button" id="attachBtn" aria-label="附件">
+                                    <span class="icon">📎</span>
+                                </button>
+                                <button class="icon-button" id="sendBtn" aria-label="发送" disabled>
+                                    <span class="icon">➤</span>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="input-wrapper">
+                            <textarea 
+                                class="chat-input" 
+                                id="chatInput" 
+                                placeholder="给 DeepSeek 发送消息" 
+                                rows="1"
+                                maxlength="2000"
+                            ></textarea>
+                        </div>
+                        <div class="input-footer">
+                            <span class="disclaimer">内容由 AI 生成，请仔细甄别</span>
+                        </div>
+                        <input type="file" id="fileInput" multiple style="display: none;">
+                    </div>
+                </main>
             </div>
         </div>
-    </main>
+    </div>
 
     <!-- 加载动画 -->
     <div class="loading-overlay" id="loadingOverlay">
@@ -81,7 +130,7 @@
 
     <!-- 错误提示模态框 -->
     <div class="modal-overlay" id="errorModal">
-        <div class="glass-card modal-card">
+        <div class="modal-card">
             <h3>⚠️ 发生错误</h3>
             <div class="error-content">
                 <p id="errorMessage">网络连接失败，请检查您的网络设置。</p>
