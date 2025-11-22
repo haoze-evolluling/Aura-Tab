@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="zh-CN" class="notranslate" translate="no">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, user-scalable=no">
+    <title>Chatbox</title>
+    <link rel="icon" type="image/png" href="pic/chat.png">
+    <link rel="stylesheet" href="../styles/main.css">
+    <link rel="stylesheet" href="../styles/glassmorphism.css">
+    <link rel="stylesheet" href="../styles/components.css">
+    <link rel="stylesheet" href="../styles/responsive.css">
+    <link rel="stylesheet" href="chat.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+</head>
+<body class="zh_CN light">
+    <div id="root">
+        <div class="ds-theme">
+            <div class="chat-layout">
+                <!-- 侧边栏 -->
+                <aside class="sidebar" id="sidebar">
+                    <div class="sidebar-header">
+                        <div class="logo-container">
+                            <img src="pic/chat.png" alt="Chatbox" class="logo-image">
+                            <span class="logo-text">Chatbox</span>
+                        </div>
+                        <button class="icon-button home-button" id="homeButton" aria-label="回到主页" type="button">
+                            <img src="pic/home.png" alt="回到主页" class="icon-image">
+                        </button>
+                    </div>
+                    <button class="new-chat-button" id="newChatBtn" type="button">
+                        <span class="icon">⊕</span>
+                        <span>开启新对话</span>
+                    </button>
+                    <div class="sidebar-content">
+                        <nav class="chat-history" id="chatHistory" role="navigation" aria-label="聊天历史">
+                            <!-- 历史对话列表将在这里动态生成 -->
+                        </nav>
+                    </div>
+                    <div class="sidebar-footer">
+                        <div class="user-profile" tabindex="0" role="button" aria-label="用户资料">
+                            <div class="user-avatar" aria-hidden="true">
+                                <img src="pic/user.png" alt="用户头像" class="user-avatar-img">
+                            </div>
+                            <div class="user-name">用户</div>
+                            <button class="icon-button menu-button" aria-label="菜单" type="button">
+                                <span class="icon">⋯</span>
+                            </button>
+                        </div>
+                    </div>
+                </aside>
+
+                <!-- 主内容区域 -->
+                <main class="main-content">
+                    <!-- 顶部标题栏 -->
+                    <header class="chat-titlebar">
+                        <button class="icon-button sidebar-toggle-button" id="sidebarToggleButton" aria-label="切换侧边栏" type="button">
+                            <span class="sidebar-icon">☰</span>
+                        </button>
+                        <div class="titlebar-content">
+                            <div class="titlebar-title" id="currentChatTitle">当前对话</div>
+                        </div>
+                    </header>
+
+                    <!-- 消息区域 -->
+                    <section class="messages-container" aria-live="polite" aria-label="消息列表">
+                        <div class="messages-scroll-area" id="messagesScrollArea">
+                            <div class="messages-list" id="chatMessages" role="log" aria-label="聊天消息">
+                                <div class="welcome-message">
+                                    <div class="welcome-content">
+                                        <h2>欢迎使用 Chatbox</h2>
+                                        <p>我是您的AI助手，可以回答各种问题，帮助您解决问题。</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- 输入区域 -->
+                    <footer class="input-area">
+                        <div class="input-toolbar">
+                            <div class="input-actions">
+                                <button class="icon-button" id="sendBtn" aria-label="发送" type="button" disabled>
+                                    <span class="icon">➤</span>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="input-wrapper">
+                            <textarea 
+                                class="chat-input" 
+                                id="chatInput" 
+                                placeholder="给 ChatRobot 发送消息" 
+                                rows="1"
+                                maxlength="2000"
+                                aria-label="消息输入框"
+                            ></textarea>
+                        </div>
+                        <div class="input-footer">
+                            <span class="disclaimer">内容由 AI 生成，请仔细甄别</span>
+                        </div>
+                        <input type="file" id="fileInput" multiple accept="image/*,text/*,.pdf,.doc,.docx" style="display: none;" aria-label="文件选择">
+                    </footer>
+                </main>
+            </div>
+        </div>
+    </div>
+
+    <!-- 加载动画 -->
+    <div class="loading-overlay" id="loadingOverlay" role="status" aria-live="polite" aria-label="加载中">
+        <div class="loading-spinner">
+            <div class="spinner" aria-hidden="true"></div>
+            <p>AI正在思考中...</p>
+        </div>
+    </div>
+
+    <!-- 错误提示模态框 -->
+    <div class="modal-overlay" id="errorModal" role="dialog" aria-labelledby="errorTitle" aria-modal="true">
+        <div class="modal-card">
+            <h3 id="errorTitle">⚠️ 发生错误</h3>
+            <div class="error-content">
+                <p id="errorMessage">网络连接失败，请检查您的网络设置。</p>
+            </div>
+            <div class="form-actions">
+                <button type="button" class="btn btn-primary" id="errorOkBtn">确定</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="chat.js"></script>
+</body>
+</html>

@@ -1,0 +1,246 @@
+/* 白色亚克力质感样式 */
+.glass-card {
+    background: var(--acrylic-bg);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid var(--acrylic-border);
+    border-radius: var(--border-radius);
+    position: relative;
+    overflow: hidden;
+    transition: none;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+}
+
+.glass-card:hover {
+    background: rgba(255, 255, 255, 0.9);
+    border-color: rgba(102, 126, 234, 0.3);
+    border-width: 1px;
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
+}
+
+/* 卡片样式 */
+.clock-card, .quick-access-card {
+    padding: 2rem;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.clock-card { 
+    text-align: center; 
+}
+
+.search-card {
+    padding: 1.5rem;
+    width: 100%;
+    position: relative;
+    box-sizing: border-box;
+}
+
+/* 模态框覆盖层 */
+.modal-overlay {
+    position: fixed;
+    top: 0; 
+    left: 0; 
+    width: 100%; 
+    height: 100%;
+    background: rgba(0, 0, 0, 0.2);
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    opacity: 0;
+    visibility: hidden;
+    padding: 1rem;
+    box-sizing: border-box;
+    transition: opacity 0.3s ease-out, visibility 0.3s ease-out;
+}
+
+.modal-overlay.active {
+    visibility: visible;
+    opacity: 1;
+}
+
+/* 模态框卡片动画 */
+.modal-card {
+    padding: 2.5rem;
+    width: 90%;
+    max-width: 550px;
+    margin: auto;
+    position: relative;
+    z-index: 1001;
+    background: rgba(255, 255, 255, 0.95) !important;
+    color: #333333;
+    box-sizing: border-box;
+    border: 1px solid rgba(255, 255, 255, 0.8);
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+    transform: scale(0.8) translateY(20px);
+    opacity: 0;
+    transition: transform 0.3s ease-out, opacity 0.3s ease-out;
+}
+
+.modal-overlay.active .modal-card {
+    transform: scale(1) translateY(0);
+    opacity: 1;
+}
+
+/* 模态框内部元素样式 */
+.modal-card h3 { 
+    color: #333333; 
+    margin-bottom: 1.5rem; 
+}
+.modal-card label { 
+    color: #666666; 
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+    font-size: 0.9rem;
+    font-weight: 500;
+}
+.modal-card input {
+    background: #f8f9fa;
+    border: 2px solid #dee2e6;
+    color: #333333;
+    padding: 0.75rem;
+    border-radius: 8px;
+    font-family: inherit;
+}
+.modal-card input::placeholder { 
+    color: #6c757d; 
+}
+.modal-card input:focus {
+    background: #ffffff;
+    border-color: #667eea;
+    border-width: 2px;
+}
+
+/* 模态框按钮样式 */
+.modal-card .btn {
+    color: #333333;
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+}
+.modal-card .btn-secondary {
+    background: #f8f9fa;
+    border: 2px solid #dee2e6;
+    color: #6c757d;
+}
+.modal-card .btn-secondary:hover {
+    background: #e9ecef;
+    border-color: #adb5bd;
+    color: #495057;
+}
+.modal-card .btn-secondary:active {
+    background: #dee2e6;
+    border-color: #6c757d;
+    color: #343a40;
+}
+.modal-card .btn-primary {
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    border: 2px solid #667eea;
+    color: #ffffff;
+}
+.modal-card .btn-primary:hover {
+    background: linear-gradient(135deg, #5a6fd8, #6a4190);
+    border-color: #5a6fd8;
+    color: #ffffff;
+}
+.modal-card .btn-primary:active {
+    background: linear-gradient(135deg, #4e5bc6, #5e3a7e);
+    border-color: #4e5bc6;
+    color: #ffffff;
+}
+
+/* 按钮亚克力效果 */
+.btn {
+    background: var(--acrylic-bg);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border: 1px solid var(--acrylic-border);
+    border-radius: 12px;
+    padding: 0.75rem 1.5rem;
+    color: var(--text-primary);
+    font-family: inherit;
+    font-size: 0.9rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: transform 0.1s ease-out;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+}
+
+/* 按钮点击缩放效果 */
+.btn:active {
+    transform: scale(0.95);
+}
+
+.btn:hover {
+    background: rgba(255, 255, 255, 0.9);
+    border-color: rgba(102, 126, 234, 0.3);
+    border-width: 1px;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+}
+.btn-primary {
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    border-color: rgba(255, 255, 255, 0.3);
+}
+.btn-primary:hover {
+    background: linear-gradient(135deg, 
+        color-mix(in srgb, var(--primary-color) 90%, white),
+        color-mix(in srgb, var(--secondary-color) 90%, white));
+}
+.btn-secondary { 
+    background: rgba(255, 255, 255, 0.1); 
+}
+
+/* 快捷访问按钮亚克力效果 */
+.shortcut-btn {
+    background: var(--acrylic-bg);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border: 1px solid var(--acrylic-border);
+    border-radius: 16px;
+    padding: 1.5rem;
+    color: var(--text-primary);
+    text-decoration: none;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.75rem;
+    transition: transform 0.1s ease-out;
+    position: relative;
+    overflow: hidden;
+    min-height: 120px;
+    justify-content: center;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+}
+
+/* 快捷访问按钮点击缩放效果 */
+.shortcut-btn:active {
+    transform: scale(0.95);
+}
+.shortcut-btn::before {
+    content: '';
+    position: absolute;
+    top: 0; 
+    left: -100%; 
+    width: 100%; 
+    height: 100%;
+    background: linear-gradient(90deg, 
+        transparent 0%, rgba(255, 255, 255, 0.1) 50%, transparent 100%);
+}
+.shortcut-btn:hover {
+    background: rgba(255, 255, 255, 0.9);
+    border-color: rgba(102, 126, 234, 0.3);
+    border-width: 1px;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+}
+
