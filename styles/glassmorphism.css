@@ -86,41 +86,92 @@
 }
 
 /* 模态框内部元素样式 */
+.modal-header {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
 .modal-card h3 { 
     color: #333333; 
-    margin-bottom: 1.5rem; 
+    margin-bottom: 0.5rem;
+    font-size: 1.5rem;
+    font-weight: 600;
 }
+
+.modal-subtitle {
+    color: #666666;
+    font-size: 0.9rem;
+    margin: 0;
+}
+
+.form-group {
+    margin-bottom: 1.5rem;
+}
+
 .modal-card label { 
-    color: #666666; 
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
-    margin-bottom: 1rem;
+    color: #333333; 
+    display: block;
+    margin-bottom: 0.5rem;
     font-size: 0.9rem;
     font-weight: 500;
+    margin-left: 0.25rem;
 }
+
+.input-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.input-icon {
+    position: absolute;
+    left: 1rem;
+    font-size: 1.2rem;
+    pointer-events: none;
+    opacity: 0.7;
+    z-index: 10;
+}
+
 .modal-card input {
+    width: 100%;
     background: #f8f9fa;
-    border: 2px solid #dee2e6;
+    border: 2px solid #e9ecef;
     color: #333333;
-    padding: 0.75rem;
-    border-radius: 8px;
+    padding: 0.875rem 1rem 0.875rem 3rem;
+    border-radius: 12px;
     font-family: inherit;
+    font-size: 1rem;
+    transition: all 0.2s ease-out;
+    box-shadow: inner 0 2px 4px rgba(0,0,0,0.02);
 }
+
 .modal-card input::placeholder { 
-    color: #6c757d; 
+    color: #adb5bd; 
 }
+
 .modal-card input:focus {
     background: #ffffff;
     border-color: #667eea;
-    border-width: 2px;
+    box-shadow: 0 0 0 4px rgba(102, 126, 234, 0.1);
+    outline: none;
+}
+
+.modal-card input:hover:not(:focus) {
+    background: #ffffff;
+    border-color: #dee2e6;
 }
 
 /* 模态框按钮样式 */
+.modal-card .form-actions {
+    margin-top: 2rem;
+    gap: 1rem;
+}
+
 .modal-card .btn {
-    color: #333333;
-    backdrop-filter: none;
-    -webkit-backdrop-filter: none;
+    flex: 1;
+    justify-content: center;
+    padding: 0.875rem;
+    font-size: 1rem;
 }
 .modal-card .btn-secondary {
     background: #f8f9fa;

@@ -207,11 +207,9 @@
 
 /* ===== 搜索引擎选择模态框样式 ===== */
 /* 搜索引擎模态框标题样式 */
-#searchEngineModal .modal-card h3 {
-    margin-bottom: 1.5rem;
+#searchEngineModal .modal-header h3 {
+    margin-bottom: 0.5rem;
     text-align: center;
-    margin-top: 0;
-    padding-top: 0;
 }
 
 /* 搜索引擎容器 */
@@ -306,10 +304,6 @@
     margin-bottom: 1rem;
     position: relative;
     z-index: 2;
-    transition: none;
-}
-
-.search-engine-item:hover .search-engine-icon {
 }
 
 /* 搜索引擎信息 */
@@ -513,20 +507,22 @@
 
 .city-search-input {
     width: 100%;
-    padding: 0.75rem 1rem;
+    padding: 0.875rem 1rem;
     font-size: 1rem;
     background: #f8f9fa;
-    border: 1px solid #dee2e6;
-    border-radius: 8px;
+    border: 2px solid #e9ecef;
+    border-radius: 12px;
     color: var(--text-primary);
     margin-bottom: 1rem;
-    transition: border-color 0.1s ease-out;
+    transition: all 0.2s ease-out;
+    box-shadow: inset 0 2px 4px rgba(0,0,0,0.02);
 }
 
 .city-search-input:focus {
     outline: none;
-    border-color: var(--primary-color);
     background: #ffffff;
+    border-color: #667eea;
+    box-shadow: 0 0 0 4px rgba(102, 126, 234, 0.1);
 }
 
 .city-list {

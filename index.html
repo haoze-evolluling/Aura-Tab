@@ -58,16 +58,25 @@
     <!-- 添加快捷方式模态框 -->
     <div class="modal-overlay" id="modalOverlay">
         <div class="glass-card modal-card">
-            <h3>添加快捷方式</h3>
+            <div class="modal-header">
+                <h3>添加快捷方式</h3>
+                <p class="modal-subtitle">添加常用的网站以便快速访问</p>
+            </div>
             <form id="shortcutForm">
-                <label>
-                    网站名称
-                    <input type="text" id="shortcutName" placeholder="例如：Google" required>
-                </label>
-                <label>
-                    网站地址
-                    <input type="text" id="shortcutUrl" placeholder="www.google.com" required>
-                </label>
+                <div class="form-group">
+                    <label for="shortcutName">网站名称</label>
+                    <div class="input-wrapper">
+                        <span class="input-icon">📝</span>
+                        <input type="text" id="shortcutName" placeholder="例如：Google" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="shortcutUrl">网站地址</label>
+                    <div class="input-wrapper">
+                        <span class="input-icon">🔗</span>
+                        <input type="text" id="shortcutUrl" placeholder="https://www.google.com" required>
+                    </div>
+                </div>
                 <div class="form-actions">
                     <button type="button" class="btn btn-secondary" id="cancelBtn">取消</button>
                     <button type="submit" class="btn btn-primary">添加</button>
@@ -79,7 +88,10 @@
     <!-- 搜索引擎选择模态框 -->
     <div class="modal-overlay" id="searchEngineModal">
         <div class="glass-card modal-card">
-            <h3>选择搜索引擎</h3>
+            <div class="modal-header">
+                <h3>选择搜索引擎</h3>
+                <p class="modal-subtitle">选择您偏好的搜索引擎</p>
+            </div>
             <div class="search-engine-container">
                 <div class="search-engine-grid" id="searchEngineGrid"></div>
             </div>
@@ -92,7 +104,10 @@
     <!-- 城市选择模态框 -->
     <div class="modal-overlay" id="citySelectModal">
         <div class="glass-card modal-card">
-            <h3>选择城市</h3>
+            <div class="modal-header">
+                <h3>选择城市</h3>
+                <p class="modal-subtitle">搜索并添加您的城市</p>
+            </div>
             <div class="city-search-container">
                 <input type="text" id="citySearchInput" placeholder="搜索城市名称..." class="city-search-input">
                 <div class="city-list" id="cityList">
