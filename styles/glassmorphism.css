@@ -15,7 +15,6 @@
     background: var(--glass-bg-hover);
     border-color: var(--glass-border-hover);
     box-shadow: var(--shadow-lg);
-    transform: translateY(-2px);
 }
 
 /* 卡片样式 */
@@ -188,14 +187,12 @@
     background: rgba(233, 236, 239, 0.95);
     border-color: rgba(173, 181, 189, 0.9);
     color: #495057;
-    transform: translateY(-1px);
 }
 
 .modal-card .btn-secondary:active {
     background: rgba(222, 226, 230, 0.95);
     border-color: #6c757d;
     color: #343a40;
-    transform: scale(0.98);
 }
 
 .modal-card .btn-primary {
@@ -208,12 +205,10 @@
 .modal-card .btn-primary:hover {
     background: linear-gradient(135deg, #5a6fd8, #6a4190);
     box-shadow: var(--shadow-lg);
-    transform: translateY(-1px);
 }
 
 .modal-card .btn-primary:active {
     background: linear-gradient(135deg, #4e5bc6, #5e3a7e);
-    transform: scale(0.98);
 }
 
 /* 统一的按钮毛玻璃效果 */
@@ -240,15 +235,12 @@
     box-shadow: var(--shadow-md);
 }
 
-.btn:active {
-    transform: scale(0.97);
-}
+
 
 .btn:hover {
     background: var(--glass-bg-hover);
     border-color: var(--glass-border-hover);
     box-shadow: var(--shadow-lg);
-    transform: translateY(-1px);
 }
 
 .btn-primary {
@@ -288,9 +280,7 @@
     box-shadow: var(--shadow-md);
 }
 
-.shortcut-btn:active {
-    transform: scale(0.97);
-}
+
 
 .shortcut-btn::before {
     content: '';
@@ -308,7 +298,6 @@
     background: var(--glass-bg-hover);
     border-color: var(--glass-border-hover);
     box-shadow: var(--shadow-lg);
-    transform: translateY(-2px);
 }
 
 .shortcut-btn:hover::before {

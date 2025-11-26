@@ -143,23 +143,6 @@ body {
     color: white;
     border: none;
     border-radius: var(--ds-radius-md);
-    font-size: 14px;
-    font-weight: 500;
-    cursor: pointer;
-    transition: all 0.2s ease;
-}
-
-.new-chat-button:hover {
-    background: #3D5BFE;
-    transform: translateY(-1px);
-    box-shadow: var(--ds-shadow-sm);
-}
-
-.new-chat-button:active {
-    transform: translateY(0);
-}
-
-.new-chat-button .icon {
     font-size: 18px;
     font-weight: 300;
     line-height: 1;
@@ -691,8 +674,13 @@ body {
 }
 
 @keyframes spin {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
 }
 
 .loading-spinner p {
@@ -789,9 +777,7 @@ body {
     background: #3D5BFE;
 }
 
-.btn-primary:active {
-    transform: translateY(1px);
-}
+
 
 /* 动画 */
 @keyframes messageSlideIn {
@@ -799,6 +785,7 @@ body {
         opacity: 0;
         transform: translateY(20px);
     }
+
     to {
         opacity: 1;
         transform: translateY(0);
@@ -960,9 +947,17 @@ body {
     font-weight: 600;
 }
 
-.message-text h1 { font-size: 1.5em; }
-.message-text h2 { font-size: 1.3em; }
-.message-text h3 { font-size: 1.1em; }
+.message-text h1 {
+    font-size: 1.5em;
+}
+
+.message-text h2 {
+    font-size: 1.3em;
+}
+
+.message-text h3 {
+    font-size: 1.1em;
+}
 
 .message-text strong {
     font-weight: 600;

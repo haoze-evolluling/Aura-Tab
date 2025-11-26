@@ -57,7 +57,6 @@
     background: var(--glass-bg-hover);
     border-color: var(--primary-color);
     box-shadow: var(--shadow-lg), 0 0 0 4px rgba(102, 126, 234, 0.1);
-    transform: translateY(-1px);
 }
 
 .search-icon {
@@ -139,9 +138,7 @@
     box-shadow: var(--shadow-md);
 }
 
-.add-shortcut-btn:active {
-    transform: scale(0.97);
-}
+
 
 .add-shortcut-btn:hover {
     background: var(--glass-bg-hover);
@@ -149,7 +146,6 @@
     border-style: solid;
     color: var(--text-primary);
     box-shadow: var(--shadow-lg);
-    transform: translateY(-1px);
 }
 
 /* 表单样式 */
@@ -187,9 +183,7 @@
     box-shadow: var(--shadow-sm);
 }
 
-.delete-shortcut:active {
-    transform: scale(0.95);
-}
+
 
 .shortcut-btn:hover .delete-shortcut {
     display: flex;
@@ -281,15 +275,12 @@
     box-shadow: var(--shadow-sm);
 }
 
-.search-engine-item:active {
-    transform: scale(0.97);
-}
+
 
 .search-engine-item:hover {
     background: rgba(255, 255, 255, 0.95);
     border-color: var(--primary-color);
     box-shadow: var(--shadow-md);
-    transform: translateY(-2px);
 }
 
 /* 搜索引擎图标 */
@@ -440,7 +431,6 @@
 .weather-widget:hover {
     background: var(--glass-bg-hover);
     border-color: var(--glass-border-hover);
-    transform: translateY(-2px);
     box-shadow: var(--shadow-lg);
 }
 
@@ -495,9 +485,7 @@
     color: var(--primary-color);
 }
 
-.weather-settings:active {
-    transform: scale(0.95);
-}
+
 
 /* 城市选择模态框样式 */
 .city-search-container {
@@ -553,12 +541,9 @@
     background: rgba(255, 255, 255, 0.95);
     border-color: var(--primary-color);
     box-shadow: var(--shadow-md);
-    transform: translateY(-1px);
 }
 
-.city-item:active {
-    transform: scale(0.98);
-}
+
 
 .city-name {
     font-weight: 500;
