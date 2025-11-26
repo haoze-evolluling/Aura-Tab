@@ -28,31 +28,31 @@ body {
         max-width: 700px;
         padding: 3rem;
     }
-    
+
     .search-engine-grid {
         gap: 1.5rem;
         margin-bottom: 2.5rem;
     }
-    
+
     .search-engine-item {
         padding: 1.5rem;
         min-height: 100px;
     }
-    
+
     .search-engine-icon {
         width: 40px;
         height: 40px;
         font-size: 1.4rem;
     }
-    
+
     .search-engine-name {
         font-size: 1.2rem;
     }
-    
+
     .search-engine-desc {
         font-size: 1rem;
     }
-    
+
     #searchEngineModal h3 {
         font-size: 1.4rem;
         margin-bottom: 2.5rem;
@@ -61,45 +61,48 @@ body {
 
 /* 大屏幕设备（桌面） - 1400px及以上 */
 @media screen and (min-width: 1400px) {
-    .clock-card, .search-card, .quick-access-card {
+
+    .clock-card,
+    .search-card,
+    .quick-access-card {
         max-width: 900px;
     }
-    
+
     .quick-access-grid {
         grid-template-columns: repeat(5, 1fr);
     }
-    
+
     /* 搜索引擎模态框优化 */
     .modal-card {
         max-width: 600px;
         padding: 2.5rem;
     }
-    
+
     .search-engine-grid {
         grid-template-columns: repeat(3, 1fr);
         gap: 1.25rem;
         margin-bottom: 2rem;
     }
-    
+
     .search-engine-item {
         padding: 1.25rem;
         min-height: 90px;
     }
-    
+
     .search-engine-icon {
         width: 36px;
         height: 36px;
         font-size: 1.3rem;
     }
-    
+
     .search-engine-name {
         font-size: 1.1rem;
     }
-    
+
     .search-engine-desc {
         font-size: 0.9rem;
     }
-    
+
     /* 搜索引擎模态框标题 */
     #searchEngineModal h3 {
         font-size: 1.3rem;
@@ -113,39 +116,41 @@ body {
         padding: 2rem;
         gap: 2rem;
     }
-    
-    .clock-card, .search-card, .quick-access-card {
+
+    .clock-card,
+    .search-card,
+    .quick-access-card {
         max-width: 800px;
     }
-    
+
     .quick-access-grid {
         grid-template-columns: repeat(4, 1fr);
     }
-    
+
     .modal-card {
         max-width: 500px;
     }
-    
+
     /* 搜索引擎模态框优化 */
     .search-engine-grid {
         grid-template-columns: repeat(3, 1fr);
         gap: 1rem;
     }
-    
+
     .search-engine-item {
         padding: 1rem;
     }
-    
+
     .search-engine-icon {
         width: 32px;
         height: 32px;
         font-size: 1.2rem;
     }
-    
+
     .search-engine-name {
         font-size: 1rem;
     }
-    
+
     .search-engine-desc {
         font-size: 0.85rem;
     }
@@ -156,77 +161,80 @@ body {
     html {
         font-size: 15px;
     }
-    
+
     .main-container {
         padding: 1.5rem;
         gap: 1.5rem;
     }
-    
-    .clock-card, .search-card, .quick-access-card {
+
+    .clock-card,
+    .search-card,
+    .quick-access-card {
         max-width: 700px;
     }
-    
-    .clock-card, .quick-access-card {
+
+    .clock-card,
+    .quick-access-card {
         padding: 1.5rem;
     }
-    
+
     .search-card {
         padding: 1.25rem;
     }
-    
+
     /* 时钟显示优化 */
     .time {
         font-size: 3rem;
     }
-    
+
     .date {
         font-size: 1rem;
     }
-    
+
     /* 搜索框优化 */
     .search-input {
         padding: 0.875rem 0.875rem 0.875rem 2.75rem;
         font-size: 1rem;
     }
-    
+
     .search-icon {
         left: 0.875rem;
     }
-    
+
     /* 快捷访问网格 - 3列布局 */
     .quick-access-grid {
         grid-template-columns: repeat(3, 1fr);
         gap: 0.875rem;
         margin-bottom: 1.25rem;
     }
-    
+
     .shortcut-btn {
         padding: 1.25rem;
         min-height: 110px;
     }
-    
+
     .shortcut-icon {
         width: 28px;
         height: 28px;
         font-size: 1.1rem;
     }
-    
+
     .shortcut-name {
         font-size: 0.85rem;
     }
-    
+
     /* 搜索引擎网格 */
     .search-engine-grid {
         grid-template-columns: repeat(2, 1fr);
         gap: 0.875rem;
     }
-    
+
     /* 模态框 */
     .modal-card {
         max-width: 450px;
         padding: 1.75rem;
     }
-    
+
     .section-title {
         font-size: 1rem;
     }
@@ -237,101 +245,104 @@ body {
     html {
         font-size: 14px;
     }
-    
+
     .main-container {
         padding: 1.25rem;
         gap: 1.25rem;
     }
-    
-    .clock-card, .search-card, .quick-access-card {
+
+    .clock-card,
+    .search-card,
+    .quick-access-card {
         width: 100%;
     }
-    
-    .clock-card, .quick-access-card {
+
+    .clock-card,
+    .quick-access-card {
         padding: 1.25rem;
     }
-    
+
     .search-card {
         padding: 1rem;
     }
-    
+
     /* 时钟显示优化 */
     .time {
         font-size: 2.5rem;
     }
-    
+
     .date {
         font-size: 0.95rem;
     }
-    
+
     /* 搜索框优化 */
     .search-input {
         padding: 0.75rem 0.75rem 0.75rem 2.5rem;
         font-size: 0.95rem;
     }
-    
+
     .search-icon {
         left: 0.75rem;
         font-size: 0.9rem;
     }
-    
+
     /* 快捷访问网格 - 3列布局 */
     .quick-access-grid {
         grid-template-columns: repeat(3, 1fr);
         gap: 0.75rem;
         margin-bottom: 1rem;
     }
-    
+
     .shortcut-btn {
         padding: 1rem;
         min-height: 100px;
     }
-    
+
     .shortcut-icon {
         width: 26px;
         height: 26px;
         font-size: 1rem;
         margin-bottom: 0.4rem;
     }
-    
+
     .shortcut-name {
         font-size: 0.8rem;
     }
-    
+
     /* 搜索引擎网格 */
     .search-engine-grid {
         grid-template-columns: repeat(2, 1fr);
         gap: 0.75rem;
     }
-    
+
     .search-engine-item {
         padding: 0.875rem;
     }
-    
+
     .search-engine-icon {
         width: 28px;
         height: 28px;
         font-size: 1.1rem;
     }
-    
+
     /* 添加快捷方式按钮 */
     .add-shortcut-btn {
         padding: 0.875rem;
         font-size: 0.85rem;
     }
-    
+
     /* 模态框 */
     .modal-card {
         width: 92%;
         max-width: 400px;
         padding: 1.5rem;
     }
-    
+
     .modal-card h3 {
         font-size: 1.1rem;
         margin-bottom: 1.25rem;
     }
-    
+
     .section-title {
         font-size: 0.95rem;
     }
@@ -342,71 +353,74 @@ body {
     html {
         font-size: 14px;
     }
-    
+
     .main-container {
         padding: 1rem;
         gap: 1rem;
     }
-    
-    .clock-card, .search-card, .quick-access-card {
+
+    .clock-card,
+    .search-card,
+    .quick-access-card {
         width: 100%;
     }
-    
-    .clock-card, .quick-access-card {
+
+    .clock-card,
+    .quick-access-card {
         padding: 1.25rem 1rem;
     }
-    
+
     .search-card {
         padding: 1rem;
     }
-    
+
     /* 时钟显示优化 */
     .time {
         font-size: 2.25rem;
     }
-    
+
     .date {
         font-size: 0.9rem;
     }
-    
+
     /* 搜索框优化 */
     .search-input {
         padding: 0.75rem 0.75rem 0.75rem 2.5rem;
         font-size: 0.9rem;
         border-radius: 14px;
     }
-    
+
     .search-icon {
         left: 0.75rem;
         font-size: 0.85rem;
     }
-    
+
     /* 快捷访问网格 - 2列布局 */
     .quick-access-grid {
         grid-template-columns: repeat(2, 1fr);
         gap: 0.75rem;
         margin-bottom: 1rem;
     }
-    
+
     .shortcut-btn {
         padding: 1rem 0.75rem;
         min-height: 95px;
         border-radius: 14px;
         gap: 0.625rem;
     }
-    
+
     .shortcut-icon {
         width: 24px;
         height: 24px;
         font-size: 0.95rem;
         margin-bottom: 0.4rem;
     }
-    
+
     .shortcut-name {
         font-size: 0.8rem;
         line-height: 1.3;
     }
-    
+
     /* 删除按钮优化 */
     .delete-shortcut {
         width: 22px;
@@ -415,40 +429,40 @@ body {
         top: 0.4rem;
         right: 0.4rem;
     }
-    
+
     /* 始终显示删除按钮在触摸设备上 */
     .shortcut-btn .delete-shortcut {
         display: flex;
         opacity: 0.6;
     }
-    
+
     .shortcut-btn:hover .delete-shortcut {
         opacity: 1;
     }
-    
+
     /* 搜索引擎网格 */
     .search-engine-grid {
         grid-template-columns: 1fr;
         gap: 0.75rem;
     }
-    
+
     .search-engine-item {
         padding: 0.875rem;
     }
-    
+
     .search-engine-icon {
         width: 28px;
         height: 28px;
         font-size: 1rem;
     }
-    
+
     /* 添加快捷方式按钮 */
     .add-shortcut-btn {
         padding: 0.875rem;
         font-size: 0.85rem;
         border-radius: 10px;
     }
-    
+
     /* 模态框 */
     .modal-card {
         width: 94%;
@@ -456,33 +470,33 @@ body {
         padding: 1.5rem;
         border-radius: 14px;
     }
-    
+
     .modal-card h3 {
         font-size: 1.05rem;
         margin-bottom: 1.25rem;
     }
-    
+
     .modal-card label {
         font-size: 0.85rem;
         margin-bottom: 0.875rem;
     }
-    
+
     .modal-card input {
         padding: 0.675rem;
         font-size: 0.9rem;
     }
-    
+
     .form-actions {
         flex-direction: row;
         gap: 0.75rem;
     }
-    
+
     .btn {
         padding: 0.65rem 1.25rem;
         font-size: 0.85rem;
         flex: 1;
     }
-    
+
     .section-title {
         font-size: 0.95rem;
         margin-bottom: 0.875rem;
@@ -494,61 +508,64 @@ body {
     html {
         font-size: 14px;
     }
-    
+
     .main-container {
         padding: 0.875rem;
         gap: 0.875rem;
         min-height: 100vh;
     }
-    
-    .clock-card, .search-card, .quick-access-card {
+
+    .clock-card,
+    .search-card,
+    .quick-access-card {
         width: 100%;
     }
-    
-    .clock-card, .quick-access-card {
+
+    .clock-card,
+    .quick-access-card {
         padding: 1rem 0.875rem;
     }
-    
+
     .search-card {
         padding: 0.875rem;
     }
-    
+
     /* 时钟显示优化 */
     .time {
         font-size: 2rem;
         letter-spacing: -0.01em;
     }
-    
+
     .date {
         font-size: 0.85rem;
     }
-    
+
     /* 搜索框优化 */
     .search-input {
         padding: 0.7rem 0.7rem 0.7rem 2.4rem;
         font-size: 0.875rem;
         border-radius: 12px;
     }
-    
+
     .search-icon {
         left: 0.7rem;
         font-size: 0.8rem;
     }
-    
+
     /* 快捷访问网格 - 2列布局 */
     .quick-access-grid {
         grid-template-columns: repeat(2, 1fr);
         gap: 0.625rem;
         margin-bottom: 0.875rem;
     }
-    
+
     .shortcut-btn {
         padding: 0.875rem 0.625rem;
         min-height: 90px;
         border-radius: 12px;
         gap: 0.5rem;
     }
-    
+
     .shortcut-icon {
         width: 22px;
         height: 22px;
@@ -556,13 +573,13 @@ body {
         margin-bottom: 0.35rem;
         border-radius: 6px;
     }
-    
+
     .shortcut-name {
         font-size: 0.75rem;
         line-height: 1.3;
         word-break: break-word;
     }
-    
+
     /* 删除按钮优化 */
     .delete-shortcut {
         width: 20px;
@@ -571,51 +588,51 @@ body {
         top: 0.35rem;
         right: 0.35rem;
     }
-    
+
     /* 始终显示删除按钮在触摸设备上 */
     .shortcut-btn .delete-shortcut {
         display: flex;
         opacity: 0.6;
     }
-    
+
     .shortcut-btn:hover .delete-shortcut {
         opacity: 1;
     }
-    
+
     /* 搜索引擎网格 */
     .search-engine-grid {
         grid-template-columns: 1fr;
         gap: 0.625rem;
         margin-bottom: 1rem;
     }
-    
+
     .search-engine-item {
         padding: 0.75rem;
         flex-direction: row;
     }
-    
+
     .search-engine-icon {
         width: 26px;
         height: 26px;
         font-size: 0.95rem;
     }
-    
+
     .search-engine-name {
         font-size: 0.9rem;
         margin-bottom: 0.2rem;
     }
-    
+
     .search-engine-desc {
         font-size: 0.75rem;
     }
-    
+
     /* 添加快捷方式按钮 */
     .add-shortcut-btn {
         padding: 0.8rem;
         font-size: 0.8rem;
         border-radius: 10px;
     }
-    
+
     /* 模态框 */
     .modal-card {
         width: 95%;
@@ -623,36 +640,36 @@ body {
         padding: 1.25rem;
         border-radius: 12px;
     }
-    
+
     .modal-card h3 {
         font-size: 1rem;
         margin-bottom: 1rem;
     }
-    
+
     .modal-card label {
         font-size: 0.8rem;
         margin-bottom: 0.75rem;
         gap: 0.4rem;
     }
-    
+
     .modal-card input {
         padding: 0.625rem;
         font-size: 0.875rem;
         border-radius: 8px;
     }
-    
+
     .form-actions {
         flex-direction: column;
         gap: 0.625rem;
     }
-    
+
     .btn {
         padding: 0.625rem 1rem;
         font-size: 0.8rem;
         width: 100%;
         border-radius: 10px;
     }
-    
+
     .section-title {
         font-size: 0.9rem;
         margin-bottom: 0.75rem;
@@ -664,53 +681,54 @@ body {
     html {
         font-size: 13px;
     }
-    
+
     .main-container {
         padding: 0.75rem;
         gap: 0.75rem;
     }
-    
-    .clock-card, .quick-access-card {
+
+    .clock-card,
+    .quick-access-card {
         padding: 0.875rem 0.75rem;
     }
-    
+
     .search-card {
         padding: 0.75rem;
     }
-    
+
     .time {
         font-size: 1.75rem;
     }
-    
+
     .date {
         font-size: 0.8rem;
     }
-    
+
     .search-input {
         padding: 0.65rem 0.65rem 0.65rem 2.25rem;
         font-size: 0.85rem;
     }
-    
+
     .search-icon {
         left: 0.65rem;
     }
-    
+
     .quick-access-grid {
         grid-template-columns: repeat(2, 1fr);
         gap: 0.5rem;
     }
-    
+
     .shortcut-btn {
         padding: 0.75rem 0.5rem;
         min-height: 85px;
     }
-    
+
     .shortcut-icon {
         width: 20px;
         height: 20px;
         font-size: 0.85rem;
     }
-    
+
     .shortcut-name {
         font-size: 0.7rem;
     }
@@ -725,31 +743,31 @@ body {
         padding-top: 1rem;
         padding-bottom: 1rem;
     }
-    
+
     .clock-card {
         padding: 1rem;
     }
-    
+
     .time {
         font-size: 2rem;
     }
-    
+
     .date {
         font-size: 0.85rem;
     }
-    
+
     .search-card {
         padding: 0.875rem;
     }
-    
+
     .quick-access-card {
         padding: 1rem;
     }
-    
+
     .quick-access-grid {
         margin-bottom: 0.75rem;
     }
-    
+
     .shortcut-btn {
         min-height: 80px;
         padding: 0.75rem;
@@ -758,20 +776,22 @@ body {
 
 /* 触摸设备优化 */
 @media (hover: none) and (pointer: coarse) {
+
     /* 增大可点击区域 */
-    .btn, .add-shortcut-btn {
+    .btn,
+    .add-shortcut-btn {
         min-height: 44px;
     }
-    
+
     .shortcut-btn {
         min-height: 90px;
     }
-    
+
     /* 禁用悬停效果，优化触摸体验 */
     .glass-card:hover {
         transform: none;
     }
-    
+
     .shortcut-btn:hover {
         transform: none;
     }
@@ -784,23 +804,17 @@ body {
 }
 
 /* 高分辨率屏幕优化 */
-@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+@media (-webkit-min-device-pixel-ratio: 2),
+(min-resolution: 192dpi) {
     .glass-card {
         -webkit-font-smoothing: antialiased;
         -moz-osx-font-smoothing: grayscale;
     }
-    
-    .time, .date, .section-title {
+
+    .time,
+    .date,
+    .section-title {
         -webkit-font-smoothing: antialiased;
         -moz-osx-font-smoothing: grayscale;
-    }
-}
-
-
-/* 浅色模式优化（系统偏好） */
-@media (prefers-color-scheme: light) {
-    :root {
-        --acrylic-bg: rgba(255, 255, 255, 0.9);
-        --acrylic-border: rgba(255, 255, 255, 0.95);
     }
 }

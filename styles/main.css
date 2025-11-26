@@ -31,13 +31,6 @@
     --transition-fast: 0.15s ease-out;
     --transition-normal: 0.25s ease-out;
     --transition-slow: 0.35s ease-out;
-
-    /* 兼容旧变量 */
-    --acrylic-bg: var(--glass-bg);
-    --acrylic-border: var(--glass-border);
-    --shadow-light: rgba(0, 0, 0, 0.1);
-    --border-radius: var(--radius-md);
-    --transition: none;
 }
 
 html {
